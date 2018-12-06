@@ -15,9 +15,9 @@ public class Player extends Characters {
     private static Player player = new Player();
 
     private int score;
-    private Weapon weapon;
+    //private Weapon weapon;
     private Rectangle hitbox;
-    private PlayerEvents events;
+    private PlayerEvents playerEvents;
 
 
 
@@ -29,10 +29,10 @@ public class Player extends Characters {
     private Player() {
         super();
         this.score = 0;
-        this.weapon = null;
+        //this.weapon = null;
         this.spriteBatch = null;
-        this.playerRender = null;
-        this.sprite = new Sprite(new Texture(""));
+        //this.playerRender = null;
+        this.sprite = new Sprite(new Texture("images/player/queen.png"));
     }
 
 
@@ -42,8 +42,16 @@ public class Player extends Characters {
     }
 
     public void shoot(Position touchedPos) {
-        weapon.shoot(touchedPos, position);
+        //weapon.shoot(touchedPos, position);
 
+    }
+
+    @Override
+    public void hit(int damage) {
+        if (health - damage < 0) {
+            health = 0;
+        }
+        health -= damage;
     }
 
 
@@ -66,8 +74,13 @@ public class Player extends Characters {
      * Updates the Player position
      */
     @Override
-    public void update(Position mousePos) {
-        sprite.setRotation();
+    public void update() {
+        Position mousePos = playerEvents.getMousePos();
+
+
+
+
+
 
 
 
@@ -82,13 +95,13 @@ public class Player extends Characters {
 
 }
 
-    public Texture getSprite() {
+    /*public Texture getSprite() {
         return sprite;
-    }
+    }*/
 
-    public void setSprite(Texture sprite) {
+    /*public void setSprite(Texture sprite) {
         this.sprite = sprite;
-    }
+    }*/
 
     public Rectangle getHitbox() {
         return hitbox;
@@ -106,11 +119,11 @@ public class Player extends Characters {
         this.score = score;
     }
 
-    public Weapon getWeapon() {
+    /*public Weapon getWeapon() {
         return weapon;
-    }
+    }*/
 
-    public void setWeapon(Weapon weapon) {
+    /*public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
-    }
+    }*/
 }

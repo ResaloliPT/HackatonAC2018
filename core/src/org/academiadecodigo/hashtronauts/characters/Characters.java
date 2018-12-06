@@ -2,10 +2,11 @@ package org.academiadecodigo.hashtronauts.characters;
 
 import org.academiadecodigo.hashtronauts.characters.interfaces.Killable;
 import org.academiadecodigo.hashtronauts.characters.interfaces.Renderable;
+import org.academiadecodigo.hashtronauts.utils.Position;
 
 public abstract class Characters implements Killable, Renderable {
 
-    private int health;
+    protected int health;
     private Position position;
 
     //Getters and Setters
