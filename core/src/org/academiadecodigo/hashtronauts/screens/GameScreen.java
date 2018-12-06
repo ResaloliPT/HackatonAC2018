@@ -40,6 +40,7 @@ public class GameScreen extends ScreenAdapter {
         this.bkgImage = new Texture("background/background_test.png");
 
         this.shapeRenderer = new ShapeRenderer();
+        this.game = new MainGame();
 
         setupEvents();
     }

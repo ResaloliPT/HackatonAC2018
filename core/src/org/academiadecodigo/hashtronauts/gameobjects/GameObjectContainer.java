@@ -29,6 +29,41 @@ public class GameObjectContainer implements Renderable {
         return instance;
     }
 
+    @Override
+    public void render(SpriteBatch batch) {
+
+        player.render(batch);
+
+        for (Enemy enemy : enemies) {
+            enemy.render(batch);
+        }
+
+        for (Projectile projectile : projectiles) {
+            projectile.render(batch);
+        }
+
+
+    }
+
+    @Override
+    public void update(Camera camera) {
+        player.update(camera);
+
+        for (Enemy enemy : enemies) {
+            enemy.update(camera);
+        }
+
+        for (Projectile projectile : projectiles) {
+            projectile.update(camera);
+        }
+
+    }
+
+    @Override
+    public void dispose() {
+
+    }
+
     public void addObject(Projectile projectile) {
         projectiles.add(projectile);
     }
@@ -53,26 +88,4 @@ public class GameObjectContainer implements Renderable {
         return projectiles;
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    @Override
-    public void render(SpriteBatch batch) {
-
-    }
-
-    @Override
-    public void update(Camera camera) {
-
-    }
-
-    @Override
-    public void dispose() {
-
-    }
 }
