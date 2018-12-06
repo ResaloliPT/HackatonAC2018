@@ -1,6 +1,7 @@
 package org.academiadecodigo.hashtronauts.menu;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import org.academiadecodigo.hashtronauts.KillerQueen;
 import org.academiadecodigo.hashtronauts.configs.GameStrings;
+import org.academiadecodigo.hashtronauts.screens.GameScreen;
 import org.academiadecodigo.hashtronauts.utils.Fonts;
 import org.academiadecodigo.hashtronauts.utils.Utils;
 
@@ -62,6 +64,12 @@ public class MainMenu extends ScreenAdapter {
 
         pressToStart.draw(batch, GameStrings.START_GAME_MESSAGE, Gdx.graphics.getWidth() / 2 - pressToStartSize.x / 2,
                 Gdx.graphics.getHeight() / 2 - pressToStartSize.y / 2 - (welcomeTextSize.y + 10));
+
+
+        if (Gdx.input.isTouched()) {
+            game.setScreen(new GameScreen(game));
+
+        }
 
         batch.end();
 
