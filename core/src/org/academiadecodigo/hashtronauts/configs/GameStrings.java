@@ -5,6 +5,5 @@ import java.util.prefs.PreferencesFactory;
 public class GameStrings {
 
     public static final String WELCOME_MESSAGE = "WELCOME";
-    public static final String START_GAME_MESSAGE = "STAR GAME";
-
+    public static final String START_GAME_MESSAGE = "START GAME";
 }

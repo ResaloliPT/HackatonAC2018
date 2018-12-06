@@ -32,7 +32,9 @@ public class MainMenu extends ScreenAdapter {
     private Texture backgroundImage;
 
 
-    public MainMenu() {
+    public MainMenu(KillerQueen game) {
+        this.batch = game.getBatch();
+        this.camera = game.getCamera();
         this.welcomeText = Fonts.PRESS_START.getFont();
         this.pressToStart = Fonts.PRESS_START.getFont();
 
@@ -60,7 +62,9 @@ public class MainMenu extends ScreenAdapter {
 
         pressToStart.draw(batch, GameStrings.START_GAME_MESSAGE, Gdx.graphics.getWidth() / 2 - pressToStartSize.x / 2,
                 Gdx.graphics.getHeight() / 2 - pressToStartSize.y / 2 - (welcomeTextSize.y + 10));
-        
+
+        batch.end();
+
     }
 
     @Override
