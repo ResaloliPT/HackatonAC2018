@@ -7,6 +7,7 @@ public abstract class Characters implements Killable, Renderable {
 
     private int health;
     private Position;
+    private int health;
 
     //Getters and Setters
     public int getHealth() {
@@ -25,7 +26,7 @@ public abstract class Characters implements Killable, Renderable {
      */
     @Override
     public boolean isDead() {
-        return getHealth() < 0;
+        return getHealth() <= 0;
     }
 }
 
