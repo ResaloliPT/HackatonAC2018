@@ -10,18 +10,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import org.academiadecodigo.hashtronauts.utils.Position;
 
-public class Player extends Characters {
+public class Player {
 
     private static Player player = new Player();
 
     private int score;
-    private Weapon weapon;
     private Rectangle hitbox;
     private PlayerEvents events;
 
 
-
-    private SpriteBatch spriteBatch;
     private Sprite sprite;
 
 
@@ -29,9 +26,6 @@ public class Player extends Characters {
     private Player() {
         super();
         this.score = 0;
-        this.weapon = null;
-        this.spriteBatch = null;
-        this.playerRender = null;
         this.sprite = new Sprite(new Texture(""));
     }
 
@@ -42,19 +36,14 @@ public class Player extends Characters {
     }
 
     public void shoot(Position touchedPos) {
-        weapon.shoot(touchedPos, position);
+
 
     }
 
 
     /**
      * Renders the Player
-     */
-    @Override
-    public void render(SpriteBatch batch) {
-        batch.draw(sprite, hitbox.x, hitbox.y, hitbox.width, hitbox.height);
 
-    }
 
     private void setEvents() {
         Gdx.input.setInputProcessor(new InputAdapter() {
@@ -64,10 +53,6 @@ public class Player extends Characters {
 
     /**
      * Updates the Player position
-     */
-    @Override
-    public void update(Position mousePos) {
-        sprite.setRotation();
 
 
 
@@ -76,18 +61,16 @@ public class Player extends Characters {
     /**
      * Disposes the Player
      */
-    @Override
-    public void dispose() {
 
 
-}
+
 
     public Texture getSprite() {
-        return sprite;
+        return null;
     }
 
     public void setSprite(Texture sprite) {
-        this.sprite = sprite;
+        this.sprite = null;
     }
 
     public Rectangle getHitbox() {
@@ -106,11 +89,7 @@ public class Player extends Characters {
         this.score = score;
     }
 
-    public Weapon getWeapon() {
-        return weapon;
-    }
 
-    public void setWeapon(Weapon weapon) {
-        this.weapon = weapon;
+    public void update(Position mousePos) {
     }
 }

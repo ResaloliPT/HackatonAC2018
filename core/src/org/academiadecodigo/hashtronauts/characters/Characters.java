@@ -2,6 +2,7 @@ package org.academiadecodigo.hashtronauts.characters;
 
 import org.academiadecodigo.hashtronauts.characters.interfaces.Killable;
 import org.academiadecodigo.hashtronauts.characters.interfaces.Renderable;
+import org.academiadecodigo.hashtronauts.utils.Position;
 
 public abstract class Characters implements Killable, Renderable {
 
@@ -26,6 +27,10 @@ public abstract class Characters implements Killable, Renderable {
     @Override
     public boolean isDead() {
         return getHealth() <= 0;
+    }
+
+    public Position getPosition() {
+        return position;
     }
 }
 
