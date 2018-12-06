@@ -3,6 +3,7 @@ package org.academiadecodigo.hashtronauts.characters;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import org.academiadecodigo.hashtronauts.utils.Position;
 
 
 public class PlayerEvents extends InputAdapter {
@@ -25,7 +26,7 @@ public class PlayerEvents extends InputAdapter {
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            player.getHitbox().y - += 200 * Gdx.graphics.getDeltaTime() * 2;
+            player.getHitbox().y += 200 * Gdx.graphics.getDeltaTime() * 2;
         }
 
         if (player.getHitbox().x < 0) {
@@ -43,8 +44,6 @@ public class PlayerEvents extends InputAdapter {
         if (player.getHitbox().y > 600) {    // 800-64
             player.getHitbox().y = 600;
         }
-    }
-
 
         return super.keyDown(keycode);
 
@@ -52,13 +51,23 @@ public class PlayerEvents extends InputAdapter {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if ()
+
+        Position tochedPos = new Position(screenX, screenY);
+
+        if (Gdx.input.isTouched()) {
+
+            player.shoot(tochedPos);
+        }
 
         return super.touchDown(screenX, screenY, pointer, button);
     }
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
+
+        Position mousePos = new Position(screenX, screenY);
+        player.update(mousePos);
+
         return super.mouseMoved(screenX, screenY);
     }
 }

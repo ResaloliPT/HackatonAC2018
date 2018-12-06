@@ -5,8 +5,10 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import org.academiadecodigo.hashtronauts.utils.Position;
 
 public class Player extends Characters {
 
@@ -14,9 +16,13 @@ public class Player extends Characters {
 
     private int score;
     private Weapon weapon;
-    private Texture sprite;
     private Rectangle hitbox;
     private PlayerEvents events;
+
+
+
+    private SpriteBatch spriteBatch;
+    private Sprite sprite;
 
 
 
@@ -26,6 +32,7 @@ public class Player extends Characters {
         this.weapon = null;
         this.spriteBatch = null;
         this.playerRender = null;
+        this.sprite = new Sprite(new Texture(""));
     }
 
 
@@ -34,7 +41,8 @@ public class Player extends Characters {
 
     }
 
-    public void shoot() {
+    public void shoot(Position touchedPos) {
+        weapon.shoot(touchedPos, position);
 
     }
 
@@ -58,10 +66,9 @@ public class Player extends Characters {
      * Updates the Player position
      */
     @Override
-    public void update() {
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            hitbox.x -= 200 * Gdx.graphics.getDeltaTime() * 2;
-        }
+    public void update(Position mousePos) {
+        sprite.setRotation();
+
 
 
     }
@@ -72,7 +79,6 @@ public class Player extends Characters {
     @Override
     public void dispose() {
 
-    }
 
 }
 
