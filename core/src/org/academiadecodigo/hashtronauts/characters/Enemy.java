@@ -24,6 +24,7 @@ public abstract class Enemy extends Characters {
         this.position = position;
         this.enemyType = type;
         enemyImage = new Texture(type.getPath());
+        hitbox = new Rectangle();
 
     }
 

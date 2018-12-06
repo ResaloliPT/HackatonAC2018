@@ -1,14 +1,8 @@
 package org.academiadecodigo.hashtronauts.characters;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import javafx.geometry.Pos;
 import org.academiadecodigo.hashtronauts.utils.Position;
 
 public class Player {

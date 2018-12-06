@@ -12,7 +12,7 @@ public class KillerQueen extends Game {
 
     SpriteBatch batch;
     OrthographicCamera camera;
-    Soldier enemy;
+    Soldier soldier;
 
 
     /**
@@ -22,7 +22,7 @@ public class KillerQueen extends Game {
     public void create() {
         batch = new SpriteBatch();
         Position position = new Position(4, 1);
-        enemy = new Soldier(position);
+        soldier = new Soldier(position);
 
 
         camera = new OrthographicCamera();
@@ -43,7 +43,7 @@ public class KillerQueen extends Game {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
-        enemy.render(batch);
+        soldier.render(batch);
         batch.end();
     }
 
