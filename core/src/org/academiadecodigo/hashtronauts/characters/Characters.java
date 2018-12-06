@@ -1,11 +1,14 @@
 package org.academiadecodigo.hashtronauts.characters;
 
-public abstract class Characters implements Killable implements Renderable{
+import org.academiadecodigo.hashtronauts.characters.interfaces.Killable;
+import org.academiadecodigo.hashtronauts.characters.interfaces.Renderable;
+
+public abstract class Characters implements Killable, Renderable {
 
     private int health;
-    private int score;
     private Position;
 
+    //Getters and Setters
     public int getHealth() {
         return health;
     }
@@ -14,13 +17,6 @@ public abstract class Characters implements Killable implements Renderable{
         this.health = health;
     }
 
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
 
     /** Sees if the character is still alive
      * @return True if the Character is alive
@@ -28,6 +24,25 @@ public abstract class Characters implements Killable implements Renderable{
     @Override
     public boolean isDead() {
         return getHealth() < 0;
+    }
+
+
+    //Renderable Interface Methods
+
+    /**
+     * Renders the character
+     */
+    @Override
+    public void render() {
+
+    }
+
+    /**
+     * Updates the character position
+     */
+    @Override
+    public void update() {
+
     }
 }
 
