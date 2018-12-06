@@ -1,5 +1,6 @@
 package org.academiadecodigo.hashtronauts;
 
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public interface Renderable {
@@ -13,7 +14,7 @@ public interface Renderable {
     /**
      * Used to updates positions & other game logic
      */
-    void update();
+    void update(Camera camera);
 
     /**
      * Used to dispose all resources

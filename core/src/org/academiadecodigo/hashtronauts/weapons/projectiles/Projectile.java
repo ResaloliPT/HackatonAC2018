@@ -1,9 +1,11 @@
 package org.academiadecodigo.hashtronauts.weapons.projectiles;
 
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Ellipse;
 import org.academiadecodigo.hashtronauts.Renderable;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Projectile implements Renderable {
 
@@ -33,6 +35,11 @@ public class Projectile implements Renderable {
         this.damage = projectileType.getDamage();
     }
 
+    /**
+     * Adds this projectile to the Game List to be rendered/updated
+     *
+     * @param game the game class wich contains the Render/update list
+     */
     public void addObject(MainGame game) {
         game.addObject(this);
     }
@@ -43,8 +50,9 @@ public class Projectile implements Renderable {
     }
 
     @Override
-    public void update() {
-
+    public void update(Camera camera) {
+        //TODO: implement to move
+        throw new NotImplementedException();
     }
 
     @Override
