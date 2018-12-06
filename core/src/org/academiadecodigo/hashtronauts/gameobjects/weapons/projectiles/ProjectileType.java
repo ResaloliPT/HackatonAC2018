@@ -1,4 +1,4 @@
-package org.academiadecodigo.hashtronauts.weapons.projectiles;
+package org.academiadecodigo.hashtronauts.gameobjects.weapons.projectiles;
 
 public enum ProjectileType {
     Gelatin("images/projectiles/gelatin.png", 1);

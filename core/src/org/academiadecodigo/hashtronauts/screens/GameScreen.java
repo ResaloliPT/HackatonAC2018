@@ -3,21 +3,24 @@ package org.academiadecodigo.hashtronauts.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import org.academiadecodigo.hashtronauts.KillerQueen;
+import org.academiadecodigo.hashtronauts.MainGame;
 
 /**
  *
  */
 public class GameScreen extends ScreenAdapter {
 
+    private MainGame game;
+
     private SpriteBatch batch;
     private OrthographicCamera camera;
+
     //Testing purposes
     private ShapeRenderer shapeRenderer;
 
@@ -34,6 +37,7 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(KillerQueen mainClass) {
         this.batch = mainClass.getBatch();
         this.camera = mainClass.getCamera();
+        this.bkgImage = new Texture("background/background_test.png");
 
         this.shapeRenderer = new ShapeRenderer();
 
@@ -57,34 +61,22 @@ public class GameScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         camera.update();
+        batch.setProjectionMatrix(camera.combined);
 
-        //Begin ShapeRenderer
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-
-        //Draw Background Color
-        shapeRenderer.setColor(Color.BROWN);
-        shapeRenderer.rect(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
-        //Test
-        shapeRenderer.setColor(Color.BLUE);
-        shapeRenderer.rect(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 40f, 40f);
-
-        shapeRenderer.end();
-
-
-        /*
         //Begin SpriteBatch
         batch.begin();
 
         //Disable Transparency
         batch.disableBlending();
 
+
         //Draw sprites
-        batch.draw()
+        game.render(batch);
 
         //End SpriteBatch
         batch.end();
-        */
+
+        game.update(camera);
 
 
     }
