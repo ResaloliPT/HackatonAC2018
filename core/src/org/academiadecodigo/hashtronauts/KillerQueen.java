@@ -8,11 +8,8 @@ import org.academiadecodigo.hashtronauts.screens.GameScreen;
 
 public class KillerQueen extends Game {
 
-    private SpriteBatch batch;
-
-    private OrthographicCamera camera;
-
-    private GameScreen gameScreen;
+    SpriteBatch batch;
+    OrthographicCamera camera;
 
 
     /**
@@ -26,17 +23,8 @@ public class KillerQueen extends Game {
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         //Sets screen
-        gameScreen = new GameScreen(this);
-        this.setScreen(gameScreen);
+        this.setScreen(new MainMenu(this));
 
-    }
-
-    @Override
-    public void render() {
-
-        batch.setProjectionMatrix(camera.combined);
-
-        super.render();
     }
 
     @Override
