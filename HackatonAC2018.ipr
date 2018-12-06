@@ -13,7 +13,7 @@
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="$PROJECT_DIR$/../../Personal/ExtrasInMinecraft/gradle/wrapper" />
+        <option name="gradleHome" value="$USER_HOME$/Personal/ExtrasInMinecraft/gradle/wrapper" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -154,18 +154,13 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Hackathon.iml" filepath="$PROJECT_DIR$/Hackathon.iml" />
       <module fileurl="file://$PROJECT_DIR$/HackatonAC2018.iml" filepath="$PROJECT_DIR$/HackatonAC2018.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" group="core" />
-      <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" group="core" />
-      <module fileurl="file://$PROJECT_DIR$/core/core_main.iml" filepath="$PROJECT_DIR$/core/core_main.iml" group="core" />
       <module fileurl="file://$PROJECT_DIR$/core/core_main.iml" filepath="$PROJECT_DIR$/core/core_main.iml" group="core" />
       <module fileurl="file://$PROJECT_DIR$/core/core_test.iml" filepath="$PROJECT_DIR$/core/core_test.iml" group="core" />
-      <module fileurl="file://$PROJECT_DIR$/core/core_test.iml" filepath="$PROJECT_DIR$/core/core_test.iml" group="core" />
-      <module fileurl="file://$PROJECT_DIR$/desktop/desktop.iml" filepath="$PROJECT_DIR$/desktop/desktop.iml" group="desktop" />
       <module fileurl="file://$PROJECT_DIR$/desktop/desktop.iml" filepath="$PROJECT_DIR$/desktop/desktop.iml" group="desktop" />
       <module fileurl="file://$PROJECT_DIR$/desktop/desktop_main.iml" filepath="$PROJECT_DIR$/desktop/desktop_main.iml" group="desktop" />
-      <module fileurl="file://$PROJECT_DIR$/desktop/desktop_main.iml" filepath="$PROJECT_DIR$/desktop/desktop_main.iml" group="desktop" />
-      <module fileurl="file://$PROJECT_DIR$/desktop/desktop_test.iml" filepath="$PROJECT_DIR$/desktop/desktop_test.iml" group="desktop" />
       <module fileurl="file://$PROJECT_DIR$/desktop/desktop_test.iml" filepath="$PROJECT_DIR$/desktop/desktop_test.iml" group="desktop" />
       <module fileurl="file://$PROJECT_DIR$/hack.iml" filepath="$PROJECT_DIR$/hack.iml" />
     </modules>
@@ -175,6 +170,7 @@
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
   <component name="libraryTable">
     <library name="Gradle: com.badlogicgames.gdx:gdx-ai:1.8.0">
