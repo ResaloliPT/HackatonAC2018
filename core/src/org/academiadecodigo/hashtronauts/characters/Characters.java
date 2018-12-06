@@ -11,7 +11,7 @@ public abstract class Characters implements Killable, Renderable {
     //Getters and Setters
     public int getHealth() {
         return health;
-    }   
+    }
 
     public void setHealth(int health) {
         this.health = health;
