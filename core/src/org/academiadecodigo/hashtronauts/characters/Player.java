@@ -34,18 +34,15 @@ public class Player extends Characters {
 
     }
 
-    public void move() {
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            hitbox.x -= 200 * Gdx.graphics.getDeltaTime() * 2;
-        }
+
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             hitbox.x += 200 * Gdx.graphics.getDeltaTime() * 2;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            hitbox.x -= 200 * Gdx.graphics.getDeltaTime() * 2;
+            hitbox.y -= 200 * Gdx.graphics.getDeltaTime() * 2;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            hitbox.x += 200 * Gdx.graphics.getDeltaTime() * 2;
+            hitbox.y += 200 * Gdx.graphics.getDeltaTime() * 2;
         }
         if (hitbox.x < 0) {
             hitbox.x = 0;
