@@ -4,8 +4,10 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Ellipse;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import org.academiadecodigo.hashtronauts.Renderable;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import org.academiadecodigo.hashtronauts.utils.Position;
 
 public class Projectile implements Renderable {
 
@@ -29,7 +31,7 @@ public class Projectile implements Renderable {
      */
     public Projectile(ProjectileType projectileType, Position startingPos, Position direction) {
         sprite = new Texture(projectileType.getSpriteURI());
-        shape = new Ellipse(startingPos.getX(), startingPos.getY(), sprite.getWidth(), sprite.getHeight());
+        shape = new Ellipse(startingPos.getVector().x, startingPos.getVector().y, sprite.getWidth(), sprite.getHeight());
         this.position = startingPos;
         this.velocity = direction;
         this.damage = projectileType.getDamage();
@@ -38,10 +40,22 @@ public class Projectile implements Renderable {
     /**
      * Adds this projectile to the Game List to be rendered/updated
      *
-     * @param game the game class wich contains the Render/update list
+     * @param game the game class which contains the Render/update list
      */
     public void addObject(MainGame game) {
         game.addObject(this);
+    }
+
+    /**
+     * Hits the enemy then disposes itself
+     *
+     * @param target the target to be hit
+     * @param game   the game containing the render/update list
+     */
+    public void hit(Killable target, MainGame game) {
+        target.hit(damage);
+        game.removeObject(this);
+        dispose();
     }
 
     @Override
@@ -51,8 +65,10 @@ public class Projectile implements Renderable {
 
     @Override
     public void update(Camera camera) {
-        //TODO: implement to move
-        throw new NotImplementedException();
+        Vector3 newCoords = new Vector3(position.getVector().x + velocity.getVector().x, position.getVector().y + velocity.getVector().y, 0);
+        newCoords = camera.unproject(newCoords);
+
+        position.setVector(new Vector2(newCoords.x, newCoords.y));
     }
 
     @Override
