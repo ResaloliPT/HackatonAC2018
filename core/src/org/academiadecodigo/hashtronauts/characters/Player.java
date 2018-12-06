@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import javafx.geometry.Pos;
 import org.academiadecodigo.hashtronauts.utils.Position;
 
 public class Player {
@@ -17,11 +18,12 @@ public class Player {
     private int score;
     private Rectangle hitbox;
     private PlayerEvents events;
-
-
     private Sprite sprite;
+    private Position pos;
 
-
+    public Position getPos() {
+        return pos;
+    }
 
     private Player() {
         super();
