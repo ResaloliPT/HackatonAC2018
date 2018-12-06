@@ -1,10 +1,10 @@
 package org.academiadecodigo.hashtronauts.weapons.projectiles;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Ellipse;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import org.academiadecodigo.hashtronauts.Renderable;
 import org.academiadecodigo.hashtronauts.characters.interfaces.Killable;
@@ -14,11 +14,11 @@ public class Projectile implements Renderable {
 
     //Render
     private Texture sprite;
-    private Ellipse shape;
+    private Ellipse shape; // Can be used as Projectile position
 
     // Position & Movement
-    private Position position;
     private Position velocity;
+    private Position position;
 
     //Projectile properties
     private int damage;
@@ -33,6 +33,7 @@ public class Projectile implements Renderable {
     public Projectile(ProjectileType projectileType, Position startingPos, Position direction) {
         sprite = new Texture(projectileType.getSpriteURI());
         shape = new Ellipse(startingPos.getVector().x, startingPos.getVector().y, sprite.getWidth(), sprite.getHeight());
+
         this.position = startingPos;
         this.velocity = direction;
         this.damage = projectileType.getDamage();
@@ -61,15 +62,22 @@ public class Projectile implements Renderable {
 
     @Override
     public void render(SpriteBatch batch) {
-        batch.draw(sprite, shape.x, shape.y, shape.width, shape.height);
+        batch.draw(sprite, shape.x, shape.y, 20, 10);
     }
 
     @Override
     public void update(Camera camera) {
-        Vector3 newCoords = new Vector3(position.getVector().x + velocity.getVector().x, position.getVector().y + velocity.getVector().y, 0);
-        newCoords = camera.unproject(newCoords);
+        position = new Position((int) (position.getVector().x + (velocity.getVector().x * Gdx.graphics.getDeltaTime())),
+                (int) (position.getVector().y + (velocity.getVector().y * Gdx.graphics.getDeltaTime())));
 
-        position.setVector(new Vector2(newCoords.x, newCoords.y));
+
+        Vector3 newCoords = new Vector3(position.getVector().x,
+                position.getVector().y, 0);
+
+
+        camera.unproject(newCoords);
+
+        this.shape.setPosition(newCoords.x, newCoords.y);
     }
 
     @Override
