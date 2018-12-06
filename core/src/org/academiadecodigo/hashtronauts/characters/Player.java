@@ -3,11 +3,9 @@ package org.academiadecodigo.hashtronauts.characters;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import org.academiadecodigo.hashtronauts.utils.Position;
 
@@ -19,7 +17,7 @@ public class Player extends Characters {
 
     private int score;
     //private Weapon weapon;
-    private Polygon hitbox;
+    private Rectangle hitbox;
     private PlayerEvents playerEvents;
 
 
@@ -34,6 +32,7 @@ public class Player extends Characters {
         //this.weapon = null;
         //this.playerRender = null;
         this.sprite = new Sprite(new Texture("images/player/queen.png"));
+        this.playerEvents = new PlayerEvents();
     }
 
 
@@ -61,15 +60,22 @@ public class Player extends Characters {
      */
     @Override
     public void render(SpriteBatch batch) {
-        batch.draw(sprite, )
         batch.draw(sprite, hitbox.x, hitbox.y, hitbox.width, hitbox.height);
 
 
     }
 
-    private void setEvents() {
+    public void setEvents() {
         Gdx.input.setInputProcessor(new InputAdapter() {
 
+            @Override
+            public boolean keyDown(int keycode) {
+                if (keycode == Input.Keys.RIGHT) {
+                    player.getHitbox().setX(player.getHitbox().getX() + 200 * Gdx.graphics.getDeltaTime() * 2);
+                    return true;
+                }
+                return super.keyDown(keycode);
+            }
         });
     }
 
@@ -87,7 +93,6 @@ public class Player extends Characters {
         float angle = (float) Math.atan(dX/dY);
 
         sprite.rotate(angle);
-        hitbox.rotate(angle);
 
 
     }
@@ -102,13 +107,9 @@ public class Player extends Characters {
 
 }
 
-    /*public Texture getSprite() {
+    public Sprite getSprite() {
         return sprite;
-    }*/
-
-    /*public void setSprite(Texture sprite) {
-        this.sprite = sprite;
-    }*/
+    }
 
     public Rectangle getHitbox() {
         return hitbox;

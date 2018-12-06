@@ -15,19 +15,19 @@ public class PlayerEvents extends InputAdapter {
     public boolean keyDown(int keycode) {
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            player.getHitbox().x -= 200 * Gdx.graphics.getDeltaTime();
+            player.getHitbox().setX(player.getHitbox().getX() - 200 * Gdx.graphics.getDeltaTime());
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            player.getHitbox().x += 200 * Gdx.graphics.getDeltaTime() * 2;
+            player.getHitbox().setX(player.getHitbox().getX() + 200 * Gdx.graphics.getDeltaTime() * 2);
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            player.getHitbox().y -= 200 * Gdx.graphics.getDeltaTime() * 2;
+            player.getHitbox().setY(player.getHitbox().getY() + 200 * Gdx.graphics.getDeltaTime() * 2);
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            player.getHitbox().y += 200 * Gdx.graphics.getDeltaTime() * 2;
+            player.getHitbox().setY(player.getHitbox().getY() - 200 * Gdx.graphics.getDeltaTime() * 2);
         }
 
         if (player.getHitbox().x < 0) {
