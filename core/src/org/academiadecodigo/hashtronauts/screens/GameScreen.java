@@ -28,29 +28,24 @@ public class GameScreen extends ScreenAdapter {
     // private Score score;
 
 
+    /**
+     * @param mainClass
+     */
     public GameScreen(KillerQueen mainClass) {
         this.batch = mainClass.getBatch();
         this.camera = mainClass.getCamera();
 
         this.shapeRenderer = new ShapeRenderer();
-        shapeRenderer.setProjectionMatrix(camera.combined);
 
         setupEvents();
     }
 
 
     /**
-     *
-     */
-    @Override
-    public void show() {
-        Gdx.gl.glClearColor(40f, 40f, 40f, 1f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-    }
-
-    /**
      * @param delta
+     *
+     * Renders the game screen and updates view
+     *
      */
     @Override
     public void render(float delta) {
@@ -64,11 +59,15 @@ public class GameScreen extends ScreenAdapter {
         camera.update();
 
         //Begin ShapeRenderer
-        shapeRenderer.begin();
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
         //Draw Background Color
         shapeRenderer.setColor(Color.BROWN);
         shapeRenderer.rect(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        //Test
+        shapeRenderer.setColor(Color.BLUE);
+        shapeRenderer.rect(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 40f, 40f);
 
         shapeRenderer.end();
 
@@ -96,6 +95,9 @@ public class GameScreen extends ScreenAdapter {
     }
 
 
+    /**
+     * Disposes of libGDX objects
+     */
     @Override
     public void dispose() {
         shapeRenderer.dispose();
