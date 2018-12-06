@@ -7,7 +7,8 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
 public enum Fonts {
 
-    COLLEGE("fonts/college.ttf", 30);
+    COLLEGE("fonts/college.ttf", 30),
+    PRESS_START("fonts/press-start.regular.ttf", 30);
 
     private String fontPath;
     private int size;

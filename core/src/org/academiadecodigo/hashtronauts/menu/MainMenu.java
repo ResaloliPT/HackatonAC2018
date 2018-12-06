@@ -34,8 +34,8 @@ public class MainMenu extends ScreenAdapter {
     public MainMenu() {
 
 
-        welcomeText = Fonts.COLLEGE.getFont();
-        pressToStart = Fonts.COLLEGE.getFont();
+        welcomeText = Fonts.PRESS_START.getFont();
+        pressToStart = Fonts.PRESS_START.getFont();
 
         //startSound = Gdx.audio.newSound()
 
@@ -44,7 +44,10 @@ public class MainMenu extends ScreenAdapter {
 
     @Override
     public void show() {
-        super.show();
+
+       // Gdx.audio
+
+       // welcomeTextSize = U
     }
 
     @Override
