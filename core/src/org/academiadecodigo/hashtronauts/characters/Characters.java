@@ -6,7 +6,7 @@ import org.academiadecodigo.hashtronauts.characters.interfaces.Renderable;
 public abstract class Characters implements Killable, Renderable {
 
     private int health;
-    private Position;
+    private Position position;
 
     //Getters and Setters
     public int getHealth() {
