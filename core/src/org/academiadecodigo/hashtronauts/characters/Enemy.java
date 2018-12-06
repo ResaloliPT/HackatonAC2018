@@ -22,6 +22,7 @@ public class Enemy extends Characters {
     public void move(Position targetPosition) {
         if (isDead()) {
             dispose();
+            return;
         }
         int x = ((int) Math.random() + 1) * 10;
         if (x <= 5) {
