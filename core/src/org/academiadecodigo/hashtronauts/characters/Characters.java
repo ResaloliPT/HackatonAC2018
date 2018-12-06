@@ -7,7 +7,6 @@ public abstract class Characters implements Killable, Renderable {
 
     private int health;
     private Position;
-    private int health;
 
     //Getters and Setters
     public int getHealth() {
