@@ -15,7 +15,7 @@ public class Projectile implements Renderable {
     private Texture sprite;
     private Ellipse shape;
 
-    // Postion & Movement
+    // Position & Movement
     private Position position;
     private Position velocity;
 
@@ -47,7 +47,7 @@ public class Projectile implements Renderable {
     }
 
     /**
-     * Hits the enemy then disposes itself
+     * Hits the target then disposes itself
      *
      * @param target the target to be hit
      * @param game   the game containing the render/update list
