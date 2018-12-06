@@ -24,7 +24,7 @@ public class KillerQueen extends Game {
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         //Sets screen
-        this.setScreen(new MainMenu(this));
+        this.setScreen(new GameScreen(this));
 
     }
 

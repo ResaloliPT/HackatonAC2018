@@ -1,5 +1,6 @@
-package org.academiadecodigo.hashtronauts.characters;
+package org.academiadecodigo.hashtronauts.gameobjects.characters;
 
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -14,7 +15,7 @@ public class Enemy extends Characters {
     private EnemyType enemyType;
     private boolean dead = false;
 
-    public Enemy(EnemyType type, Position position){
+    public Enemy(EnemyType type, Position position) {
         this.enemyType = type;
         this.position = position;
 
@@ -39,7 +40,7 @@ public class Enemy extends Characters {
     }
 
     @Override
-    public void update() {
+    public void update(Camera camera) {
 
     }
 
@@ -86,11 +87,9 @@ public class Enemy extends Characters {
     @Override
     public void hit(int damage) {
         health -= damage;
-        if(damage > health || health <= 0){
+        if (damage > health || health <= 0) {
             setDead(true);
         }
-
-
 
 
     }

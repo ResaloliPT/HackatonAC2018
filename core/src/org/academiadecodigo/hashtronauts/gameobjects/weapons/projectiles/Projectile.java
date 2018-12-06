@@ -1,4 +1,4 @@
-package org.academiadecodigo.hashtronauts.weapons.projectiles;
+package org.academiadecodigo.hashtronauts.gameobjects.weapons.projectiles;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
@@ -8,7 +8,8 @@ import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Vector3;
 import org.academiadecodigo.hashtronauts.MainGame;
 import org.academiadecodigo.hashtronauts.Renderable;
-import org.academiadecodigo.hashtronauts.characters.interfaces.Killable;
+import org.academiadecodigo.hashtronauts.gameobjects.GameObjectContainer;
+import org.academiadecodigo.hashtronauts.gameobjects.characters.interfaces.Killable;
 import org.academiadecodigo.hashtronauts.utils.Position;
 
 public class Projectile implements Renderable {
@@ -45,8 +46,9 @@ public class Projectile implements Renderable {
      *
      * @param game the game class which contains the Render/update list
      */
-    public void addObject(MainGame game) {
-        game.addObject(this);
+
+    public void addObject() {
+        GameObjectContainer.getInstance();
     }
 
     /**
@@ -55,9 +57,10 @@ public class Projectile implements Renderable {
      * @param target the target to be hit
      * @param game   the game containing the render/update list
      */
+
     public void hit(Killable target, MainGame game) {
         target.hit(damage);
-        game.removeObject(this);
+        GameObjectContainer.getInstance().removeObject(this);
         dispose();
     }
 

@@ -1,13 +1,34 @@
 package org.academiadecodigo.hashtronauts;
 
-public class MainGame {
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import org.academiadecodigo.hashtronauts.gameobjects.GameObjectContainer;
 
+public class MainGame implements Renderable {
 
-    public void addObject(Object o) {
+    private GameObjectContainer gameObjects;
+
+    public MainGame() {
+        this.gameObjects = GameObjectContainer.getInstance();
+    }
+
+    public GameObjectContainer getGameObjects() {
+        return gameObjects;
+    }
+
+    @Override
+    public void render(SpriteBatch batch) {
+        gameObjects.render(batch);
 
     }
 
-    public void removeObject(Object o) {
+    @Override
+    public void update(Camera camera) {
+        gameObjects.update(camera);
+    }
+
+    @Override
+    public void dispose() {
 
     }
 }

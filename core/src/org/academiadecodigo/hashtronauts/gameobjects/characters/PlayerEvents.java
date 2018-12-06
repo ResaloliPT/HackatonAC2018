@@ -1,4 +1,4 @@
-package org.academiadecodigo.hashtronauts.characters;
+package org.academiadecodigo.hashtronauts.gameobjects.characters;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -48,7 +48,7 @@ public class PlayerEvents extends InputAdapter {
 
         return super.keyDown(keycode);
 
-}
+    }
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
@@ -67,7 +67,7 @@ public class PlayerEvents extends InputAdapter {
     public boolean mouseMoved(int screenX, int screenY) {
 
         mousePos = new Position(screenX, screenY);
-        player.update();
+        //player.update();
 
         return super.mouseMoved(screenX, screenY);
     }

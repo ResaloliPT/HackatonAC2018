@@ -1,4 +1,4 @@
-package org.academiadecodigo.hashtronauts.characters;
+package org.academiadecodigo.hashtronauts.gameobjects.characters;
 
 public enum EnemyType {
     SOLDIER(5),

@@ -1,8 +1,9 @@
-package org.academiadecodigo.hashtronauts.characters;
+package org.academiadecodigo.hashtronauts.gameobjects.characters;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -24,15 +25,14 @@ public class Player extends Characters {
 
     private Sprite sprite;
 
-
-
     private Player() {
         super();
         this.score = 0;
         //this.weapon = null;
         //this.playerRender = null;
-        this.sprite = new Sprite(new Texture("images/player/queen.png"));
+        this.hitbox = new Rectangle(100f, 100f, 20f, 20f);
         this.playerEvents = new PlayerEvents();
+        this.sprite = new Sprite(new Texture("images/player/queen.png"));
     }
 
 
@@ -61,8 +61,6 @@ public class Player extends Characters {
     @Override
     public void render(SpriteBatch batch) {
         batch.draw(sprite, hitbox.x, hitbox.y, hitbox.width, hitbox.height);
-
-
     }
 
     public void setEvents() {
@@ -84,7 +82,7 @@ public class Player extends Characters {
      * Updates the Player position
      */
     @Override
-    public void update() {
+    public void update(Camera camera) {
         Position mousePos = playerEvents.getMousePos();
 
         int dX = mousePos.getX() - position.getX();
@@ -102,13 +100,6 @@ public class Player extends Characters {
      */
     @Override
     public void dispose() {
-
-
-
-}
-
-    public Sprite getSprite() {
-        return sprite;
     }
 
     public Rectangle getHitbox() {
@@ -126,12 +117,4 @@ public class Player extends Characters {
     public void setScore(int score) {
         this.score = score;
     }
-
-    /*public Weapon getWeapon() {
-        return weapon;
-    }*/
-
-    /*public void setWeapon(Weapon weapon) {
-        this.weapon = weapon;
-    }*/
 }
