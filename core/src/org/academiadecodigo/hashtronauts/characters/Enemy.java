@@ -5,23 +5,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
 
-
-
 public class Enemy extends Characters {
     private Texture sprite;
     private Rectangle hitbox;
     private int health;
     private Position position;
     private EnemyType enemyType;
+    private boolean dead = false;
 
     public Enemy(EnemyType type, Position position){
         this.enemyType = type;
         this.position = position;
 
     }
-
-
-
 
     public void move(Position targetPosition) {
         if (isDead()) {
@@ -74,5 +70,26 @@ public class Enemy extends Characters {
     @Override
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    @Override
+    public boolean isDead() {
+        return dead;
+    }
+
+    public void setDead(boolean dead) {
+        this.dead = dead;
+    }
+
+    @Override
+    public void hit(int damage) {
+        health -= damage;
+        if(damage > health || health <= 0){
+            setDead(true);
+        }
+
+
+
+
     }
 }

@@ -6,8 +6,8 @@ public enum EnemyType {
 
     private int health;
 
-    EnemyType(int i) {
-        this.health = i;
+    EnemyType(int enemyHealth) {
+        this.health = enemyHealth;
 
     }
 
