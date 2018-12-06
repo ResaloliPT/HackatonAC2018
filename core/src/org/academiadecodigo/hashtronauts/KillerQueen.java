@@ -4,7 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import org.academiadecodigo.hashtronauts.screens.GameScreen;
+import org.academiadecodigo.hashtronauts.menu.MainMenu;
 
 public class KillerQueen extends Game {
 
