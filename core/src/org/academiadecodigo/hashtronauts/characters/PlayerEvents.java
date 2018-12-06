@@ -9,6 +9,7 @@ import org.academiadecodigo.hashtronauts.utils.Position;
 public class PlayerEvents extends InputAdapter {
 
     private Player player;
+    private Position mousePos;
 
     @Override
     public boolean keyDown(int keycode) {
@@ -65,9 +66,13 @@ public class PlayerEvents extends InputAdapter {
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
 
-        Position mousePos = new Position(screenX, screenY);
-        player.update(mousePos);
+        mousePos = new Position(screenX, screenY);
+        player.update();
 
         return super.mouseMoved(screenX, screenY);
+    }
+
+    public Position getMousePos() {
+        return mousePos;
     }
 }

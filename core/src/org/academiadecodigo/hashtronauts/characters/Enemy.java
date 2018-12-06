@@ -3,6 +3,7 @@ package org.academiadecodigo.hashtronauts.characters;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import org.academiadecodigo.hashtronauts.utils.Position;
 
 
 public class Enemy extends Characters {
