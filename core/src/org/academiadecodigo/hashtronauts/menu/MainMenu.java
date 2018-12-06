@@ -1,20 +1,28 @@
+
 package org.academiadecodigo.hashtronauts.menu;
 
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import javafx.stage.Stage;
-
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import org.academiadecodigo.hashtronauts.KillerQueen;
 
 
 public class MainMenu extends ScreenAdapter {
 
-    private Stage stage;
-    private Skin skin;
+    private KillerQueen game;
+    private  SpriteBatch batch;
+    private OrthographicCamera camera;
+
+    /* Screen Texts */
+    private BitmapFont welcomeText;
 
 
 
 
+    public MainMenu(KillerQueen game) {
 
+    }
 
     @Override
     public void show() {
