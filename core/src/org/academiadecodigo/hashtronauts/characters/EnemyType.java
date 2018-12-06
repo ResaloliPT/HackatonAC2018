@@ -2,7 +2,7 @@ package org.academiadecodigo.hashtronauts.characters;
 
 public enum EnemyType {
     SOLDIER(5),
-    King(20);
+    KING(20);
 
     private int health;
 
