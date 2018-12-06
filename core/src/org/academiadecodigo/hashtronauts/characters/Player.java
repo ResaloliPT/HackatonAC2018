@@ -7,6 +7,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import org.academiadecodigo.hashtronauts.utils.Position;
 
@@ -14,14 +15,15 @@ public class Player extends Characters {
 
     private static Player player = new Player();
 
+    private Position position;
+
     private int score;
     //private Weapon weapon;
-    private Rectangle hitbox;
+    private Polygon hitbox;
     private PlayerEvents playerEvents;
 
 
 
-    private SpriteBatch spriteBatch;
     private Sprite sprite;
 
 
@@ -30,7 +32,6 @@ public class Player extends Characters {
         super();
         this.score = 0;
         //this.weapon = null;
-        this.spriteBatch = null;
         //this.playerRender = null;
         this.sprite = new Sprite(new Texture("images/player/queen.png"));
     }
@@ -60,12 +61,15 @@ public class Player extends Characters {
      */
     @Override
     public void render(SpriteBatch batch) {
+        batch.draw(sprite, )
         batch.draw(sprite, hitbox.x, hitbox.y, hitbox.width, hitbox.height);
+
 
     }
 
     private void setEvents() {
         Gdx.input.setInputProcessor(new InputAdapter() {
+
         });
     }
 
@@ -77,11 +81,13 @@ public class Player extends Characters {
     public void update() {
         Position mousePos = playerEvents.getMousePos();
 
+        int dX = mousePos.getX() - position.getX();
+        int dY = mousePos.getY() - position.getY();
 
+        float angle = (float) Math.atan(dX/dY);
 
-
-
-
+        sprite.rotate(angle);
+        hitbox.rotate(angle);
 
 
     }
@@ -91,6 +97,7 @@ public class Player extends Characters {
      */
     @Override
     public void dispose() {
+
 
 
 }

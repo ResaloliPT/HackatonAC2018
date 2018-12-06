@@ -21,7 +21,7 @@ public class Position {
     public int getX() {
         return (int) vector.x;
     }
-    
+
     public int getY() {
         return (int) vector.y;
     }

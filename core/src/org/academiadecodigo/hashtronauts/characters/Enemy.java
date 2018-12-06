@@ -27,8 +27,8 @@ public class Enemy extends Characters {
         }
         int x = ((int) Math.random() + 1) * 10;
         if (x <= 5) {
-            hitbox.x = 200 * (hitbox.x + targetPosition.getX) * 2;
-            hitbox.y = 200 * (hitbox.y + targetPosition.getY) * 2;
+            hitbox.x = 200 * (hitbox.x + targetPosition.getX()) * 2;
+            hitbox.y = 200 * (hitbox.y + targetPosition.getY()) * 2;
         }
     }
 
