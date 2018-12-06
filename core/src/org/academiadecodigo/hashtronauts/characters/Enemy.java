@@ -5,10 +5,22 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
 
+
+
 public class Enemy extends Characters {
     private Texture sprite;
     private Rectangle hitbox;
     private int health;
+    private Position position;
+    private EnemyType enemyType;
+
+    public Enemy(EnemyType type, Position position){
+        this.enemyType = type;
+        this.position = position;
+
+    }
+
+
 
 
     public void move(Position targetPosition) {
