@@ -1,4 +1,3 @@
-
 package org.academiadecodigo.hashtronauts.menu;
 
 import com.badlogic.gdx.Gdx;
@@ -10,13 +9,15 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import org.academiadecodigo.hashtronauts.KillerQueen;
+import org.academiadecodigo.hashtronauts.configs.GameStrings;
 import org.academiadecodigo.hashtronauts.utils.Fonts;
+import org.academiadecodigo.hashtronauts.utils.Utils;
 
 
 public class MainMenu extends ScreenAdapter {
 
     private KillerQueen game;
-    private  SpriteBatch batch;
+    private SpriteBatch batch;
     private OrthographicCamera camera;
 
     /* Screen Texts */
@@ -32,31 +33,42 @@ public class MainMenu extends ScreenAdapter {
 
 
     public MainMenu() {
+        this.welcomeText = Fonts.PRESS_START.getFont();
+        this.pressToStart = Fonts.PRESS_START.getFont();
 
-
-        welcomeText = Fonts.PRESS_START.getFont();
-        pressToStart = Fonts.PRESS_START.getFont();
-
-        //startSound = Gdx.audio.newSound()
-
+        //Adding a background image
         this.backgroundImage = new Texture("background/background_test.png");
     }
 
+
     @Override
     public void show() {
-
-       // Gdx.audio
-
-       // welcomeTextSize = U
+        welcomeTextSize = Utils.getStringSize(welcomeText, GameStrings.WELCOME_MESSAGE);
+        pressToStartSize = Utils.getStringSize(pressToStart, GameStrings.START_GAME_MESSAGE);
     }
 
     @Override
     public void render(float delta) {
-        super.render(delta);
+
+        batch.begin();
+        batch.draw(backgroundImage, 0, 0);
+
+        //Draw the MAIN MENU text options
+        welcomeText.draw(batch, GameStrings.WELCOME_MESSAGE, Gdx.graphics.getWidth() / 2 - welcomeTextSize.x / 2,
+                Gdx.graphics.getHeight() / 2 - welcomeTextSize.y / 2);
+
+
+        pressToStart.draw(batch, GameStrings.START_GAME_MESSAGE, Gdx.graphics.getWidth() / 2 - pressToStartSize.x / 2,
+                Gdx.graphics.getHeight() / 2 - pressToStartSize.y / 2 - (welcomeTextSize.y + 10));
+        
     }
 
     @Override
     public void dispose() {
-        super.dispose();
+
+        welcomeText.dispose();
+        pressToStart.dispose();
+
+        backgroundImage.dispose();
     }
 }

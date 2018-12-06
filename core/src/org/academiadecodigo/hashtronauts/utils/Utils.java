@@ -16,15 +16,12 @@ public class Utils {
      * @param text the text showed
      * @return vector2 with the width and height (x, y)
      */
-
     public static Vector2 getStringSize(BitmapFont font, String text) {
 
         glyphLayout.setText(font, text);
 
         return new Vector2(glyphLayout.width, glyphLayout.height);
-
     }
-
 }
 
 
