@@ -54,46 +54,15 @@ public class Player extends Characters {
     }
 
 
-
-
-
-
-
     /**
      * Updates the Player position
      */
-
-
-
-
-
     @Override
     public void update() {
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             hitbox.x -= 200 * Gdx.graphics.getDeltaTime() * 2;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            hitbox.x += 200 * Gdx.graphics.getDeltaTime() * 2;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            hitbox.x -= 200 * Gdx.graphics.getDeltaTime() * 2;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            hitbox.x += 200 * Gdx.graphics.getDeltaTime() * 2;
-        }
-        if (hitbox.x < 0) {
-            hitbox.x = 0;
-        }
-        if (hitbox.x > 736) {    // 800-64
-            hitbox.x = 736;
-        }
 
-        if (hitbox.y < 0) {
-            hitbox.y = 0;
-        }
-        if (hitbox.y > 600) {    // 800-64
-            hitbox.y = 600;
-        }
 
     }
 
