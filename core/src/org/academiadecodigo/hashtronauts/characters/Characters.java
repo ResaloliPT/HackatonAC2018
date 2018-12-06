@@ -18,33 +18,16 @@ public abstract class Characters implements Killable, Renderable {
     }
 
 
-    /** Sees if the character is still alive
+    /**
+     * Sees if the character is still alive
+     *
      * @return True if the Character is alive
      */
     @Override
     public boolean isDead() {
         return getHealth() < 0;
     }
-
-
-    //Renderable Interface Methods
-
-    /**
-     * Renders the character
-     */
-    @Override
-    public void render() {
-
-    }
-
-    /**
-     * Updates the character position
-     */
-    @Override
-    public void update() {
-
-    }
 }
 
 
-}
+
