@@ -84,6 +84,9 @@ public class MainMenu extends ScreenAdapter {
         if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
 
             Gdx.app.exit();
+
+
+            
         }
 
         batch.end();
