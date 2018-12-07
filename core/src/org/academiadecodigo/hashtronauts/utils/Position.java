@@ -17,4 +17,12 @@ public class Position {
     public void setVector(Vector2 vector) {
         this.vector = vector;
     }
+
+    public int getX() {
+        return (int) vector.x;
+    }
+
+    public int getY() {
+        return (int) vector.y;
+    }
 }

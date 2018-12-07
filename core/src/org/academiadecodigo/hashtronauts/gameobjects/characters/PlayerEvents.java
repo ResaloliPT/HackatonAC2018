@@ -1,4 +1,4 @@
-package org.academiadecodigo.hashtronauts.characters;
+package org.academiadecodigo.hashtronauts.gameobjects.characters;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -9,24 +9,25 @@ import org.academiadecodigo.hashtronauts.utils.Position;
 public class PlayerEvents extends InputAdapter {
 
     private Player player;
+    private Position mousePos;
 
     @Override
     public boolean keyDown(int keycode) {
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            player.getHitbox().x -= 200 * Gdx.graphics.getDeltaTime();
+            player.getHitbox().setX(player.getHitbox().getX() - 200 * Gdx.graphics.getDeltaTime());
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            player.getHitbox().x += 200 * Gdx.graphics.getDeltaTime() * 2;
+            player.getHitbox().setX(player.getHitbox().getX() + 200 * Gdx.graphics.getDeltaTime() * 2);
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            player.getHitbox().y -= 200 * Gdx.graphics.getDeltaTime() * 2;
+            player.getHitbox().setY(player.getHitbox().getY() + 200 * Gdx.graphics.getDeltaTime() * 2);
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            player.getHitbox().y += 200 * Gdx.graphics.getDeltaTime() * 2;
+            player.getHitbox().setY(player.getHitbox().getY() - 200 * Gdx.graphics.getDeltaTime() * 2);
         }
 
         if (player.getHitbox().x < 0) {
@@ -47,7 +48,7 @@ public class PlayerEvents extends InputAdapter {
 
         return super.keyDown(keycode);
 
-}
+    }
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
@@ -65,9 +66,13 @@ public class PlayerEvents extends InputAdapter {
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
 
-        Position mousePos = new Position(screenX, screenY);
-        player.update(mousePos);
+        mousePos = new Position(screenX, screenY);
+        //player.update();
 
         return super.mouseMoved(screenX, screenY);
+    }
+
+    public Position getMousePos() {
+        return mousePos == null ? new Position(0,0) : mousePos;
     }
 }

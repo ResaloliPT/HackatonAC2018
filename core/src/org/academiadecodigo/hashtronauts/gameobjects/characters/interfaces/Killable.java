@@ -1,9 +1,11 @@
-package org.academiadecodigo.hashtronauts.characters.interfaces;
+package org.academiadecodigo.hashtronauts.gameobjects.characters.interfaces;
 
 public interface Killable {
 
 
-    /** Sees if the class that implements the interface is dead
+    /**
+     * Sees if the class that implements the interface is dead
+     *
      * @return true if dead
      */
     boolean isDead();

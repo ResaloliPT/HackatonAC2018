@@ -1,12 +1,17 @@
-package org.academiadecodigo.hashtronauts.characters;
+package org.academiadecodigo.hashtronauts.gameobjects.characters;
 
-import org.academiadecodigo.hashtronauts.characters.interfaces.Killable;
-import org.academiadecodigo.hashtronauts.characters.interfaces.Renderable;
+import org.academiadecodigo.hashtronauts.Renderable;
+import org.academiadecodigo.hashtronauts.utils.Position;
+import org.academiadecodigo.hashtronauts.gameobjects.characters.interfaces.Killable;
 
 public abstract class Characters implements Killable, Renderable {
 
-    private int health;
+    protected int health;
     private Position position;
+
+    public Characters(Position position){
+        this.position = position;
+    }
 
     //Getters and Setters
     public int getHealth() {
@@ -26,6 +31,10 @@ public abstract class Characters implements Killable, Renderable {
     @Override
     public boolean isDead() {
         return getHealth() <= 0;
+    }
+
+    public Position getPosition() {
+        return position;
     }
 }
 

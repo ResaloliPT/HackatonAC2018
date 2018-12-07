@@ -1,9 +1,9 @@
-package org.academiadecodigo.hashtronauts.characters;
+package org.academiadecodigo.hashtronauts.gameobjects.characters;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,24 +15,22 @@ public class Player extends Characters {
     private static Player player = new Player();
 
     private int score;
-    private Weapon weapon;
+    //private Weapon weapon;
     private Rectangle hitbox;
-    private PlayerEvents events;
+    private PlayerEvents playerEvents;
 
 
 
-    private SpriteBatch spriteBatch;
     private Sprite sprite;
 
-
-
     private Player() {
-        super();
+        super(new Position(100, 100));
         this.score = 0;
-        this.weapon = null;
-        this.spriteBatch = null;
-        this.playerRender = null;
-        this.sprite = new Sprite(new Texture(""));
+        //this.weapon = null;
+        //this.playerRender = null;
+        this.hitbox = new Rectangle(100f, 100f, 20f, 20f);
+        this.playerEvents = new PlayerEvents();
+        this.sprite = new Sprite(new Texture("images/player/queen.png"));
     }
 
 
@@ -42,8 +40,16 @@ public class Player extends Characters {
     }
 
     public void shoot(Position touchedPos) {
-        weapon.shoot(touchedPos, position);
+        //weapon.shoot(touchedPos, position);
 
+    }
+
+    @Override
+    public void hit(int damage) {
+        if (health - damage < 0) {
+            health = 0;
+        }
+        health -= damage;
     }
 
 
@@ -53,11 +59,19 @@ public class Player extends Characters {
     @Override
     public void render(SpriteBatch batch) {
         batch.draw(sprite, hitbox.x, hitbox.y, hitbox.width, hitbox.height);
-
     }
 
-    private void setEvents() {
+    public void setEvents() {
         Gdx.input.setInputProcessor(new InputAdapter() {
+
+            @Override
+            public boolean keyDown(int keycode) {
+                if (keycode == Input.Keys.RIGHT) {
+                    player.getHitbox().setX(player.getHitbox().getX() + 200 * Gdx.graphics.getDeltaTime() * 2);
+                    return true;
+                }
+                return super.keyDown(keycode);
+            }
         });
     }
 
@@ -66,9 +80,15 @@ public class Player extends Characters {
      * Updates the Player position
      */
     @Override
-    public void update(Position mousePos) {
-        sprite.setRotation();
+    public void update(Camera camera) {
+        Position mousePos = playerEvents.getMousePos();
 
+        int dX = mousePos.getX() - getPosition().getX();
+        int dY = mousePos.getY() - getPosition().getY();
+
+        float angle = (float) Math.atan(dX/dY);
+
+        sprite.rotate(angle);
 
 
     }
@@ -78,16 +98,6 @@ public class Player extends Characters {
      */
     @Override
     public void dispose() {
-
-
-}
-
-    public Texture getSprite() {
-        return sprite;
-    }
-
-    public void setSprite(Texture sprite) {
-        this.sprite = sprite;
     }
 
     public Rectangle getHitbox() {
@@ -104,13 +114,5 @@ public class Player extends Characters {
 
     public void setScore(int score) {
         this.score = score;
-    }
-
-    public Weapon getWeapon() {
-        return weapon;
-    }
-
-    public void setWeapon(Weapon weapon) {
-        this.weapon = weapon;
     }
 }
