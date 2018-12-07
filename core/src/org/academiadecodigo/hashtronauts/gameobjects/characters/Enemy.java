@@ -6,22 +6,24 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import org.academiadecodigo.hashtronauts.configs.GameSettings;
-import org.academiadecodigo.hashtronauts.gameobjects.GameObjectContainer;
 import org.academiadecodigo.hashtronauts.utils.Position;
 
 
 public abstract class Enemy extends Characters {
+
     private Texture enemyImage;
     private Rectangle hitbox;
     private int health;
     private final float VELOCITIY = 0.04f;
+
+    private boolean toDispose;
 
 
     Enemy(EnemyType type, Position position) {
         super(position);
         this.health = type.getHealth();
         enemyImage = new Texture(type.getPath());
-        this.hitbox = new Rectangle(position.getX(), position.getY(), GameSettings.ENEMY_THICKNESS, GameSettings.ENEMY_THICKNESS);
+        this.hitbox = new Rectangle(position.getX(), position.getY(), GameSettings.ENEMY_SIZE, GameSettings.ENEMY_SIZE);
     }
 
     private void checkCol() {
@@ -48,9 +50,7 @@ public abstract class Enemy extends Characters {
     @Override
     public void update(Camera camera) {
         if (isDead()) {
-            GameObjectContainer.getInstance().removeObject(this);
-            dispose();
-            return;
+            toDispose = true;
         }
 
         Position playerPos = Player.getInstance().getPosition();
@@ -109,5 +109,13 @@ public abstract class Enemy extends Characters {
             health = 0;
         }
         health -= damage;
+    }
+
+    public Rectangle getHitbox() {
+        return hitbox;
+    }
+
+    public boolean isToDispose() {
+        return toDispose;
     }
 }

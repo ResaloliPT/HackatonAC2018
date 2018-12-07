@@ -5,9 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import org.academiadecodigo.hashtronauts.configs.GameSettings;
@@ -19,7 +17,6 @@ public class Player extends Characters {
 
     private static Player player = new Player();
 
-    private int score;
     private Weapon weapon;
     private Rectangle hitbox;
     private PlayerEvents playerEvents;
@@ -37,12 +34,8 @@ public class Player extends Characters {
     private float angle;
     private Position mousePos;
 
-
     private Player() {
         super(new Position(100, 100));
-        this.score = 0;
-        //this.weapon = null;
-        //this.playerRender = null;
 
         this.activeTexture = new Texture(GameSettings.QUEEN_FRONT_VIEW);
         this.textureDown = new Texture(GameSettings.QUEEN_FRONT_VIEW);
@@ -50,11 +43,11 @@ public class Player extends Characters {
         this.textureUp = new Texture(GameSettings.QUEEN_BACK_VIEW);
         this.textureLeft = new Texture(GameSettings.QUEEN_LEFT_VIEW);
 
-        this.hitbox = new Rectangle(getPosition().getX(), getPosition().getY(), GameSettings.PLAYER_WIDTH, -GameSettings.PLAYER_HEIGHT);
+        this.hitbox = new Rectangle(getPosition().getX(), getPosition().getY(), GameSettings.PLAYER_WIDTH, GameSettings.PLAYER_HEIGHT);
         this.playerEvents = new PlayerEvents();
         this.angle = 0;
         this.weapon = new WeaponGelatin();
-        this.mousePos = new Position(0,0);
+        this.mousePos = new Position(0, 0);
 
     }
 
@@ -73,9 +66,10 @@ public class Player extends Characters {
     @Override
     public void hit(int damage) {
         if (health - damage < 0) {
-            health = 0;
+            setHealth(0);
         }
-        health -= damage;
+
+        setHealth(health - damage);
     }
 
 
@@ -93,22 +87,22 @@ public class Player extends Characters {
 
             @Override
             public boolean keyDown(int keycode) {
-                if (keycode == Input.Keys.RIGHT) {
+                if (keycode == Input.Keys.D) {
                     movingRight = true;
                     return true;
                 }
 
-                if (keycode == Input.Keys.LEFT) {
+                if (keycode == Input.Keys.A) {
                     movingLeft = true;
                     return true;
                 }
 
-                if (keycode == Input.Keys.UP) {
+                if (keycode == Input.Keys.W) {
                     movingUp = true;
                     return true;
                 }
 
-                if (keycode == Input.Keys.DOWN) {
+                if (keycode == Input.Keys.S) {
                     movingDown = true;
                     return true;
                 }
@@ -119,22 +113,22 @@ public class Player extends Characters {
 
             @Override
             public boolean keyUp(int keycode) {
-                if (keycode == Input.Keys.RIGHT) {
+                if (keycode == Input.Keys.D) {
                     movingRight = false;
                     return true;
                 }
 
-                if (keycode == Input.Keys.LEFT) {
+                if (keycode == Input.Keys.A) {
                     movingLeft = false;
                     return true;
                 }
 
-                if (keycode == Input.Keys.UP) {
+                if (keycode == Input.Keys.W) {
                     movingUp = false;
                     return true;
                 }
 
-                if (keycode == Input.Keys.DOWN) {
+                if (keycode == Input.Keys.S) {
                     movingDown = false;
                     return true;
                 }
@@ -172,8 +166,8 @@ public class Player extends Characters {
 
                     angle = calculatedAngle;
 
-                mousePos.setX(screenX);
-                mousePos.setY(screenY);
+                    mousePos.setX(screenX);
+                    mousePos.setY(screenY);
                 }
                 return true;
 
@@ -184,7 +178,7 @@ public class Player extends Characters {
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
                 Position tochedPos = new Position(screenX, screenY);
-                
+
                 if (Gdx.input.isTouched()) {
 
                     player.shoot(tochedPos);
@@ -202,6 +196,10 @@ public class Player extends Characters {
      */
     @Override
     public void update(Camera camera) {
+        if (isDead()){
+            return;
+        }
+
         Position mousePos = playerEvents.getMousePos();
 
 
@@ -275,27 +273,10 @@ public class Player extends Characters {
         textureDown.dispose();
         textureRight.dispose();
         textureUp.dispose();
-
-
-
-
-
     }
 
     public Rectangle getHitbox() {
         return hitbox;
-    }
-
-    public void setHitbox(Rectangle hitbox) {
-        this.hitbox = hitbox;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 
     public void setTexture(Texture texture) {

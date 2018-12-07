@@ -19,6 +19,7 @@ import org.academiadecodigo.hashtronauts.utils.Utils;
 public class MainMenu extends ScreenAdapter {
 
     private KillerQueen game;
+    private GameOverScreen gameOver;
     private SpriteBatch batch;
     private OrthographicCamera camera;
 
@@ -44,7 +45,7 @@ public class MainMenu extends ScreenAdapter {
 
 
         //Adding a background image
-        this.backgroundImage = new Texture("background/background_test.png");
+        this.backgroundImage = new Texture("background/main_menu_bg1.png");
 
     }
 

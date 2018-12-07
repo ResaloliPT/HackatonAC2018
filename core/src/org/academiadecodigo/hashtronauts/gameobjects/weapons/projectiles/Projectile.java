@@ -1,11 +1,9 @@
 package org.academiadecodigo.hashtronauts.gameobjects.weapons.projectiles;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import org.academiadecodigo.hashtronauts.Renderable;
 import org.academiadecodigo.hashtronauts.configs.GameSettings;
@@ -25,6 +23,7 @@ public class Projectile implements Renderable {
 
     //Projectile properties
     private int damage;
+    private boolean toDispose;
 
     /**
      * Creates a new Projectile
@@ -35,18 +34,11 @@ public class Projectile implements Renderable {
      */
     public Projectile(ProjectileType projectileType, Position startingPos, Position direction) {
         sprite = new Texture(projectileType.getSpriteURI());
-        hitbox = new Rectangle(startingPos.getVector().x, startingPos.getVector().y, 90, 90);
+        hitbox = new Rectangle(startingPos.getVector().x, startingPos.getVector().y, 30, 30);
 
-        this.position = startingPos;
+        this.position = new Position(startingPos.getX(), startingPos.getY());
         this.velocity = direction;
         this.damage = projectileType.getDamage();
-    }
-
-    /**
-     * Adds this projectile to the Game List to be rendered/updated
-     */
-    public void addObject() {
-        GameObjectContainer.getInstance().addObject(this);
     }
 
     /**
@@ -63,8 +55,7 @@ public class Projectile implements Renderable {
      */
     public void hit(Killable target) {
         target.hit(damage);
-        GameObjectContainer.getInstance().removeObject(this);
-        dispose();
+        toDispose = true;
     }
 
     @Override
@@ -74,10 +65,10 @@ public class Projectile implements Renderable {
 
     @Override
     public void update(Camera camera) {
-        Vector2 newPos = position.getVector().set(position.getX() + (velocity.getX() * Gdx.graphics.getDeltaTime()), position.getY() + (velocity.getY() * Gdx.graphics.getDeltaTime()));
-        position.setVector(newPos);
 
-        Vector3 screenLocation = new Vector3(position.getX(), position.getY(), 0);
+        position = new Position(position.getX() + velocity.getX(), position.getY() + velocity.getY());
+
+        Vector3 screenLocation = new Vector3(position.getX() + velocity.getX(), position.getY() + velocity.getY(), 0);
 
         screenLocation = camera.unproject(screenLocation);
 
@@ -85,11 +76,11 @@ public class Projectile implements Renderable {
 
         if ((position.getX() < 0 || position.getX() > GameSettings.WIDTH) ||
                 (position.getY() < 0 || position.getY() > GameSettings.HEIGHT)) {
-            synchronized (GameObjectContainer.getInstance()) {
-                deleteObject();
-                dispose();
-            }
+            deleteObject();
+            dispose();
+
         }
+
     }
 
     public Rectangle getHitbox() {
@@ -99,5 +90,9 @@ public class Projectile implements Renderable {
     @Override
     public void dispose() {
         sprite.dispose();
+    }
+
+    public boolean isToDispose() {
+        return toDispose;
     }
 }

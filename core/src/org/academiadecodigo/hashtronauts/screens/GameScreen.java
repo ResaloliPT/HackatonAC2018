@@ -10,7 +10,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.academiadecodigo.hashtronauts.KillerQueen;
 import org.academiadecodigo.hashtronauts.MainGame;
 import org.academiadecodigo.hashtronauts.configs.GameSettings;
+import org.academiadecodigo.hashtronauts.gameobjects.GameObjectContainer;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Player;
+import org.academiadecodigo.hashtronauts.gameobjects.characters.Soldier;
+import org.academiadecodigo.hashtronauts.utils.Position;
 
 /**
  *
@@ -40,7 +43,13 @@ public class GameScreen extends ScreenAdapter {
         bkgMusic.setLooping(true);
         bkgMusic.play();
 
-        this.game = new MainGame();
+        this.game = new MainGame(mainClass);
+
+        int numOfEnemies = (int)((Math.random() * 10) + 5);
+
+        for (int i = 0; i < numOfEnemies; i++) {
+            GameObjectContainer.getInstance().addObject(new Soldier(new Position((int)((Math.random() * GameSettings.WIDTH) + 50), -10)));
+        }
 
         setupEvents();
     }
@@ -70,7 +79,6 @@ public class GameScreen extends ScreenAdapter {
         batch.end();
 
         game.update(camera);
-
 
     }
 

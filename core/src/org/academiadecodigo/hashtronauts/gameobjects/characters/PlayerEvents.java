@@ -1,7 +1,5 @@
 package org.academiadecodigo.hashtronauts.gameobjects.characters;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import org.academiadecodigo.hashtronauts.utils.Position;
 

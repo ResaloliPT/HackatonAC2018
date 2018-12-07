@@ -6,7 +6,7 @@ import org.academiadecodigo.hashtronauts.utils.Position;
 
 public abstract class Characters implements Killable, Renderable {
 
-    protected int health;
+    protected int health = 5;
     protected Position position;
 
     public Characters(Position position){
@@ -21,7 +21,6 @@ public abstract class Characters implements Killable, Renderable {
     public void setHealth(int health) {
         this.health = health;
     }
-
 
     /**
      * Sees if the character is still alive

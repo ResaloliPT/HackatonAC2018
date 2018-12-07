@@ -3,7 +3,7 @@ package org.academiadecodigo.hashtronauts.gameobjects.weapons;
 import org.academiadecodigo.hashtronauts.gameobjects.weapons.projectiles.ProjectileType;
 
 public enum WeaponType {
-    GELATIN(ProjectileType.Gelatin);
+    GELATIN(ProjectileType.CAKE);
 
     ProjectileType projectileType;
 
