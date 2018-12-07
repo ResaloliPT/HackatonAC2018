@@ -1,10 +1,13 @@
 package org.academiadecodigo.hashtronauts.gameobjects;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.utils.TimeUtils;
 import org.academiadecodigo.hashtronauts.Renderable;
+import org.academiadecodigo.hashtronauts.configs.GameSettings;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Enemy;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Player;
 import org.academiadecodigo.hashtronauts.gameobjects.weapons.projectiles.Projectile;
@@ -23,6 +26,7 @@ public class GameObjectContainer implements Renderable {
     private volatile List<Enemy> enemies;
     private volatile List<Projectile> projectiles;
     private Player player;
+    private Sound enemyHit;
     private Score score;
     private boolean gameOver;
     private long playerTimer = 0;
@@ -32,6 +36,7 @@ public class GameObjectContainer implements Renderable {
         this.player = Player.getInstance();
         this.enemies = new LinkedList<Enemy>();
         this.projectiles = new LinkedList<Projectile>();
+        this.enemyHit = Gdx.audio.newSound(Gdx.files.internal(GameSettings.ENEMY_HIT_SOUND));
         this.score = new Score();
     }
 
@@ -107,6 +112,7 @@ public class GameObjectContainer implements Renderable {
                 Enemy currentEnemy = iterator.next();
 
                 if (Intersector.overlaps(currentProjectile.getHitbox(), currentEnemy.getHitbox())) {
+                    enemyHit.play();
                     currentProjectile.hit(currentEnemy);
                 }
             }
@@ -157,4 +163,5 @@ public class GameObjectContainer implements Renderable {
     public void resetScore() {
         score.changeScore(-score.getScore());
     }
+
 }

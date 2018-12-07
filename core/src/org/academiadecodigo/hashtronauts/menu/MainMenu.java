@@ -30,7 +30,6 @@ public class MainMenu extends ScreenAdapter {
     private Vector2 pressToStartSize;
 
     /* Screen Components */
-    private Sound startSound;
     private Texture backgroundImage;
 
     public MainMenu(KillerQueen game) {
@@ -39,9 +38,6 @@ public class MainMenu extends ScreenAdapter {
         this.camera = game.getCamera();
         this.welcomeText = Fonts.PRESS_START.getFont();
         this.pressToStart = Fonts.PRESS_START.getFont();
-
-        /* Adding music */
-
 
         //Adding a background image
         this.backgroundImage = new Texture("background/main_menu_bg1.png");

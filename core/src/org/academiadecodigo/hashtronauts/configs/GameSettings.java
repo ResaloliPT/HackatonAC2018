@@ -42,7 +42,7 @@ public class GameSettings {
     public static int PLAYER_HP = 5;
 
     /* Sounds and music */
-    public static final String BCKG_MUSIC = "assets/sounds/killer_queen.mp3";
+    public static final String BCKG_MUSIC = "sounds/killer_queen.mp3";
     public static final String ENEMY_HIT_SOUND = "sounds/enemy_hit.mp3";
     public static final String SHOOTING_SOUND = "sounds/shooting_sound.mp3";
     public static final String GAMME_OVER_SOUND = "sounds/game_over.mp3";

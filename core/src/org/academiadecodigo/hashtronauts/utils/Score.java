@@ -7,8 +7,6 @@ import org.academiadecodigo.hashtronauts.configs.GameStrings;
 
 public class Score {
 
-
-    private int currentScore;
     private BitmapFont scoreText;
     private Integer score;
 
@@ -18,7 +16,7 @@ public class Score {
     }
 
     public void draw(SpriteBatch batch) {
-        scoreText.draw(batch, GameStrings.SCORE_BASE_STRING + score, 10, Gdx.graphics.getHeight() - (scoreText.getCapHeight()));
+        scoreText.draw(batch, GameStrings.SCORE_BASE_STRING + score, 50, Gdx.graphics.getHeight() - (scoreText.getCapHeight()));
     }
 
     public Integer changeScore(Integer enemyScore) {

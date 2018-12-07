@@ -23,7 +23,6 @@ public class GameScreen extends ScreenAdapter {
     private SpriteBatch batch;
     private OrthographicCamera camera;
 
-    private Music music;
     private Texture bkgImage;
 
 
@@ -36,6 +35,7 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(KillerQueen mainClass) {
         this.batch = mainClass.getBatch();
         this.camera = mainClass.getCamera();
+        this.bkgImage = new Texture(GameSettings.MAP_LEVEL1);
         this.game = new MainGame(mainClass);
     }
 
@@ -51,10 +51,7 @@ public class GameScreen extends ScreenAdapter {
 
 
     /**
-     * @param delta
-     *
-     * Renders the game screen and updates view
-     *
+     * @param delta Renders the game screen and updates view
      */
     @Override
     public void render(float delta) {
@@ -68,7 +65,7 @@ public class GameScreen extends ScreenAdapter {
 
         //Begin SpriteBatch
         batch.begin();
-        batch.draw(bkgImage, 0,0, GameSettings.WIDTH, GameSettings.HEIGHT);
+        batch.draw(bkgImage, 0, 0, GameSettings.WIDTH, GameSettings.HEIGHT);
 
         //Draw sprites
         game.render(batch);
