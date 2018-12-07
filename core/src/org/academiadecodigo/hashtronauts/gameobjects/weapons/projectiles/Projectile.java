@@ -34,7 +34,7 @@ public class Projectile implements Renderable {
      */
     public Projectile(ProjectileType projectileType, Position startingPos, Position direction) {
         sprite = new Texture(projectileType.getSpriteURI());
-        shape = new Ellipse(startingPos.getVector().x, startingPos.getVector().y, sprite.getWidth(), sprite.getHeight());
+        shape = new Ellipse(startingPos.getVector().x, startingPos.getVector().y, 20, 10);
 
         this.position = startingPos;
         this.velocity = direction;
@@ -43,10 +43,7 @@ public class Projectile implements Renderable {
 
     /**
      * Adds this projectile to the Game List to be rendered/updated
-     *
-     * @param game the game class which contains the Render/update list
      */
-
     public void addObject() {
         GameObjectContainer.getInstance();
     }
@@ -66,7 +63,7 @@ public class Projectile implements Renderable {
 
     @Override
     public void render(SpriteBatch batch) {
-        batch.draw(sprite, shape.x, shape.y, 20, 10);
+        batch.draw(sprite, shape.x, shape.y, shape.width, shape.height);
     }
 
     @Override
@@ -81,7 +78,7 @@ public class Projectile implements Renderable {
 
         camera.unproject(newCoords);
 
-        this.shape.setPosition(newCoords.x, newCoords.y);
+        this.shape = this.shape.setPosition(newCoords.x, newCoords.y);
     }
 
     @Override
