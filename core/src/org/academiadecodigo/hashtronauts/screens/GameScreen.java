@@ -38,9 +38,16 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(KillerQueen mainClass) {
         this.batch = mainClass.getBatch();
         this.camera = mainClass.getCamera();
-        this.bkgImage = new Texture(GameSettings.MAP_LEVEL1);
-
         this.game = new MainGame(mainClass);
+    }
+
+    @Override
+    public void show () {
+
+        Player.getInstance().reset();
+        GameObjectContainer.getInstance().reset();
+
+        this.bkgImage = new Texture(GameSettings.MAP_LEVEL1);
 
         int numOfEnemies = (int)((Math.random() * 10) + 5);
 

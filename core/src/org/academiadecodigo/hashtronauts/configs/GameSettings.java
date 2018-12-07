@@ -38,4 +38,6 @@ public class GameSettings {
     public static final String ENEMY_RIGHT_VIEW = "assets/images/enemies/enemy_right_view.png";
     public static final String ENEMY_DEAD_VIEW = "images/enemies/enemy_dead_view.png";
 
+    /* Player stats */
+    public static int PLAYER_HP = 5;
 }

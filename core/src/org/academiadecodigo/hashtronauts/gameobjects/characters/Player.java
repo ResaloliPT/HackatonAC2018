@@ -42,13 +42,9 @@ public class Player extends Characters {
         this.textureRight = new Texture(GameSettings.QUEEN_RIGHT_VIEW);
         this.textureUp = new Texture(GameSettings.QUEEN_BACK_VIEW);
         this.textureLeft = new Texture(GameSettings.QUEEN_LEFT_VIEW);
-
-        this.hitbox = new Rectangle(getPosition().getX(), getPosition().getY(), GameSettings.PLAYER_WIDTH, GameSettings.PLAYER_HEIGHT);
         this.playerEvents = new PlayerEvents();
-        this.angle = 0;
-        this.weapon = new WeaponGelatin();
-        this.mousePos = new Position(0, 0);
 
+        reset();
     }
 
 
@@ -281,5 +277,13 @@ public class Player extends Characters {
 
     public void setTexture(Texture texture) {
         this.activeTexture = texture;
+    }
+
+    public void reset() {
+        this.setHealth(GameSettings.PLAYER_HP);
+        this.hitbox = new Rectangle(getPosition().getX(), getPosition().getY(), GameSettings.PLAYER_WIDTH, GameSettings.PLAYER_HEIGHT);
+        this.angle = 0;
+        this.weapon = new WeaponGelatin();
+        this.mousePos = new Position(0, 0);
     }
 }

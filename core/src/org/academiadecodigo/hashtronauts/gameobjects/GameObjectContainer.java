@@ -64,6 +64,9 @@ public class GameObjectContainer implements Renderable {
             Enemy currentEnemy = iterator.next();
 
             if (currentEnemy.isToDispose()) {
+
+                score.changeScore(currentEnemy.getEnemyScore());
+
                 iterator.remove();
                 if (enemies.size() == 0) {
                     gameOver = true;
@@ -133,5 +136,27 @@ public class GameObjectContainer implements Renderable {
 
     public boolean isGameOver() {
         return gameOver;
+    }
+
+    public void reset() {
+        for (Iterator<Enemy> iterator = enemies.iterator(); iterator.hasNext(); ) {
+            Enemy projectile = iterator.next();
+
+            if (projectile != null) {
+                iterator.remove();
+            }
+        }
+
+        for (Iterator<Projectile> iterator = projectiles.iterator(); iterator.hasNext(); ) {
+            Projectile projectile = iterator.next();
+
+            if (projectile != null) {
+                iterator.remove();
+            }
+        }
+
+        gameOver = false;
+
+        score.changeScore(-score.getScore());
     }
 }

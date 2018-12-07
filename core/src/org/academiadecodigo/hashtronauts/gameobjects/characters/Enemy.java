@@ -11,6 +11,7 @@ import org.academiadecodigo.hashtronauts.utils.Position;
 
 public abstract class Enemy extends Characters {
 
+    private final EnemyType type;
     private Texture enemyImage;
     private Rectangle hitbox;
     private int health;
@@ -21,6 +22,7 @@ public abstract class Enemy extends Characters {
 
     Enemy(EnemyType type, Position position) {
         super(position);
+        this.type = type;
         this.health = type.getHealth();
         enemyImage = new Texture(type.getPath());
         this.hitbox = new Rectangle(position.getX(), position.getY(), GameSettings.ENEMY_SIZE, GameSettings.ENEMY_SIZE);
@@ -117,5 +119,9 @@ public abstract class Enemy extends Characters {
 
     public boolean isToDispose() {
         return toDispose;
+    }
+
+    public Integer getEnemyScore() {
+        return type.getPoints();
     }
 }
