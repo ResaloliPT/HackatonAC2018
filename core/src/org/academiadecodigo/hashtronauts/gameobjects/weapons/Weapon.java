@@ -10,7 +10,7 @@ public abstract class Weapon {
 
     private WeaponType weaponType;
     private long timer = 0;
-    private long shootTime = 350;
+    private long shootTime = 500;
 
     public Weapon(WeaponType weaponType) {
         this.weaponType = weaponType;

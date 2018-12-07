@@ -16,7 +16,7 @@ public class Guillotine implements Renderable {
 
     public Guillotine(Position position) {
         this.texture = new Texture("images/projectiles/projectile1.png");
-        this.hitbox = new Rectangle(position.getX(), position.getY(), GameSettings.ENEMY_THICKNESS, GameSettings.ENEMY_THICKNESS);
+        this.hitbox = new Rectangle(position.getX(), position.getY(), GameSettings.ENEMY_SIZE, GameSettings.ENEMY_SIZE);
         this.pos = position;
     }
 

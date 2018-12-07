@@ -23,9 +23,14 @@ public class MainGame implements Renderable {
     public void render(SpriteBatch batch) {
         gameObjects.render(batch);
 
+        if (gameObjects.getEnemies().size() == 0) {
+            //game.setScreen(new GameOverScreen());
+            return;
+        }
 
         if (Player.getInstance().isDead()) {
-            //game.setScreen(new GameOverScreen());
+            //game.setScreen(new GameOverScreen());r
+            return;
         }
 
     }

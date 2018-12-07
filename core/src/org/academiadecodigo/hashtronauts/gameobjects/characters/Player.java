@@ -35,7 +35,6 @@ public class Player extends Characters {
     private float angle;
     private Position mousePos;
 
-
     private Player() {
         super(new Position(100, 100));
         this.score = 0;

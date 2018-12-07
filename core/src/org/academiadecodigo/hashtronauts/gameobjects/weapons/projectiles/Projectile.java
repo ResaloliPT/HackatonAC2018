@@ -23,6 +23,7 @@ public class Projectile implements Renderable {
 
     //Projectile properties
     private int damage;
+    private boolean toDispose;
 
     /**
      * Creates a new Projectile
@@ -33,7 +34,7 @@ public class Projectile implements Renderable {
      */
     public Projectile(ProjectileType projectileType, Position startingPos, Position direction) {
         sprite = new Texture(projectileType.getSpriteURI());
-        hitbox = new Rectangle(startingPos.getVector().x, startingPos.getVector().y, 90, 90);
+        hitbox = new Rectangle(startingPos.getVector().x, startingPos.getVector().y, 30, 30);
 
         this.position = new Position(startingPos.getX(), startingPos.getY());
         this.velocity = direction;
@@ -54,8 +55,7 @@ public class Projectile implements Renderable {
      */
     public void hit(Killable target) {
         target.hit(damage);
-        GameObjectContainer.getInstance().removeObject(this);
-        dispose();
+        toDispose = true;
     }
 
     @Override
@@ -80,6 +80,7 @@ public class Projectile implements Renderable {
             dispose();
 
         }
+
     }
 
     public Rectangle getHitbox() {
@@ -89,5 +90,9 @@ public class Projectile implements Renderable {
     @Override
     public void dispose() {
         sprite.dispose();
+    }
+
+    public boolean isToDispose() {
+        return toDispose;
     }
 }

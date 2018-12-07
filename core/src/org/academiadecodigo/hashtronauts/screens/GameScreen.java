@@ -42,7 +42,11 @@ public class GameScreen extends ScreenAdapter {
 
         this.game = new MainGame(mainClass);
 
-        GameObjectContainer.getInstance().addObject(new Soldier(new Position(100, -10)));
+        int numOfEnemies = (int) ((Math.random() * 10) + 5);
+
+        for (int i = 0; i < numOfEnemies; i++) {
+            GameObjectContainer.getInstance().addObject(new Soldier(new Position((int) ((Math.random() * GameSettings.WIDTH) + 50), -10)));
+        }
 
         setupEvents();
     }
@@ -75,7 +79,6 @@ public class GameScreen extends ScreenAdapter {
         batch.end();
 
         game.update(camera);
-
 
     }
 

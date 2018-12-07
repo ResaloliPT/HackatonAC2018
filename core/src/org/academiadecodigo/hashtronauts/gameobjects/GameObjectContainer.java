@@ -9,10 +9,13 @@ import org.academiadecodigo.hashtronauts.gameobjects.characters.Player;
 import org.academiadecodigo.hashtronauts.gameobjects.weapons.projectiles.Projectile;
 import org.academiadecodigo.hashtronauts.utils.Score;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 public class GameObjectContainer implements Renderable {
+
+    private static final java.util.concurrent.locks.Lock lock = new java.util.concurrent.locks.ReentrantLock();
 
     private static GameObjectContainer instance = new GameObjectContainer();
 
@@ -34,12 +37,14 @@ public class GameObjectContainer implements Renderable {
     }
 
     @Override
-    public synchronized void render(SpriteBatch batch) {
+    public void render(SpriteBatch batch) {
 
         player.render(batch);
 
-        for (Enemy enemy : enemies) {
-            enemy.render(batch);
+        for (Enemy currentEnemy : enemies) {
+            synchronized (lock) {
+                currentEnemy.render(batch);
+            }
         }
 
         for (Projectile projectile : projectiles) {
@@ -49,30 +54,46 @@ public class GameObjectContainer implements Renderable {
         }
 
         score.draw(batch);
-
     }
 
     @Override
     public void update(Camera camera) {
         player.update(camera);
 
-        for (Enemy enemy : enemies) {
-            enemy.update(camera);
 
-            if (Intersector.overlaps(player.getHitbox(), enemy.getHitbox())) {
+        for (Iterator<Enemy> iterator = enemies.iterator(); iterator.hasNext(); ) {
+            Enemy currentEnemy = iterator.next();
+
+            if (currentEnemy.isToDispose()) {
+                iterator.remove();
+                continue;
+            }
+
+            currentEnemy.update(camera);
+
+            if (Intersector.overlaps(player.getHitbox(), currentEnemy.getHitbox())) {
                 player.hit(1);
             }
-
-            for (Projectile projectile : projectiles) {
-                projectile.update(camera);
+        }
 
 
-                if (Intersector.overlaps(projectile.getHitbox(), enemy.getHitbox())) {
-                    projectile.hit(enemy);
-                }
+        for (Iterator<Projectile> pIterator = projectiles.iterator(); pIterator.hasNext(); ) {
+            Projectile currentProjectile = pIterator.next();
 
+            if (currentProjectile.isToDispose()) {
+                pIterator.remove();
+                continue;
             }
 
+            currentProjectile.update(camera);
+
+            for (Iterator<Enemy> iterator = enemies.iterator(); iterator.hasNext(); ) {
+                Enemy currentEnemy = iterator.next();
+
+                if (Intersector.overlaps(currentProjectile.getHitbox(), currentEnemy.getHitbox())) {
+                    currentProjectile.hit(currentEnemy);
+                }
+            }
         }
     }
 
@@ -97,4 +118,7 @@ public class GameObjectContainer implements Renderable {
         enemies.remove(enemy);
     }
 
+    public List<Enemy> getEnemies() {
+        return enemies;
+    }
 }
