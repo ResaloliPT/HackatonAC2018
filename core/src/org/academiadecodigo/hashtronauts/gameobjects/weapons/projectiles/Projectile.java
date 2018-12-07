@@ -37,7 +37,7 @@ public class Projectile implements Renderable {
         sprite = new Texture(projectileType.getSpriteURI());
         hitbox = new Rectangle(startingPos.getVector().x, startingPos.getVector().y, 90, 90);
 
-        this.position = startingPos;
+        this.position = new Position(startingPos.getX(), startingPos.getY());
         this.velocity = direction;
         this.damage = projectileType.getDamage();
     }

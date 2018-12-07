@@ -5,9 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import org.academiadecodigo.hashtronauts.configs.GameSettings;
@@ -184,7 +182,7 @@ public class Player extends Characters {
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
                 Position tochedPos = new Position(screenX, screenY);
-                
+
                 if (Gdx.input.isTouched()) {
 
                     player.shoot(tochedPos);

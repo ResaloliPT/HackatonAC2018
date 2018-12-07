@@ -10,8 +10,8 @@ import org.academiadecodigo.hashtronauts.utils.Position;
 public abstract class Weapon {
 
     private WeaponType weaponType;
-    private long timer;
-
+    private long timer = 0;
+    private long shootTime = 350;
 
     public Weapon(WeaponType weaponType) {
         this.weaponType = weaponType;
@@ -20,9 +20,14 @@ public abstract class Weapon {
     public synchronized void shoot(Position touchedPos, Position position) {
         Position direction;
 
-        if(TimeUtils.nanoTime() - timer > 1000000000) {
+        long difftime = TimeUtils.millis() - timer;
+
+        if (difftime < shootTime) {
             return;
         }
+
+        timer = TimeUtils.millis();
+
 
         int xDiff = touchedPos.getX() - position.getX();
         int yDiff = touchedPos.getY() - position.getY();
@@ -35,6 +40,5 @@ public abstract class Weapon {
         Projectile projectile = new Projectile(weaponType.getBulletType(), position, direction);
 
         GameObjectContainer.getInstance().addObject(projectile);
-        timer = TimeUtils.nanoTime();
     }
 }
