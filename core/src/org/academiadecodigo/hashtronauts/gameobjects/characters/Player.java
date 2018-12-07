@@ -22,6 +22,7 @@ public class Player extends Characters {
 
 
     private Sprite sprite;
+    private boolean movingRight;
 
     private Player() {
         super(new Position(100, 100));
@@ -67,19 +68,20 @@ public class Player extends Characters {
             @Override
             public boolean keyDown(int keycode) {
                 if (keycode == Input.Keys.RIGHT) {
-                    player.getPosition().setX((int) (player.getPosition().getX() + 200 * Gdx.graphics.getDeltaTime()));
-
-
-                    player.getHitbox().setX(player.getHitbox().getX() + 200 * Gdx.graphics.getDeltaTime() * 2);
+                    movingRight = true;
                     return true;
                 }
                 return super.keyDown(keycode);
             }
 
-
-
-
-
+            @Override
+            public boolean keyUp(int keycode) {
+                if (keycode == Input.Keys.RIGHT) {
+                    movingRight = false;
+                    return true;
+                }
+                return super.keyUp(keycode);
+            }
         });
     }
 
@@ -98,6 +100,10 @@ public class Player extends Characters {
 
         sprite.rotate(angle);
 
+        if (movingRight) {
+            player.getPosition().setX((int) (player.getPosition().getX() + 200 * Gdx.graphics.getDeltaTime()));
+            player.getHitbox().setX(player.getHitbox().getX() + 200 * Gdx.graphics.getDeltaTime() * 2);
+        }
 
     }
 
