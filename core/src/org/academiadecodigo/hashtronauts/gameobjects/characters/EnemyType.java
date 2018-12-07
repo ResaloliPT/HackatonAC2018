@@ -1,7 +1,7 @@
 package org.academiadecodigo.hashtronauts.gameobjects.characters;
 
 public enum EnemyType {
-    SOLDIER(5, "images/enemies/enemies.png"),
+    SOLDIER(3, "images/enemies/enemies.png"),
     KING(20, "images/enemies/enemies.png");
 
     private int health;
