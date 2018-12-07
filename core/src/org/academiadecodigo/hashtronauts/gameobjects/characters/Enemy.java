@@ -23,7 +23,7 @@ public abstract class Enemy extends Characters {
         this.enemyType = type;
         this.health = enemyType.getHealth();
         enemyImage = new Texture(type.getPath());
-        this.hitbox = new Rectangle(position.getX(), position.getY(), 20, 20);
+        this.hitbox = new Rectangle(position.getX(), position.getY(), GameSettings.ENEMY_THICKNESS, GameSettings.ENEMY_THICKNESS);
     }
 
     private void checkCol() {
@@ -54,8 +54,8 @@ public abstract class Enemy extends Characters {
             return;
         }
 
-        Position position = new Position((int)(getPosition().getX() + ( VELOCITIY * Gdx.graphics.getDeltaTime())),
-                (int) (getPosition().getY() + ( VELOCITIY * Gdx.graphics.getDeltaTime())));
+        Position position = new Position((int) (getPosition().getX() + (VELOCITIY * Gdx.graphics.getDeltaTime())),
+                (int) (getPosition().getY() + (VELOCITIY * Gdx.graphics.getDeltaTime())));
 
         Vector3 vector3 = new Vector3(position.getX(), position.getY(), 0);
 
@@ -88,9 +88,9 @@ public abstract class Enemy extends Characters {
 
     @Override
     public void hit(int damage) {
-        health -= damage;
         if (damage > health || health <= 0) {
             health = 0;
         }
+        health -= damage;
     }
 }

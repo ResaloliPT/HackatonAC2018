@@ -6,6 +6,7 @@ public class GameSettings {
     public static final int WIDTH = 600;
     public static final int HEIGHT = 800;
     public static final int WALL_THICKNESS  = 40;
+    public static final int ENEMY_THICKNESS = 40;
 
 
 }
