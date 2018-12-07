@@ -14,9 +14,9 @@ public abstract class Enemy extends Characters {
     private Texture enemyImage;
     private Rectangle hitbox;
     private int health;
-    private int VELOCITIY = 90;
 
-    public Enemy(EnemyType type, Position position) {
+
+    Enemy(EnemyType type, Position position) {
         super(position);
         this.health = type.getHealth();
         enemyImage = new Texture(type.getPath());
@@ -50,16 +50,13 @@ public abstract class Enemy extends Characters {
             dispose();
             return;
         }
-
+        final int VELOCITIY = 90;
         Position position = new Position((int) (getPosition().getX() + (VELOCITIY * Gdx.graphics.getDeltaTime())),
                 (int) (getPosition().getY() + (VELOCITIY * Gdx.graphics.getDeltaTime())));
 
         Vector3 vector3 = new Vector3(position.getX(), position.getY(), 0);
-
         camera.unproject(vector3);
-
         this.hitbox.setPosition(vector3.x, vector3.y);
-
         checkCol();
     }
 
@@ -71,11 +68,6 @@ public abstract class Enemy extends Characters {
     @Override
     public int getHealth() {
         return health;
-    }
-
-    @Override
-    public void setHealth(int health) {
-        this.health = health;
     }
 
     @Override
