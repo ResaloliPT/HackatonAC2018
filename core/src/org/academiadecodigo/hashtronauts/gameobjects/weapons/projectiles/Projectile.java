@@ -4,10 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Ellipse;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import org.academiadecodigo.hashtronauts.MainGame;
 import org.academiadecodigo.hashtronauts.Renderable;
 import org.academiadecodigo.hashtronauts.configs.GameSettings;
 import org.academiadecodigo.hashtronauts.gameobjects.GameObjectContainer;
@@ -18,7 +17,7 @@ public class Projectile implements Renderable {
 
     //Render
     private Texture sprite;
-    private Ellipse shape;
+    private Rectangle hitbox;
 
     // Position & Movement
     private Position velocity;
@@ -36,7 +35,7 @@ public class Projectile implements Renderable {
      */
     public Projectile(ProjectileType projectileType, Position startingPos, Position direction) {
         sprite = new Texture(projectileType.getSpriteURI());
-        shape = new Ellipse(startingPos.getVector().x, startingPos.getVector().y, 20, 10);
+        hitbox = new Rectangle(startingPos.getVector().x, startingPos.getVector().y, 90, 90);
 
         this.position = startingPos;
         this.velocity = direction;
@@ -61,10 +60,8 @@ public class Projectile implements Renderable {
      * Hits the target then disposes itself
      *
      * @param target the target to be hit
-     * @param game   the game containing the render/update list
      */
-
-    public void hit(Killable target, MainGame game) {
+    public void hit(Killable target) {
         target.hit(damage);
         GameObjectContainer.getInstance().removeObject(this);
         dispose();
@@ -72,7 +69,7 @@ public class Projectile implements Renderable {
 
     @Override
     public void render(SpriteBatch batch) {
-        batch.draw(sprite, shape.x, shape.y, shape.width, shape.height);
+        batch.draw(sprite, hitbox.x, hitbox.y, hitbox.width, hitbox.height);
     }
 
     @Override
@@ -84,13 +81,17 @@ public class Projectile implements Renderable {
 
         screenLocation = camera.unproject(screenLocation);
 
-        shape.setPosition(screenLocation.x, screenLocation.y);
+        hitbox.setPosition(screenLocation.x, screenLocation.y);
 
         if ((position.getX() < 0 || position.getX() > GameSettings.WIDTH) ||
                 (position.getY() < 0 || position.getY() > GameSettings.HEIGHT)) {
             deleteObject();
             dispose();
         }
+    }
+
+    public Rectangle getHitbox() {
+        return hitbox;
     }
 
     @Override
