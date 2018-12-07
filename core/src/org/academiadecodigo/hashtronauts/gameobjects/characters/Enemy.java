@@ -15,15 +15,14 @@ public abstract class Enemy extends Characters {
     private Rectangle hitbox;
     private int health;
     private Position position;
-    private EnemyType enemyType;
-    private boolean dead = false;
 
     public Enemy(EnemyType type, Position position) {
         super(position);
         this.position = position;
-        this.enemyType = type;
+        health = type.getHealth();
         enemyImage = new Texture(type.getPath());
-        hitbox = new Rectangle();
+        this.hitbox = new Rectangle(position.getX(),position.getY(),20,20);
+
 
     }
 
@@ -47,18 +46,13 @@ public abstract class Enemy extends Characters {
     public void render(SpriteBatch batch) {
         String enemyImagePath = EnemyType.SOLDIER.getPath();
         enemyImage = new Texture(enemyImagePath);
-
-        hitbox.width = 20;
-        hitbox.height = 20;
-        hitbox.y = GameSettings.HEIGHT - hitbox.height;
-        hitbox.x = MathUtils.random(GameSettings.HEIGHT - hitbox.width);
-
-        batch.draw(enemyImage, hitbox.x, hitbox.y, enemyImage.getWidth(), enemyImage.getHeight());
+        batch.draw(enemyImage, hitbox.x, hitbox.y, hitbox.width, hitbox.height);
     }
 
     @Override
     public void update(Camera camera) {
-        Vector3 vector3 = new Vector3(position.getVector().x, position.getVector().y, 0);
+        /*
+       Vector3 vector3 = new Vector3(position.getVector().x, position.getVector().y, 0);
         camera.unproject(vector3);
         if (isDead()) {
             dispose();
@@ -71,8 +65,8 @@ public abstract class Enemy extends Characters {
             hitbox.y = 200 * (hitbox.y + Player.getInstance().getPosition().getVector().y) * 2;
             checkCol();
         }
+*/
     }
-
     @Override
     public void dispose() {
         enemyImage.dispose();
@@ -101,9 +95,6 @@ public abstract class Enemy extends Characters {
         return health <= 0;
     }
 
-    public void setDead(boolean dead) {
-        this.dead = dead;
-    }
 
     @Override
     public void hit(int damage) {
