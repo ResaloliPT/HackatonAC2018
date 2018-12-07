@@ -50,26 +50,16 @@ public class PlayerEvents extends InputAdapter {
 
     }*/
 
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-        Position tochedPos = new Position(screenX, screenY);
 
-        if (Gdx.input.isTouched()) {
-
-            player.shoot(tochedPos);
-        }
-
-        return super.touchDown(screenX, screenY, pointer, button);
-    }
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
 
         mousePos = new Position(screenX, screenY);
         //player.update();
+        return true;
 
-        return super.mouseMoved(screenX, screenY);
     }
 
     public Position getMousePos() {

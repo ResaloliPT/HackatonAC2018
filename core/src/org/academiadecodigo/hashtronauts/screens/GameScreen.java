@@ -68,8 +68,8 @@ public class GameScreen extends ScreenAdapter {
         //Begin SpriteBatch
         batch.begin();
 
-        //Disable Transparency
-        batch.disableBlending();
+        //Enable Transparency
+        batch.enableBlending();
 
 
         //Draw sprites
