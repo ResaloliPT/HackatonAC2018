@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import org.academiadecodigo.hashtronauts.KillerQueen;
 import org.academiadecodigo.hashtronauts.configs.GameStrings;
-import org.academiadecodigo.hashtronauts.screens.GameScreen;
 import org.academiadecodigo.hashtronauts.utils.Fonts;
 import org.academiadecodigo.hashtronauts.utils.Utils;
 
@@ -19,6 +18,7 @@ import org.academiadecodigo.hashtronauts.utils.Utils;
 public class MainMenu extends ScreenAdapter {
 
     private KillerQueen game;
+    private GameOverScreen gameOver;
     private SpriteBatch batch;
     private OrthographicCamera camera;
 
@@ -44,7 +44,7 @@ public class MainMenu extends ScreenAdapter {
 
 
         //Adding a background image
-        this.backgroundImage = new Texture("background/background_test.png");
+        this.backgroundImage = new Texture("background/main_menu_bg1.png");
 
     }
 
@@ -70,16 +70,20 @@ public class MainMenu extends ScreenAdapter {
 
 
         if (Gdx.input.isTouched()) {
-            game.setScreen(new GameScreen(game));
+            game.setScreen(new GameOverScreen(game));
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
 
             Gdx.app.exit();
-
-
-            
         }
+
+
+
+
+
+
+
 
         batch.end();
     }
