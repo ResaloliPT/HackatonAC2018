@@ -11,7 +11,7 @@ public class GameSettings {
     public static final int PLAYER_HEIGHT = 32;
 
     /* Map */
-    public static final int WALL_THICKNESS  = 40;
+    public static final int WALL_THICKNESS = 40;
 
     /* Enemies */
     public static final int ENEMY_THICKNESS = 20;

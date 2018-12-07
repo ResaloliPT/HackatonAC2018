@@ -128,11 +128,8 @@ public class Player extends Characters {
 
             @Override
             public boolean mouseMoved(int screenX, int screenY) {
-
-                System.out.println("mouseX: " + screenX + ", mouseY: " + screenY);
-
-                float dX = screenX - (getPosition().getX() + GameSettings.PLAYER_WIDTH/2);
-                float dY = (getPosition().getY() + GameSettings.PLAYER_HEIGHT/2) - screenY;
+                float dX = screenX - (getPosition().getX() + GameSettings.PLAYER_WIDTH / 2);
+                float dY = (getPosition().getY() + GameSettings.PLAYER_HEIGHT / 2) - screenY;
                 if ((dX != 0 && dY != 0)) {
 
                     if (dX >= 0 && dY >= 0) {
@@ -151,11 +148,7 @@ public class Player extends Characters {
                         angle = (float) (180 + Math.toDegrees(Math.atan(dY / dX)));
                     }
 
-                    System.out.println(angle);
-
                     //sprite.rotate(angle);
-
-
 
 
                 }
@@ -180,16 +173,6 @@ public class Player extends Characters {
         int dY = mousePos.getY() - getPosition().getY();
 
         float angle = (float) Math.atan(dX/dY);
-
-
-        //System.out.println("dX: " + dX);
-        //System.out.println("dY: " + dY);
-
-
-
-
-        //System.out.println("y: " + player.getPosition().getY());
-        //System.out.println("x: " + player.getPosition().getX());
 
         if (player.getPosition().getX() >= GameSettings.WIDTH - GameSettings.PLAYER_WIDTH) {
             player.getPosition().setX(GameSettings.WIDTH - GameSettings.PLAYER_WIDTH);
@@ -223,7 +206,6 @@ public class Player extends Characters {
         if (movingDown) {
             player.getPosition().setY((int) (player.getPosition().getY() + 200 * Gdx.graphics.getDeltaTime()));
         }
-
 
 
         Vector3 cameraPos = new Vector3(getPosition().getX(), getPosition().getY(), 0);

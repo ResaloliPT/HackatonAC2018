@@ -17,6 +17,7 @@ import org.academiadecodigo.hashtronauts.gameobjects.characters.Player;
  */
 public class GameScreen extends ScreenAdapter {
 
+
     private MainGame game;
 
     private SpriteBatch batch;
