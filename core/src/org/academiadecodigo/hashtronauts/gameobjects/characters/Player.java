@@ -67,11 +67,19 @@ public class Player extends Characters {
             @Override
             public boolean keyDown(int keycode) {
                 if (keycode == Input.Keys.RIGHT) {
+                    player.getPosition().setX((int) (player.getPosition().getX() + 200 * Gdx.graphics.getDeltaTime()));
+
+
                     player.getHitbox().setX(player.getHitbox().getX() + 200 * Gdx.graphics.getDeltaTime() * 2);
                     return true;
                 }
                 return super.keyDown(keycode);
             }
+
+
+
+
+
         });
     }
 
