@@ -4,7 +4,7 @@ public class GameSettings {
 
     /* Screen Size */
     public static final int HEIGHT = 600;
-    public static final int WEIGHT = 800;
+    public static final int WIGHT = 800;
 
 
 }

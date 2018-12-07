@@ -1,6 +1,7 @@
 package org.academiadecodigo.hashtronauts.menu;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.audio.Sound;
@@ -68,10 +69,17 @@ public class MainMenu extends ScreenAdapter {
 
         if (Gdx.input.isTouched()) {
             game.setScreen(new GameScreen(game));
-
         }
 
+        if (Gdx.input.isTouched(Input.Keys.ESCAPE)) {
+
+            Gdx.app.exit();
+        }
+
+
+
         batch.end();
+
 
     }
 
