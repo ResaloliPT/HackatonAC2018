@@ -19,7 +19,6 @@ import org.academiadecodigo.hashtronauts.utils.Utils;
 public class MainMenu extends ScreenAdapter {
 
     private KillerQueen game;
-    private GameOverScreen gameOver;
     private SpriteBatch batch;
     private OrthographicCamera camera;
 

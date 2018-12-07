@@ -12,8 +12,6 @@ import org.academiadecodigo.hashtronauts.MainGame;
 import org.academiadecodigo.hashtronauts.configs.GameSettings;
 import org.academiadecodigo.hashtronauts.gameobjects.GameObjectContainer;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Player;
-import org.academiadecodigo.hashtronauts.gameobjects.characters.Soldier;
-import org.academiadecodigo.hashtronauts.utils.Position;
 
 /**
  *
@@ -44,16 +42,9 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void show () {
 
+        GameObjectContainer.getInstance().resetScore();
         Player.getInstance().reset();
-        GameObjectContainer.getInstance().reset();
-
         this.bkgImage = new Texture(GameSettings.MAP_LEVEL1);
-
-        int numOfEnemies = (int)((Math.random() * 10) + 5);
-
-        for (int i = 0; i < numOfEnemies; i++) {
-            GameObjectContainer.getInstance().addObject(new Soldier(new Position((int)((Math.random() * GameSettings.WIDTH) + 50), -10)));
-        }
 
         setupEvents();
     }

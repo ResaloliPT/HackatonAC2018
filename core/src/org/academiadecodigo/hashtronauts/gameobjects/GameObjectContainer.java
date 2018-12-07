@@ -67,6 +67,10 @@ public class GameObjectContainer implements Renderable {
 
                 score.changeScore(currentEnemy.getEnemyScore());
 
+                if (score.getScore() % 10 == 0) {
+                    player.setHealth(player.getHealth() + 1);
+                }
+
                 iterator.remove();
                 if (enemies.size() == 0) {
                     gameOver = true;
@@ -126,14 +130,6 @@ public class GameObjectContainer implements Renderable {
         projectiles.remove(projectile);
     }
 
-    public synchronized void removeObject(Enemy enemy) {
-        enemies.remove(enemy);
-    }
-
-    public List<Enemy> getEnemies() {
-        return enemies;
-    }
-
     public boolean isGameOver() {
         return gameOver;
     }
@@ -156,7 +152,9 @@ public class GameObjectContainer implements Renderable {
         }
 
         gameOver = false;
+    }
 
+    public void resetScore() {
         score.changeScore(-score.getScore());
     }
 }
