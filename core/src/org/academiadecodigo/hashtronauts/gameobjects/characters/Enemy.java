@@ -19,7 +19,6 @@ public abstract class Enemy extends Characters {
     private boolean toDispose;
 
 
-
     Enemy(EnemyType type, Position position) {
         super(position);
         this.health = type.getHealth();

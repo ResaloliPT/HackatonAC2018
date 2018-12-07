@@ -3,11 +3,11 @@ package org.academiadecodigo.hashtronauts.gameobjects;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.utils.TimeUtils;
 import org.academiadecodigo.hashtronauts.Renderable;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Enemy;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Player;
 import org.academiadecodigo.hashtronauts.gameobjects.weapons.projectiles.Projectile;
-import org.academiadecodigo.hashtronauts.menu.GameOverScreen;
 import org.academiadecodigo.hashtronauts.utils.Score;
 
 import java.util.Iterator;
@@ -25,6 +25,8 @@ public class GameObjectContainer implements Renderable {
     private Player player;
     private Score score;
     private boolean gameOver;
+    private long playerTimer = 0;
+    private long playerInverubility = 1000;
 
     private GameObjectContainer() {
         this.player = Player.getInstance();
@@ -72,10 +74,17 @@ public class GameObjectContainer implements Renderable {
             currentEnemy.update(camera);
 
             if (Intersector.overlaps(player.getHitbox(), currentEnemy.getHitbox())) {
-                player.hit(1);
+                long difftime = TimeUtils.millis() - playerTimer;
+
+                if (difftime < playerInverubility) {
+                    return;
+                }
+
+                playerTimer = TimeUtils.millis();
+                player.hit(1)
+                ;
             }
         }
-
 
         for (Iterator<Projectile> pIterator = projectiles.iterator(); pIterator.hasNext(); ) {
             Projectile currentProjectile = pIterator.next();

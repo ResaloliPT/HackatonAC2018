@@ -17,7 +17,6 @@ public class Player extends Characters {
 
     private static Player player = new Player();
 
-    private int score;
     private Weapon weapon;
     private Rectangle hitbox;
     private PlayerEvents playerEvents;
@@ -37,9 +36,6 @@ public class Player extends Characters {
 
     private Player() {
         super(new Position(100, 100));
-        this.score = 0;
-        //this.weapon = null;
-        //this.playerRender = null;
 
         this.activeTexture = new Texture(GameSettings.QUEEN_FRONT_VIEW);
         this.textureDown = new Texture(GameSettings.QUEEN_FRONT_VIEW);
@@ -47,7 +43,7 @@ public class Player extends Characters {
         this.textureUp = new Texture(GameSettings.QUEEN_BACK_VIEW);
         this.textureLeft = new Texture(GameSettings.QUEEN_LEFT_VIEW);
 
-        this.hitbox = new Rectangle(getPosition().getX(), getPosition().getY(), GameSettings.PLAYER_WIDTH, -GameSettings.PLAYER_HEIGHT);
+        this.hitbox = new Rectangle(getPosition().getX(), getPosition().getY(), GameSettings.PLAYER_WIDTH, GameSettings.PLAYER_HEIGHT);
         this.playerEvents = new PlayerEvents();
         this.angle = 0;
         this.weapon = new WeaponGelatin();
@@ -281,18 +277,6 @@ public class Player extends Characters {
 
     public Rectangle getHitbox() {
         return hitbox;
-    }
-
-    public void setHitbox(Rectangle hitbox) {
-        this.hitbox = hitbox;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 
     public void setTexture(Texture texture) {
