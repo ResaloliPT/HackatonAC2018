@@ -1,13 +1,13 @@
 package org.academiadecodigo.hashtronauts.gameobjects.characters;
 
 import org.academiadecodigo.hashtronauts.Renderable;
-import org.academiadecodigo.hashtronauts.utils.Position;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.interfaces.Killable;
+import org.academiadecodigo.hashtronauts.utils.Position;
 
 public abstract class Characters implements Killable, Renderable {
 
     protected int health;
-    private Position position;
+    protected Position position;
 
     public Characters(Position position){
         this.position = position;

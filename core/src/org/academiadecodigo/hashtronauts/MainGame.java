@@ -19,7 +19,6 @@ public class MainGame implements Renderable {
     @Override
     public void render(SpriteBatch batch) {
         gameObjects.render(batch);
-
     }
 
     @Override

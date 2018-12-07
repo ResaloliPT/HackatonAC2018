@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Position {
 
+
     private Vector2 vector;
 
     public Position(int x, int y) {
@@ -24,5 +25,13 @@ public class Position {
 
     public int getY() {
         return (int) vector.y;
+    }
+
+    public void setX(int x) {
+        vector.x = x;
+    }
+
+    public void setY(int y) {
+        vector.y = y;
     }
 }
