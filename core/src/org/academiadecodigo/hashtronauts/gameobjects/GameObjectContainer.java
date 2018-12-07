@@ -72,7 +72,7 @@ public class GameObjectContainer implements Renderable {
 
                 score.changeScore(currentEnemy.getEnemyScore());
 
-                if (score.getScore() % 10 == 0) {
+                if (score.getScore() % GameSettings.SCORE_MODULUS == 0) {
                     player.setHealth(player.getHealth() + 1);
                 }
 

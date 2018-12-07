@@ -48,4 +48,6 @@ public class GameSettings {
     public static final String GAMME_OVER_SOUND = "sounds/game_over.mp3";
 
 
+    /* Score */
+    public static Integer SCORE_MODULUS = 50; // each x points awards a hearth
 }
