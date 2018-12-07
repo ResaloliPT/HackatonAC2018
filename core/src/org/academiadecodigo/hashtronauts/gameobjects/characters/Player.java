@@ -89,8 +89,6 @@ public class Player extends Characters {
         float angle = (float) Math.atan(dX/dY);
 
         sprite.rotate(angle);
-
-
     }
 
     /**

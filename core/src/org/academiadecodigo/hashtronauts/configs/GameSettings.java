@@ -9,4 +9,7 @@ public class GameSettings {
     public static final int ENEMY_THICKNESS = 20;
 
 
+    /* Weapons & Projectiles */
+    public static final int PROJECTILE_GELATIN_SPEED = 600;
+
 }

@@ -1,4 +1,4 @@
-package org.academiadecodigo.hashtronauts.weapons;
+package org.academiadecodigo.hashtronauts.gameobjects.weapons;
 
 import org.academiadecodigo.hashtronauts.utils.Position;
 
