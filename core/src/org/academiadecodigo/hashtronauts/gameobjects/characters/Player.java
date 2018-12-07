@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector3;
 import org.academiadecodigo.hashtronauts.configs.GameSettings;
 import org.academiadecodigo.hashtronauts.gameobjects.weapons.Weapon;
 import org.academiadecodigo.hashtronauts.gameobjects.weapons.WeaponGelatin;
+import org.academiadecodigo.hashtronauts.utils.Healthbar;
 import org.academiadecodigo.hashtronauts.utils.Position;
 
 public class Player extends Characters {
@@ -20,6 +21,7 @@ public class Player extends Characters {
     private Weapon weapon;
     private Rectangle hitbox;
     private PlayerEvents playerEvents;
+    private Healthbar healthbar;
 
     private Texture activeTexture;
     private Texture textureUp;
@@ -42,6 +44,7 @@ public class Player extends Characters {
         this.textureRight = new Texture(GameSettings.QUEEN_RIGHT_VIEW);
         this.textureUp = new Texture(GameSettings.QUEEN_BACK_VIEW);
         this.textureLeft = new Texture(GameSettings.QUEEN_LEFT_VIEW);
+        this.healthbar = new Healthbar();
 
         this.hitbox = new Rectangle(getPosition().getX(), getPosition().getY(), GameSettings.PLAYER_WIDTH, GameSettings.PLAYER_HEIGHT);
         this.playerEvents = new PlayerEvents();
@@ -80,6 +83,7 @@ public class Player extends Characters {
     public void render(SpriteBatch batch) {
 
         batch.draw(activeTexture, hitbox.getX(), hitbox.getY(), GameSettings.PLAYER_WIDTH, GameSettings.PLAYER_HEIGHT);
+        healthbar.draw(batch);
     }
 
     public void setEvents() {
