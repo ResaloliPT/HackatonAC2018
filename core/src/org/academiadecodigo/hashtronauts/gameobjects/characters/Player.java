@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import org.academiadecodigo.hashtronauts.configs.GameSettings;
@@ -18,7 +19,7 @@ public class Player extends Characters {
 
     private int score;
     //private Weapon weapon;
-    private Rectangle hitbox;
+    private Polygon hitbox;
     private PlayerEvents playerEvents;
 
 
@@ -37,7 +38,11 @@ public class Player extends Characters {
         //this.playerRender = null;
 
         this.sprite = new Sprite(new Texture("images/player/queen.png"));
-        this.hitbox = new Rectangle(getPosition().getX(), getPosition().getY(), GameSettings.PLAYER_WIDTH, GameSettings.PLAYER_HEIGHT);
+        this.hitbox = new Polygon();
+        hitbox.setOrigin(getPosition().getX(), getPosition().getY());
+        float[] vertices = {0, 0, GameSettings.PLAYER_WIDTH, 0, 0, -GameSettings.PLAYER_HEIGHT, GameSettings.PLAYER_WIDTH, GameSettings.PLAYER_HEIGHT};
+        hitbox.setVertices(vertices);
+        //this.hitbox = new Rectangle(getPosition().getX(), getPosition().getY(), GameSettings.PLAYER_WIDTH, GameSettings.PLAYER_HEIGHT);
         this.playerEvents = new PlayerEvents();
         this.angle = 0;
 
@@ -68,7 +73,7 @@ public class Player extends Characters {
      */
     @Override
     public void render(SpriteBatch batch) {
-        batch.draw(sprite, hitbox.x, hitbox.y, hitbox.width, hitbox.height);
+        batch.draw(sprite, hitbox.getX(), hitbox.getY(), GameSettings.PLAYER_WIDTH, GameSettings.PLAYER_HEIGHT);
     }
 
     public void setEvents() {
@@ -131,37 +136,34 @@ public class Player extends Characters {
             @Override
             public boolean mouseMoved(int screenX, int screenY) {
 
-                System.out.println("mouseX: " + screenX + ", mouseY: " + screenY);
+                //System.out.println("mouseX: " + screenX + ", mouseY: " + screenY);
+
+                float calculatedAngle = angle;
 
                 float dX = screenX - (getPosition().getX() + GameSettings.PLAYER_WIDTH/2);
                 float dY = (getPosition().getY() + GameSettings.PLAYER_HEIGHT/2) - screenY;
                 if ((dX != 0 && dY != 0)) {
 
                     if (dX >= 0 && dY >= 0) {
-                        angle = (float) Math.toDegrees(Math.atan(dY / dX));
+                        calculatedAngle = (float) Math.toDegrees(Math.atan(dY / dX));
                     }
 
                     if (dX < 0 && dY >= 0) {
-                        angle = (float) (180 + Math.toDegrees(Math.atan(dY / dX)));
+                        calculatedAngle = (float) (180 + Math.toDegrees(Math.atan(dY / dX)));
                     }
 
                     if (dX >= 0 && dY < 0) {
-                        angle = (float) (360 + Math.toDegrees(Math.atan(dY / dX)));
+                        calculatedAngle = (float) (360 + Math.toDegrees(Math.atan(dY / dX)));
                     }
 
                     if (dX < 0 && dY < 0) {
-                        angle = (float) (180 + Math.toDegrees(Math.atan(dY / dX)));
+                        calculatedAngle = (float) (180 + Math.toDegrees(Math.atan(dY / dX)));
                     }
 
-                    System.out.println(angle);
-
-                    //sprite.rotate(angle);
-
-
+                    angle = calculatedAngle;
 
 
                 }
-                //angle = Math.atan(dY/dX);
                 return true;
 
                 //return super.mouseMoved(screenX, screenY);
@@ -226,6 +228,14 @@ public class Player extends Characters {
             player.getPosition().setY((int) (player.getPosition().getY() + 200 * Gdx.graphics.getDeltaTime()));
         }
 
+        sprite.setRotation(angle);
+
+
+        hitbox.setOrigin(player.getPosition().getX() + GameSettings.PLAYER_WIDTH/2, player.getPosition().getY() + GameSettings.PLAYER_HEIGHT/2);
+        System.out.println(hitbox.getRotation());
+        System.out.println(hitbox.getOriginX() + " " + hitbox.getOriginY());
+
+
 
 
         Vector3 cameraPos = new Vector3(getPosition().getX(), getPosition().getY(), 0);
@@ -241,11 +251,11 @@ public class Player extends Characters {
     public void dispose() {
     }
 
-    public Rectangle getHitbox() {
+    public Polygon getHitbox() {
         return hitbox;
     }
 
-    public void setHitbox(Rectangle hitbox) {
+    public void setHitbox(Polygon hitbox) {
         this.hitbox = hitbox;
     }
 
