@@ -11,11 +11,11 @@ public class PlayerEvents extends InputAdapter {
     private Player player;
     private Position mousePos;
 
-    @Override
+    /*@Override
     public boolean keyDown(int keycode) {
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            player.getHitbox().setX(player.getHitbox().getX() - 200 * Gdx.graphics.getDeltaTime());
+            player.getHitbox().se   .setX(player.getHitbox().getX() - 200 * Gdx.graphics.getDeltaTime());
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
@@ -48,28 +48,18 @@ public class PlayerEvents extends InputAdapter {
 
         return super.keyDown(keycode);
 
-    }
+    }*/
 
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-        Position tochedPos = new Position(screenX, screenY);
 
-        if (Gdx.input.isTouched()) {
-
-            player.shoot(tochedPos);
-        }
-
-        return super.touchDown(screenX, screenY, pointer, button);
-    }
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
 
         mousePos = new Position(screenX, screenY);
         //player.update();
+        return true;
 
-        return super.mouseMoved(screenX, screenY);
     }
 
     public Position getMousePos() {
