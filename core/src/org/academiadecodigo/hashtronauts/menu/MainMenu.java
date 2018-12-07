@@ -51,6 +51,8 @@ public class MainMenu extends ScreenAdapter {
     public void show() {
         welcomeTextSize = Utils.getStringSize(welcomeText, GameStrings.WELCOME_MESSAGE);
         pressToStartSize = Utils.getStringSize(pressToStart, GameStrings.START_GAME_MESSAGE);
+
+    
     }
 
     @Override
