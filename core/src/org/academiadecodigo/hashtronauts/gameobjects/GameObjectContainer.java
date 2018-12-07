@@ -2,6 +2,7 @@ package org.academiadecodigo.hashtronauts.gameobjects;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Intersector;
 import org.academiadecodigo.hashtronauts.Renderable;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Enemy;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Player;
@@ -14,8 +15,8 @@ public class GameObjectContainer implements Renderable {
 
     private static GameObjectContainer instance = new GameObjectContainer();
 
-    private List<Enemy> enemies;
-    private List<Projectile> projectiles;
+    private volatile List<Enemy> enemies;
+    private volatile List<Projectile> projectiles;
     private Player player;
 
 
@@ -30,7 +31,7 @@ public class GameObjectContainer implements Renderable {
     }
 
     @Override
-    public void render(SpriteBatch batch) {
+    public synchronized void render(SpriteBatch batch) {
 
         player.render(batch);
 
@@ -46,46 +47,50 @@ public class GameObjectContainer implements Renderable {
     }
 
     @Override
-    public void update(Camera camera) {
+    public synchronized void update(Camera camera) {
         player.update(camera);
 
         for (Enemy enemy : enemies) {
             enemy.update(camera);
+
+            if (Intersector.overlaps(player.getHitbox(), enemy.getHitbox())) {
+                player.hit(1);
+            }
+
+            for (Projectile projectile : projectiles) {
+                projectile.update(camera);
+
+
+                if (Intersector.overlaps(projectile.getHitbox(), enemy.getHitbox())) {
+                    projectile.hit(enemy);
+                }
+
+            }
+
         }
 
-        for (Projectile projectile : projectiles) {
-            projectile.update(camera);
-        }
 
     }
 
     @Override
-    public void dispose() {
+    public synchronized void dispose() {
 
     }
 
-    public void addObject(Projectile projectile) {
+    public synchronized void addObject(Projectile projectile) {
         projectiles.add(projectile);
     }
 
-    public void addObject(Enemy enemy) {
+    public synchronized void addObject(Enemy enemy) {
         enemies.add(enemy);
     }
 
-    public void removeObject(Projectile projectile) {
+    public synchronized void removeObject(Projectile projectile) {
         projectiles.remove(projectile);
     }
 
-    public void removeObject(Enemy enemy) {
+    public synchronized void removeObject(Enemy enemy) {
         enemies.remove(enemy);
-    }
-
-    public List<Enemy> getEnemies() {
-        return enemies;
-    }
-
-    public List<Projectile> getProjectiles() {
-        return projectiles;
     }
 
 }

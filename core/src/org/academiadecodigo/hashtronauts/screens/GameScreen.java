@@ -7,9 +7,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import org.academiadecodigo.hashtronauts.KillerQueen;
 import org.academiadecodigo.hashtronauts.MainGame;
+import org.academiadecodigo.hashtronauts.configs.GameSettings;
 
 /**
  *
@@ -22,7 +22,6 @@ public class GameScreen extends ScreenAdapter {
     private OrthographicCamera camera;
 
     //Testing purposes
-    private ShapeRenderer shapeRenderer;
 
     private Music music;
     private Texture bkgImage;
@@ -39,8 +38,7 @@ public class GameScreen extends ScreenAdapter {
         this.camera = mainClass.getCamera();
         this.bkgImage = new Texture("background/background_test.png");
 
-        this.shapeRenderer = new ShapeRenderer();
-        this.game = new MainGame();
+        this.game = new MainGame(mainClass);
 
         setupEvents();
     }
@@ -70,9 +68,11 @@ public class GameScreen extends ScreenAdapter {
         //Disable Transparency
         batch.disableBlending();
 
+        batch.draw(bkgImage, 0f, 0f, GameSettings.WIDTH, GameSettings.HEIGHT);
 
         //Draw sprites
         game.render(batch);
+
 
         //End SpriteBatch
         batch.end();
@@ -93,7 +93,6 @@ public class GameScreen extends ScreenAdapter {
      */
     @Override
     public void dispose() {
-        shapeRenderer.dispose();
         batch.dispose();
     }
 
