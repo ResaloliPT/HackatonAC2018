@@ -72,16 +72,12 @@ public class MainMenu extends ScreenAdapter {
             game.setScreen(new GameScreen(game));
         }
 
-        if (Gdx.input.isTouched(Input.Keys.ESCAPE)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
 
             Gdx.app.exit();
         }
 
-
-
         batch.end();
-
-
     }
 
     @Override
