@@ -27,7 +27,6 @@ public class GameScreen extends ScreenAdapter {
 
     private Music music;
     private Texture bkgImage;
-    private Player player = Player.getInstance();
 
 
     // private Score score;
@@ -101,7 +100,7 @@ public class GameScreen extends ScreenAdapter {
 
     public void setupEvents() {
         //input handling
-        player.setEvents();
+        Player.getInstance().setEvents();
     }
 
 }

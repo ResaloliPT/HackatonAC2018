@@ -82,10 +82,8 @@ public class Player extends Characters {
             @Override
             public boolean keyDown(int keycode) {
                 if (keycode == Input.Keys.RIGHT) {
-
                     movingRight = true;
                     return true;
-
                 }
 
                 if (keycode == Input.Keys.LEFT) {
@@ -183,7 +181,7 @@ public class Player extends Characters {
         int dX = mousePos.getX() - getPosition().getX();
         int dY = mousePos.getY() - getPosition().getY();
 
-
+        float angle = (float) Math.atan(dX/dY);
 
 
         //System.out.println("dX: " + dX);
@@ -242,6 +240,7 @@ public class Player extends Characters {
         cameraPos = camera.unproject(cameraPos);
         hitbox.setPosition(cameraPos.x, cameraPos.y);
 
+        sprite.rotate(angle);
     }
 
     /**
