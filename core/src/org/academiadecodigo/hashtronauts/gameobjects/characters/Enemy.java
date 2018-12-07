@@ -18,10 +18,11 @@ public abstract class Enemy extends Characters {
     private Rectangle hitbox;
     private int health;
     private final int VELOCITIY = 10;
-
+    private EnemyType type;
 
     Enemy(EnemyType type, Position position) {
         super(position);
+        this.type = type;
         this.health = type.getHealth();
         enemyImage = new Texture(type.getPath());
         this.hitbox = new Rectangle(position.getX(), position.getY(), GameSettings.ENEMY_THICKNESS, GameSettings.ENEMY_THICKNESS);
@@ -96,5 +97,9 @@ public abstract class Enemy extends Characters {
             health = 0;
         }
         health -= damage;
+    }
+
+    public Integer getScore() {
+        return this.type.getPoints();
     }
 }

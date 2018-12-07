@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import org.academiadecodigo.hashtronauts.KillerQueen;
 import org.academiadecodigo.hashtronauts.MainGame;
 import org.academiadecodigo.hashtronauts.gameobjects.GameObjectContainer;
-import org.academiadecodigo.hashtronauts.gameobjects.Guillotine;
+import org.academiadecodigo.hashtronauts.gameobjects.characters.Guillotine;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Player;
 import org.academiadecodigo.hashtronauts.utils.Position;
 

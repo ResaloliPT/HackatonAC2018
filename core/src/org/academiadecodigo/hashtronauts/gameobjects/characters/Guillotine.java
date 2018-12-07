@@ -25,7 +25,6 @@ public class Guillotine implements Renderable {
     }
 
     @Override
-
     public void render(SpriteBatch batch) {
         batch.draw(texture, hitbox.x, hitbox.y, hitbox.width, hitbox.height);
     }

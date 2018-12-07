@@ -6,7 +6,7 @@ public enum EnemyType {
 
     private int health;
     private String path;
-    private int points;
+    private Integer points;
 
     EnemyType(int enemyHealth, String imagePath, int points) {
         this.health = enemyHealth;
@@ -22,7 +22,7 @@ public enum EnemyType {
         return path;
     }
 
-    public int getPoints() {
+    public Integer getPoints() {
         return points;
     }
 }
