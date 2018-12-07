@@ -39,10 +39,10 @@ public class GameObjectContainer implements Renderable {
         }
 
         for (Projectile projectile : projectiles) {
-            projectile.render(batch);
+            synchronized (this) {
+                projectile.render(batch);
+            }
         }
-
-
     }
 
     @Override
@@ -52,11 +52,11 @@ public class GameObjectContainer implements Renderable {
         for (Enemy enemy : enemies) {
             enemy.update(camera);
         }
-
-        for (Projectile projectile : projectiles) {
-            projectile.update(camera);
+            for (Projectile projectile : projectiles) {
+                synchronized (this) {
+                    projectile.update(camera);
+            }
         }
-
     }
 
     @Override
@@ -64,19 +64,19 @@ public class GameObjectContainer implements Renderable {
 
     }
 
-    public void addObject(Projectile projectile) {
+    public synchronized void addObject(Projectile projectile) {
         projectiles.add(projectile);
     }
 
-    public void addObject(Enemy enemy) {
+    public synchronized void addObject(Enemy enemy) {
         enemies.add(enemy);
     }
 
-    public void removeObject(Projectile projectile) {
+    public synchronized void removeObject(Projectile projectile) {
         projectiles.remove(projectile);
     }
 
-    public void removeObject(Enemy enemy) {
+    public synchronized void removeObject(Enemy enemy) {
         enemies.remove(enemy);
     }
 

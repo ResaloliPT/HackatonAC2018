@@ -14,7 +14,7 @@ public abstract class Enemy extends Characters {
     private Texture enemyImage;
     private Rectangle hitbox;
     private int health;
-    private final int VELOCITIY = 1;
+    private final float VELOCITIY = 0.04f;
 
 
     Enemy(EnemyType type, Position position) {
@@ -65,11 +65,11 @@ public abstract class Enemy extends Characters {
         int calculatedY = 0;
 
         if (Math.random() > 0.6) {
-            calculatedX = (int) (xDiff * 0.04);
+            calculatedX = (int) (xDiff * VELOCITIY);
         }
 
         if (Math.random() > 0.6) {
-            calculatedY = (int) (yDiff * 0.04);
+            calculatedY = (int) (yDiff * VELOCITIY);
         }
 
 

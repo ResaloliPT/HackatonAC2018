@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import org.academiadecodigo.hashtronauts.configs.GameSettings;
 import org.academiadecodigo.hashtronauts.gameobjects.weapons.Weapon;
+import org.academiadecodigo.hashtronauts.gameobjects.weapons.WeaponGelatin;
 import org.academiadecodigo.hashtronauts.utils.Position;
 
 public class Player extends Characters {
@@ -49,10 +50,10 @@ public class Player extends Characters {
         this.textureDown = new Texture(GameSettings.QUEEN_BACK_VIEW);
         this.textureLeft = new Texture(GameSettings.QUEEN_LEFT_VIEW);
 
-        this.hitbox = new Rectangle(getPosition().getX(), getPosition().getY(), GameSettings.PLAYER_WIDTH, GameSettings.PLAYER_HEIGHT);
+        this.hitbox = new Rectangle(getPosition().getX(), getPosition().getY(), GameSettings.PLAYER_WIDTH, -GameSettings.PLAYER_HEIGHT);
         this.playerEvents = new PlayerEvents();
         this.angle = 0;
-        this.weapon = new Weapon();
+        this.weapon = new WeaponGelatin();
         this.mousePos = new Position(0,0);
 
     }
@@ -183,7 +184,7 @@ public class Player extends Characters {
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
                 Position tochedPos = new Position(screenX, screenY);
-
+                
                 if (Gdx.input.isTouched()) {
 
                     player.shoot(tochedPos);
@@ -191,10 +192,6 @@ public class Player extends Characters {
                 }
                 return super.mouseMoved(screenX, screenY);
             }
-
-
-
-
 
         });
     }
@@ -262,11 +259,6 @@ public class Player extends Characters {
         if (angle >= 0 && angle < 45 || angle >= 315 && angle < 360) {
             //texture = new Texture(GameSettings.QUEEN_RIGHT_VIEW);
         }
-
-
-
-
-
 
         Vector3 cameraPos = new Vector3(getPosition().getX(), getPosition().getY(), 0);
         cameraPos = camera.unproject(cameraPos);
