@@ -45,10 +45,6 @@ public class GameScreen extends ScreenAdapter {
         this.camera = mainClass.getCamera();
         this.bkgImage = new Texture("background/background_test.png");
 
-        guillotine1 = new Guillotine(new Position(100,100));
-        guillotine2 = new Guillotine(new Position(400,400));
-        GameObjectContainer.getInstance().addObject(guillotine1);
-
         this.shapeRenderer = new ShapeRenderer();
         this.game = new MainGame();
 
