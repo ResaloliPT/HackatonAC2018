@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.academiadecodigo.hashtronauts.KillerQueen;
 import org.academiadecodigo.hashtronauts.MainGame;
+import org.academiadecodigo.hashtronauts.configs.GameSettings;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Player;
 
 /**
@@ -34,7 +35,7 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(KillerQueen mainClass) {
         this.batch = mainClass.getBatch();
         this.camera = mainClass.getCamera();
-        this.bkgImage = new Texture("background/background_test.png");
+        this.bkgImage = new Texture(GameSettings.MAP_LEVEL1);
 
         this.game = new MainGame();
 
@@ -60,7 +61,7 @@ public class GameScreen extends ScreenAdapter {
 
         //Begin SpriteBatch
         batch.begin();
-
+        batch.draw(bkgImage, 0,0, GameSettings.WIDTH, GameSettings.HEIGHT);
 
         //Draw sprites
         game.render(batch);

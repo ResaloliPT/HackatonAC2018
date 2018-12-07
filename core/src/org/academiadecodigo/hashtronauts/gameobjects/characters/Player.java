@@ -219,20 +219,20 @@ public class Player extends Characters {
         //System.out.println("y: " + player.getPosition().getY());
         //System.out.println("x: " + player.getPosition().getX());
 
-        if (player.getPosition().getX() >= GameSettings.WIDTH - GameSettings.PLAYER_WIDTH) {
-            player.getPosition().setX(GameSettings.WIDTH - GameSettings.PLAYER_WIDTH);
+        if (player.getPosition().getX() >= GameSettings.WIDTH - GameSettings.PLAYER_WIDTH - 30) {
+            player.getPosition().setX(GameSettings.WIDTH - GameSettings.PLAYER_WIDTH - 30);
         }
 
-        if (player.getPosition().getX() <= 0) {
-            player.getPosition().setX(0);
+        if (player.getPosition().getX() <= 30) {
+            player.getPosition().setX(30);
         }
 
         if (player.getPosition().getY() >= GameSettings.HEIGHT - GameSettings.PLAYER_HEIGHT) {
             player.getPosition().setY(GameSettings.HEIGHT - GameSettings.PLAYER_WIDTH);
         }
 
-        if (player.getPosition().getY() <= 0) {
-            player.getPosition().setY(0);
+        if (player.getPosition().getY() <= 40) {
+            player.getPosition().setY(40);
         }
 
         if (movingRight) {
