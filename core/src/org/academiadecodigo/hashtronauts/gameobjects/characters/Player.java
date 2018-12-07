@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
+import org.academiadecodigo.hashtronauts.configs.GameSettings;
 import org.academiadecodigo.hashtronauts.utils.Position;
 
 public class Player extends Characters {
@@ -20,17 +22,25 @@ public class Player extends Characters {
     private PlayerEvents playerEvents;
 
 
-
     private Sprite sprite;
+    private boolean movingRight;
+    private boolean movingLeft;
+    private boolean movingUp;
+    private boolean movingDown;
+    private float angle;
+
 
     private Player() {
         super(new Position(100, 100));
         this.score = 0;
         //this.weapon = null;
         //this.playerRender = null;
-        this.hitbox = new Rectangle(100f, 100f, 20f, 20f);
-        this.playerEvents = new PlayerEvents();
+
         this.sprite = new Sprite(new Texture("images/player/queen.png"));
+        this.hitbox = new Rectangle(getPosition().getX(), getPosition().getY(), GameSettings.PLAYER_WIDTH, GameSettings.PLAYER_HEIGHT);
+        this.playerEvents = new PlayerEvents();
+        this.angle = 0;
+
     }
 
 
@@ -67,10 +77,92 @@ public class Player extends Characters {
             @Override
             public boolean keyDown(int keycode) {
                 if (keycode == Input.Keys.RIGHT) {
-                    player.getHitbox().setX(player.getHitbox().getX() + 200 * Gdx.graphics.getDeltaTime() * 2);
+                    movingRight = true;
                     return true;
                 }
+
+                if (keycode == Input.Keys.LEFT) {
+                    movingLeft = true;
+                    return true;
+                }
+
+                if (keycode == Input.Keys.UP) {
+                    movingUp = true;
+                    return true;
+                }
+
+                if (keycode == Input.Keys.DOWN) {
+                    movingDown = true;
+                    return true;
+                }
+
+
                 return super.keyDown(keycode);
+            }
+
+            @Override
+            public boolean keyUp(int keycode) {
+                if (keycode == Input.Keys.RIGHT) {
+                    movingRight = false;
+                    return true;
+                }
+
+                if (keycode == Input.Keys.LEFT) {
+                    movingLeft = false;
+                    return true;
+                }
+
+                if (keycode == Input.Keys.UP) {
+                    movingUp = false;
+                    return true;
+                }
+
+                if (keycode == Input.Keys.DOWN) {
+                    movingDown = false;
+                    return true;
+                }
+
+
+                return super.keyUp(keycode);
+            }
+
+            @Override
+            public boolean mouseMoved(int screenX, int screenY) {
+
+                System.out.println("mouseX: " + screenX + ", mouseY: " + screenY);
+
+                float dX = screenX - (getPosition().getX() + GameSettings.PLAYER_WIDTH/2);
+                float dY = (getPosition().getY() + GameSettings.PLAYER_HEIGHT/2) - screenY;
+                if ((dX != 0 && dY != 0)) {
+
+                    if (dX >= 0 && dY >= 0) {
+                        angle = (float) Math.toDegrees(Math.atan(dY / dX));
+                    }
+
+                    if (dX < 0 && dY >= 0) {
+                        angle = (float) (180 + Math.toDegrees(Math.atan(dY / dX)));
+                    }
+
+                    if (dX >= 0 && dY < 0) {
+                        angle = (float) (360 + Math.toDegrees(Math.atan(dY / dX)));
+                    }
+
+                    if (dX < 0 && dY < 0) {
+                        angle = (float) (180 + Math.toDegrees(Math.atan(dY / dX)));
+                    }
+
+                    System.out.println(angle);
+
+                    //sprite.rotate(angle);
+
+
+
+
+                }
+                //angle = Math.atan(dY/dX);
+                return true;
+
+                //return super.mouseMoved(screenX, screenY);
             }
         });
     }
@@ -83,10 +175,60 @@ public class Player extends Characters {
     public void update(Camera camera) {
         Position mousePos = playerEvents.getMousePos();
 
+
         int dX = mousePos.getX() - getPosition().getX();
         int dY = mousePos.getY() - getPosition().getY();
 
         float angle = (float) Math.atan(dX/dY);
+
+
+        //System.out.println("dX: " + dX);
+        //System.out.println("dY: " + dY);
+
+
+
+
+        //System.out.println("y: " + player.getPosition().getY());
+        //System.out.println("x: " + player.getPosition().getX());
+
+        if (player.getPosition().getX() >= GameSettings.WIDTH - GameSettings.PLAYER_WIDTH) {
+            player.getPosition().setX(GameSettings.WIDTH - GameSettings.PLAYER_WIDTH);
+        }
+
+        if (player.getPosition().getX() <= 0) {
+            player.getPosition().setX(0);
+        }
+
+        if (player.getPosition().getY() >= GameSettings.HEIGHT - GameSettings.PLAYER_HEIGHT) {
+            player.getPosition().setY(GameSettings.HEIGHT - GameSettings.PLAYER_WIDTH);
+        }
+
+        if (player.getPosition().getY() <= 0) {
+            player.getPosition().setY(0);
+        }
+
+        if (movingRight) {
+
+            player.getPosition().setX((int) (player.getPosition().getX() + 200 * Gdx.graphics.getDeltaTime()));
+        }
+
+        if (movingLeft) {
+            player.getPosition().setX((int) (player.getPosition().getX() - 200 * Gdx.graphics.getDeltaTime()));
+        }
+
+        if (movingUp) {
+            player.getPosition().setY((int) (player.getPosition().getY() - 200 * Gdx.graphics.getDeltaTime()));
+        }
+
+        if (movingDown) {
+            player.getPosition().setY((int) (player.getPosition().getY() + 200 * Gdx.graphics.getDeltaTime()));
+        }
+
+
+
+        Vector3 cameraPos = new Vector3(getPosition().getX(), getPosition().getY(), 0);
+        cameraPos = camera.unproject(cameraPos);
+        hitbox.setPosition(cameraPos.x, cameraPos.y);
 
         sprite.rotate(angle);
     }

@@ -1,8 +1,6 @@
 package org.academiadecodigo.hashtronauts.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
@@ -12,15 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import org.academiadecodigo.hashtronauts.KillerQueen;
 import org.academiadecodigo.hashtronauts.MainGame;
-import org.academiadecodigo.hashtronauts.configs.GameSettings;
-import org.academiadecodigo.hashtronauts.gameobjects.GameObjectContainer;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Player;
-import org.academiadecodigo.hashtronauts.gameobjects.characters.Soldier;
-import org.academiadecodigo.hashtronauts.gameobjects.weapons.Weapon;
-import org.academiadecodigo.hashtronauts.gameobjects.weapons.WeaponGelatin;
-import org.academiadecodigo.hashtronauts.gameobjects.weapons.projectiles.Projectile;
-import org.academiadecodigo.hashtronauts.gameobjects.weapons.projectiles.ProjectileType;
-import org.academiadecodigo.hashtronauts.utils.Position;
 
 /**
  *
@@ -37,9 +27,6 @@ public class GameScreen extends ScreenAdapter {
 
     private Music music;
     private Texture bkgImage;
-    private Soldier soldier;
-
-    private Weapon weapon;
 
 
     // private Score score;
@@ -53,10 +40,7 @@ public class GameScreen extends ScreenAdapter {
         this.camera = mainClass.getCamera();
         this.bkgImage = new Texture("background/background_test.png");
 
-        soldier = new Soldier(new Position(200, 200));
-        weapon = new WeaponGelatin();
-
-        GameObjectContainer.getInstance().addObject(soldier);
+        this.shapeRenderer = new ShapeRenderer();
         this.game = new MainGame();
 
         setupEvents();
@@ -64,7 +48,10 @@ public class GameScreen extends ScreenAdapter {
 
 
     /**
-     * @param delta Renders the game screen and updates view
+     * @param delta
+     *
+     * Renders the game screen and updates view
+     *
      */
     @Override
     public void render(float delta) {
@@ -112,20 +99,8 @@ public class GameScreen extends ScreenAdapter {
     }
 
     public void setupEvents() {
-        Gdx.input.setInputProcessor(new InputAdapter(){
-
-            @Override
-            public boolean keyDown(int keycode) {
-                if(keycode == Input.Keys.A) {
-                    weapon.shoot(new Position(400, 200), new Position(20, 100));
-                    return true;
-                }
-                return super.keyDown(keycode);
-
-            }
-        });
-
-
+        //input handling
+        Player.getInstance().setEvents();
     }
 
 }

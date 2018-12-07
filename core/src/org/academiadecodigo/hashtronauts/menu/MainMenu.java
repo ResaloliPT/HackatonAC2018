@@ -1,6 +1,7 @@
 package org.academiadecodigo.hashtronauts.menu;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.audio.Sound;
@@ -8,7 +9,13 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import org.academiadecodigo.hashtronauts.KillerQueen;
 import org.academiadecodigo.hashtronauts.configs.GameStrings;
 import org.academiadecodigo.hashtronauts.screens.GameScreen;
@@ -33,7 +40,6 @@ public class MainMenu extends ScreenAdapter {
     private Sound startSound;
     private Texture backgroundImage;
 
-
     public MainMenu(KillerQueen game) {
         this.game = game;
         this.batch = game.getBatch();
@@ -41,10 +47,14 @@ public class MainMenu extends ScreenAdapter {
         this.welcomeText = Fonts.PRESS_START.getFont();
         this.pressToStart = Fonts.PRESS_START.getFont();
 
+        /* Adding music */
+
+
+
         //Adding a background image
         this.backgroundImage = new Texture("background/background_test.png");
-    }
 
+    }
 
     @Override
     public void show() {
@@ -69,11 +79,14 @@ public class MainMenu extends ScreenAdapter {
 
         if (Gdx.input.isTouched()) {
             game.setScreen(new GameScreen(game));
+        }
 
+        if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
+
+            Gdx.app.exit();
         }
 
         batch.end();
-
     }
 
     @Override

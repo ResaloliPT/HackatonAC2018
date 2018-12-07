@@ -1,83 +1,83 @@
 package org.academiadecodigo.hashtronauts.gameobjects.characters;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import org.academiadecodigo.hashtronauts.configs.GameSettings;
+import org.academiadecodigo.hashtronauts.gameobjects.GameObjectContainer;
 import org.academiadecodigo.hashtronauts.utils.Position;
+
+import javax.swing.*;
 
 
 public abstract class Enemy extends Characters {
     private Texture enemyImage;
     private Rectangle hitbox;
     private int health;
-    private Position position;
+    private final int VELOCITIY = 10;
 
-    public Enemy(EnemyType type, Position position) {
+
+    Enemy(EnemyType type, Position position) {
         super(position);
-        this.position = position;
-        health = type.getHealth();
+        this.health = type.getHealth();
         enemyImage = new Texture(type.getPath());
-        this.hitbox = new Rectangle(position.getX(),position.getY(),20,20);
-
-
+        this.hitbox = new Rectangle(position.getX(), position.getY(), GameSettings.ENEMY_THICKNESS, GameSettings.ENEMY_THICKNESS);
     }
 
-
     private void checkCol() {
-        if (hitbox.x <= 0) {
-            hitbox.x = 0;
+
+        if (hitbox.x <= GameSettings.WALL_THICKNESS) {
+            hitbox.x = GameSettings.WALL_THICKNESS;
         }
-        if (hitbox.x >= 736) {    // 800-64
-            hitbox.x = 736;
+        if (hitbox.x >= GameSettings.WIDTH - hitbox.width - GameSettings.WALL_THICKNESS) {
+            hitbox.x = GameSettings.WIDTH - hitbox.width - GameSettings.WALL_THICKNESS;
         }
-        if (hitbox.y >= 536) {    //600-64
-            hitbox.y = 536;
+        if (hitbox.y >= GameSettings.HEIGHT - hitbox.height - GameSettings.WALL_THICKNESS) {
+            hitbox.y = GameSettings.HEIGHT;
         }
-        if (hitbox.y <= 0) {
-            hitbox.y = 0;
+        if (hitbox.y <= GameSettings.WALL_THICKNESS) {
+            hitbox.y = GameSettings.WALL_THICKNESS;
         }
     }
 
     @Override
     public void render(SpriteBatch batch) {
-        String enemyImagePath = EnemyType.SOLDIER.getPath();
-        enemyImage = new Texture(enemyImagePath);
         batch.draw(enemyImage, hitbox.x, hitbox.y, hitbox.width, hitbox.height);
     }
 
     @Override
     public void update(Camera camera) {
-        /*
-       Vector3 vector3 = new Vector3(position.getVector().x, position.getVector().y, 0);
-        camera.unproject(vector3);
         if (isDead()) {
+            GameObjectContainer.getInstance().removeObject(this);
             dispose();
             return;
         }
-        int x = (int) (Math.random() + 1) * 10;
-        if (x <= 5) {
 
-            hitbox.x = 200 * (hitbox.x + Player.getInstance().getPosition().getVector().x) * 2;
-            hitbox.y = 200 * (hitbox.y + Player.getInstance().getPosition().getVector().y) * 2;
-            checkCol();
-        }
+   /*     position = new Position((int) (getPosition().getX() + (VELOCITIY * Gdx.graphics.getDeltaTime())),
+                (int) (getPosition().getY() + (VELOCITIY * Gdx.graphics.getDeltaTime())));
+
 */
+        int dx = Player.getInstance().getPosition().getX() - getPosition().getX();
+        int dy = Player.getInstance().getPosition().getY() - getPosition().getX();
+
+        int moveSpeedX = (100 * VELOCITIY / dx);
+        int moveSpeedY = (100 * VELOCITIY / dy);
+
+
+        position = new Position((int) (moveSpeedX * Gdx.graphics.getDeltaTime()), (int) (moveSpeedY * Gdx.graphics.getDeltaTime()));
+
+        Vector3 vector3 = new Vector3(position.getX(), position.getY(), 0);
+        camera.unproject(vector3);
+        this.hitbox.setPosition(vector3.x, vector3.y);
+        //checkCol();
     }
+
     @Override
     public void dispose() {
         enemyImage.dispose();
-    }
-
-    public Rectangle getHitbox() {
-        return hitbox;
-    }
-
-    public void setHitbox(Rectangle hitbox) {
-        this.hitbox = hitbox;
     }
 
     @Override
@@ -86,21 +86,15 @@ public abstract class Enemy extends Characters {
     }
 
     @Override
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    @Override
     public boolean isDead() {
         return health <= 0;
     }
 
-
     @Override
     public void hit(int damage) {
-        health -= damage;
-        if (damage > health || health <= 0){
+        if (damage > health || health <= 0) {
             health = 0;
         }
+        health -= damage;
     }
 }

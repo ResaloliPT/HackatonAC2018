@@ -7,7 +7,7 @@ import org.academiadecodigo.hashtronauts.gameobjects.characters.interfaces.Killa
 public abstract class Characters implements Killable, Renderable {
 
     protected int health;
-    private Position position;
+    protected Position position;
 
     public Characters(Position position){
         this.position = position;
