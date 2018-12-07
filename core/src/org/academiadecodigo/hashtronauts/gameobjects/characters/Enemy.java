@@ -7,13 +7,17 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import org.academiadecodigo.hashtronauts.configs.GameSettings;
+import org.academiadecodigo.hashtronauts.gameobjects.GameObjectContainer;
 import org.academiadecodigo.hashtronauts.utils.Position;
+
+import javax.swing.*;
 
 
 public abstract class Enemy extends Characters {
     private Texture enemyImage;
     private Rectangle hitbox;
     private int health;
+    private final int VELOCITIY = 10;
 
 
     Enemy(EnemyType type, Position position) {
@@ -47,17 +51,28 @@ public abstract class Enemy extends Characters {
     @Override
     public void update(Camera camera) {
         if (isDead()) {
+            GameObjectContainer.getInstance().removeObject(this);
             dispose();
             return;
         }
-        final int VELOCITIY = 90;
-        Position position = new Position((int) (getPosition().getX() + (VELOCITIY * Gdx.graphics.getDeltaTime())),
+
+   /*     position = new Position((int) (getPosition().getX() + (VELOCITIY * Gdx.graphics.getDeltaTime())),
                 (int) (getPosition().getY() + (VELOCITIY * Gdx.graphics.getDeltaTime())));
+
+*/
+        int dx = Player.getInstance().getPosition().getX() - getPosition().getX();
+        int dy = Player.getInstance().getPosition().getY() - getPosition().getX();
+
+        int moveSpeedX = (100 * VELOCITIY / dx);
+        int moveSpeedY = (100 * VELOCITIY / dy);
+
+
+        position = new Position((int) (moveSpeedX * Gdx.graphics.getDeltaTime()), (int) (moveSpeedY * Gdx.graphics.getDeltaTime()));
 
         Vector3 vector3 = new Vector3(position.getX(), position.getY(), 0);
         camera.unproject(vector3);
         this.hitbox.setPosition(vector3.x, vector3.y);
-        checkCol();
+        //checkCol();
     }
 
     @Override
