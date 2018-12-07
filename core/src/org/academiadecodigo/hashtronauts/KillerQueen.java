@@ -20,7 +20,7 @@ public class KillerQueen extends Game {
         batch = new SpriteBatch();
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        camera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         //Sets screen
         this.setScreen(new MainMenu(this));
