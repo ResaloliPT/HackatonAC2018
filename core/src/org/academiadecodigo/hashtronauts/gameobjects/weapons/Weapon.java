@@ -1,6 +1,5 @@
 package org.academiadecodigo.hashtronauts.gameobjects.weapons;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.TimeUtils;
 import org.academiadecodigo.hashtronauts.configs.GameSettings;
 import org.academiadecodigo.hashtronauts.gameobjects.GameObjectContainer;
@@ -18,7 +17,6 @@ public abstract class Weapon {
     }
 
     public synchronized void shoot(Position touchedPos, Position position) {
-        Position direction;
 
         long difftime = TimeUtils.millis() - timer;
 
@@ -29,13 +27,16 @@ public abstract class Weapon {
         timer = TimeUtils.millis();
 
 
-        int xDiff = touchedPos.getX() - position.getX();
-        int yDiff = touchedPos.getY() - position.getY();
+        Position direction;
 
-        int xThreeSimpleCalc = ((100 * GameSettings.PROJECTILE_GELATIN_SPEED) / xDiff);
-        int yThreeSimpleCalc = ((100 * GameSettings.PROJECTILE_GELATIN_SPEED) / yDiff);
+        float xDiff = touchedPos.getX() - position.getX();
+        float yDiff = touchedPos.getY() - position.getY();
 
-        direction = new Position((int) ((xThreeSimpleCalc * xDiff) * Gdx.graphics.getDeltaTime()), (int) ((yThreeSimpleCalc * yDiff) * Gdx.graphics.getDeltaTime()));
+        int calculatedX = (int) (xDiff * GameSettings.PROJECTILE_GELATIN_SPEED);
+        int calculatedY = (int) (yDiff * GameSettings.PROJECTILE_GELATIN_SPEED);
+
+
+        direction = new Position(calculatedX, calculatedY);
 
         Projectile projectile = new Projectile(weaponType.getBulletType(), position, direction);
 

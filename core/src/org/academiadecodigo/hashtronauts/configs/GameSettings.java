@@ -18,7 +18,7 @@ public class GameSettings {
 
 
     /* Weapons & Projectiles */
-    public static final int PROJECTILE_GELATIN_SPEED = 600;
+    public static final float PROJECTILE_GELATIN_SPEED = 0.05f;
 
 
     /* Player images */

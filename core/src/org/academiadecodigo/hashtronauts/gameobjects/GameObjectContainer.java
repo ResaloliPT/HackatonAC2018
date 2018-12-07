@@ -52,9 +52,17 @@ public class GameObjectContainer implements Renderable {
         for (Enemy enemy : enemies) {
             enemy.update(camera);
         }
-            for (Projectile projectile : projectiles) {
-                synchronized (this) {
-                    projectile.update(camera);
+
+        for (Projectile projectile : projectiles) {
+            projectile.update(camera);
+        }
+
+        for (Projectile projectile : projectiles) {
+            for (Enemy enemy : enemies) {
+                if (projectile.getHitbox().contains(enemy.getPosition().getVector())) {
+                    projectile.hit(enemy);
+                    continue;
+                }
             }
         }
     }
