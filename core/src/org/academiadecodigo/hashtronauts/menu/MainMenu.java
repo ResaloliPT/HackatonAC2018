@@ -48,7 +48,7 @@ public class MainMenu extends ScreenAdapter {
         this.pressToStart = Fonts.PRESS_START.getFont();
 
         /* Adding music */
-        
+
 
 
         //Adding a background image
