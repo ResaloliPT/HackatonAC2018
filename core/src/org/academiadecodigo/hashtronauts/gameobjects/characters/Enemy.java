@@ -13,15 +13,12 @@ import org.academiadecodigo.hashtronauts.utils.Position;
 public abstract class Enemy extends Characters {
     private Texture enemyImage;
     private Rectangle hitbox;
-
-    private EnemyType enemyType;
     private int health;
     private int VELOCITIY = 90;
 
     public Enemy(EnemyType type, Position position) {
         super(position);
-        this.enemyType = type;
-        this.health = enemyType.getHealth();
+        this.health = type.getHealth();
         enemyImage = new Texture(type.getPath());
         this.hitbox = new Rectangle(position.getX(), position.getY(), GameSettings.ENEMY_THICKNESS, GameSettings.ENEMY_THICKNESS);
     }
