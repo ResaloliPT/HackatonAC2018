@@ -5,9 +5,11 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Ellipse;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import org.academiadecodigo.hashtronauts.MainGame;
 import org.academiadecodigo.hashtronauts.Renderable;
+import org.academiadecodigo.hashtronauts.configs.GameSettings;
 import org.academiadecodigo.hashtronauts.gameobjects.GameObjectContainer;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.interfaces.Killable;
 import org.academiadecodigo.hashtronauts.utils.Position;
@@ -16,7 +18,7 @@ public class Projectile implements Renderable {
 
     //Render
     private Texture sprite;
-    private Ellipse shape; // Can be used as Projectile position
+    private Ellipse shape;
 
     // Position & Movement
     private Position velocity;
@@ -45,7 +47,14 @@ public class Projectile implements Renderable {
      * Adds this projectile to the Game List to be rendered/updated
      */
     public void addObject() {
-        GameObjectContainer.getInstance();
+        GameObjectContainer.getInstance().addObject(this);
+    }
+
+    /**
+     * Adds this projectile to the Game List to be rendered/updated
+     */
+    public void deleteObject() {
+        GameObjectContainer.getInstance().removeObject(this);
     }
 
     /**
@@ -68,17 +77,20 @@ public class Projectile implements Renderable {
 
     @Override
     public void update(Camera camera) {
-        position = new Position((int) (position.getVector().x + (velocity.getVector().x * Gdx.graphics.getDeltaTime())),
-                (int) (position.getVector().y + (velocity.getVector().y * Gdx.graphics.getDeltaTime())));
+        Vector2 newPos = position.getVector().set(position.getX() + (velocity.getX() * Gdx.graphics.getDeltaTime()), position.getY() + (velocity.getY() * Gdx.graphics.getDeltaTime()));
+        position.setVector(newPos);
 
+        Vector3 screenLocation = new Vector3(position.getX(), position.getY(), 0);
 
-        Vector3 newCoords = new Vector3(position.getVector().x,
-                position.getVector().y, 0);
+        screenLocation = camera.unproject(screenLocation);
 
+        shape.setPosition(screenLocation.x, screenLocation.y);
 
-        camera.unproject(newCoords);
-
-        this.shape = this.shape.setPosition(newCoords.x, newCoords.y);
+        if ((position.getX() < 0 || position.getX() > GameSettings.WIDTH) ||
+                (position.getY() < 0 || position.getY() > GameSettings.HEIGHT)) {
+            deleteObject();
+            dispose();
+        }
     }
 
     @Override

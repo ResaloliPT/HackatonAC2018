@@ -7,4 +7,7 @@ public class GameSettings {
     public static final int HEIGHT = 800;
 
 
+    /* Weapons & Projectiles */
+    public static final int PROJECTILE_GELATIN_SPEED = 600;
+
 }
