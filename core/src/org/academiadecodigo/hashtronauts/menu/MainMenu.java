@@ -43,7 +43,6 @@ public class MainMenu extends ScreenAdapter {
         /* Adding music */
 
 
-
         //Adding a background image
         this.backgroundImage = new Texture("background/background_test.png");
     }

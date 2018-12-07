@@ -9,8 +9,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.academiadecodigo.hashtronauts.KillerQueen;
 import org.academiadecodigo.hashtronauts.MainGame;
-import org.academiadecodigo.hashtronauts.gameobjects.characters.Player;
 import org.academiadecodigo.hashtronauts.configs.GameSettings;
+import org.academiadecodigo.hashtronauts.gameobjects.characters.Player;
 
 /**
  *
@@ -21,8 +21,6 @@ public class GameScreen extends ScreenAdapter {
 
     private SpriteBatch batch;
     private OrthographicCamera camera;
-
-    //Testing purposes
 
     private Music music;
     private Texture bkgImage;
@@ -53,8 +51,6 @@ public class GameScreen extends ScreenAdapter {
      */
     @Override
     public void render(float delta) {
-
-        //game.update();
 
         //fill the screen with black
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -94,6 +90,7 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void dispose() {
         batch.dispose();
+        bkgImage.dispose();
     }
 
     public void setupEvents() {

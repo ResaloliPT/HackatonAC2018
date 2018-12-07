@@ -1,6 +1,5 @@
 package org.academiadecodigo.hashtronauts.gameobjects.characters;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -10,15 +9,13 @@ import org.academiadecodigo.hashtronauts.configs.GameSettings;
 import org.academiadecodigo.hashtronauts.gameobjects.GameObjectContainer;
 import org.academiadecodigo.hashtronauts.utils.Position;
 
-import javax.swing.*;
-
 
 public abstract class Enemy extends Characters {
 
     private Texture enemyImage;
     private Rectangle hitbox;
     private int health;
-    private final int VELOCITIY = 10;
+    private final float VELOCITIY = 0.04f;
 
 
     Enemy(EnemyType type, Position position) {
@@ -30,17 +27,17 @@ public abstract class Enemy extends Characters {
 
     private void checkCol() {
 
-        if (hitbox.x <= GameSettings.WALL_THICKNESS) {
-            hitbox.x = GameSettings.WALL_THICKNESS;
+        if (position.getX() <= GameSettings.WALL_THICKNESS) {
+            position.setX(GameSettings.WALL_THICKNESS);
         }
-        if (hitbox.x >= GameSettings.WIDTH - hitbox.width - GameSettings.WALL_THICKNESS) {
-            hitbox.x = GameSettings.WIDTH - hitbox.width - GameSettings.WALL_THICKNESS;
+        if (position.getX() >= GameSettings.WIDTH - hitbox.width - GameSettings.WALL_THICKNESS) {
+            position.setX((int) (GameSettings.WIDTH - hitbox.width - GameSettings.WALL_THICKNESS));
         }
-        if (hitbox.y >= GameSettings.HEIGHT - hitbox.height - GameSettings.WALL_THICKNESS) {
-            hitbox.y = GameSettings.HEIGHT;
+        if (position.getY() <= GameSettings.WALL_THICKNESS) {
+            position.setY(GameSettings.WALL_THICKNESS);
         }
-        if (hitbox.y <= GameSettings.WALL_THICKNESS) {
-            hitbox.y = GameSettings.WALL_THICKNESS;
+        if (position.getY() >= GameSettings.HEIGHT - hitbox.width - GameSettings.WALL_THICKNESS) {
+            position.setY((int) (GameSettings.HEIGHT - hitbox.width - GameSettings.WALL_THICKNESS));
         }
     }
 
@@ -57,23 +54,39 @@ public abstract class Enemy extends Characters {
             return;
         }
 
-   /*     position = new Position((int) (getPosition().getX() + (VELOCITIY * Gdx.graphics.getDeltaTime())),
-                (int) (getPosition().getY() + (VELOCITIY * Gdx.graphics.getDeltaTime())));
+        Position playerPos = Player.getInstance().getPosition();
 
-*/
-        int dx = Player.getInstance().getPosition().getX() - getPosition().getX();
-        int dy = Player.getInstance().getPosition().getY() - getPosition().getX();
+        Position direction;
 
-        int moveSpeedX = (100 * VELOCITIY / dx);
-        int moveSpeedY = (100 * VELOCITIY / dy);
+        float xDiff = playerPos.getX() - position.getX();
+        float yDiff = playerPos.getY() - position.getY();
 
 
-        position = new Position((int) (moveSpeedX * Gdx.graphics.getDeltaTime()), (int) (moveSpeedY * Gdx.graphics.getDeltaTime()));
+        int calculatedX = 0;
+        int calculatedY = 0;
 
-        Vector3 vector3 = new Vector3(position.getX(), position.getY(), 0);
-        camera.unproject(vector3);
-        this.hitbox.setPosition(vector3.x, vector3.y);
-        //checkCol();
+        if (Math.random() > 0.6) {
+            calculatedX = (int) (xDiff * VELOCITIY);
+        }
+
+        if (Math.random() > 0.6) {
+            calculatedY = (int) (yDiff * VELOCITIY);
+        }
+
+
+        direction = new Position(calculatedX, calculatedY);
+
+        position = new Position(position.getX() + (direction.getX()),
+                (position.getY() + (direction.getY())));
+
+        checkCol();
+
+        Vector3 screenLocation = new Vector3(position.getX(), position.getY(), 0);
+
+        screenLocation = camera.unproject(screenLocation);
+
+        hitbox.setPosition(screenLocation.x, screenLocation.y);
+
     }
 
     @Override

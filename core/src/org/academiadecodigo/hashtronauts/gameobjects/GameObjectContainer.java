@@ -43,7 +43,9 @@ public class GameObjectContainer implements Renderable {
         }
 
         for (Projectile projectile : projectiles) {
-            projectile.render(batch);
+            synchronized (this) {
+                projectile.render(batch);
+            }
         }
 
         score.draw(batch);
@@ -51,7 +53,7 @@ public class GameObjectContainer implements Renderable {
     }
 
     @Override
-    public synchronized void update(Camera camera) {
+    public void update(Camera camera) {
         player.update(camera);
 
         for (Enemy enemy : enemies) {
@@ -72,7 +74,6 @@ public class GameObjectContainer implements Renderable {
             }
 
         }
-
 
     }
 

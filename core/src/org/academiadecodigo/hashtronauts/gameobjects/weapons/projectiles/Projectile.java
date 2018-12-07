@@ -85,8 +85,10 @@ public class Projectile implements Renderable {
 
         if ((position.getX() < 0 || position.getX() > GameSettings.WIDTH) ||
                 (position.getY() < 0 || position.getY() > GameSettings.HEIGHT)) {
-            deleteObject();
-            dispose();
+            synchronized (GameObjectContainer.getInstance()) {
+                deleteObject();
+                dispose();
+            }
         }
     }
 

@@ -5,11 +5,12 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import org.academiadecodigo.hashtronauts.configs.GameSettings;
+import org.academiadecodigo.hashtronauts.gameobjects.weapons.Weapon;
+import org.academiadecodigo.hashtronauts.gameobjects.weapons.WeaponGelatin;
 import org.academiadecodigo.hashtronauts.utils.Position;
 
 public class Player extends Characters {
@@ -17,17 +18,22 @@ public class Player extends Characters {
     private static Player player = new Player();
 
     private int score;
-    //private Weapon weapon;
+    private Weapon weapon;
     private Rectangle hitbox;
     private PlayerEvents playerEvents;
 
+    private Texture activeTexture;
+    private Texture textureUp;
+    private Texture textureRight;
+    private Texture textureDown;
+    private Texture textureLeft;
 
-    private Sprite sprite;
     private boolean movingRight;
     private boolean movingLeft;
     private boolean movingUp;
     private boolean movingDown;
     private float angle;
+    private Position mousePos;
 
 
     private Player() {
@@ -36,10 +42,17 @@ public class Player extends Characters {
         //this.weapon = null;
         //this.playerRender = null;
 
-        this.sprite = new Sprite(new Texture("images/player/queen_back_view.png"));
-        this.hitbox = new Rectangle(getPosition().getX(), getPosition().getY(), GameSettings.PLAYER_WIDTH, GameSettings.PLAYER_HEIGHT);
+        this.activeTexture = new Texture(GameSettings.QUEEN_FRONT_VIEW);
+        this.textureUp = new Texture(GameSettings.QUEEN_FRONT_VIEW);
+        this.textureRight = new Texture(GameSettings.QUEEN_RIGHT_VIEW);
+        this.textureDown = new Texture(GameSettings.QUEEN_BACK_VIEW);
+        this.textureLeft = new Texture(GameSettings.QUEEN_LEFT_VIEW);
+
+        this.hitbox = new Rectangle(getPosition().getX(), getPosition().getY(), GameSettings.PLAYER_WIDTH, -GameSettings.PLAYER_HEIGHT);
         this.playerEvents = new PlayerEvents();
         this.angle = 0;
+        this.weapon = new WeaponGelatin();
+        this.mousePos = new Position(0, 0);
 
     }
 
@@ -50,7 +63,8 @@ public class Player extends Characters {
     }
 
     public void shoot(Position touchedPos) {
-        //weapon.shoot(touchedPos, position);
+        System.out.println("x shot: " + touchedPos.getX() + "y shot: " + touchedPos.getY());
+        weapon.shoot(touchedPos, position);
 
     }
 
@@ -68,7 +82,8 @@ public class Player extends Characters {
      */
     @Override
     public void render(SpriteBatch batch) {
-        batch.draw(sprite, hitbox.x, hitbox.y, hitbox.width, hitbox.height);
+
+        batch.draw(activeTexture, hitbox.getX(), hitbox.getY(), GameSettings.PLAYER_WIDTH, GameSettings.PLAYER_HEIGHT);
     }
 
     public void setEvents() {
@@ -129,41 +144,53 @@ public class Player extends Characters {
             @Override
             public boolean mouseMoved(int screenX, int screenY) {
 
-                System.out.println("mouseX: " + screenX + ", mouseY: " + screenY);
+                //System.out.println("mouseX: " + screenX + ", mouseY: " + screenY);
+
+                float calculatedAngle = angle;
 
                 float dX = screenX - (getPosition().getX() + GameSettings.PLAYER_WIDTH/2);
                 float dY = (getPosition().getY() + GameSettings.PLAYER_HEIGHT/2) - screenY;
                 if ((dX != 0 && dY != 0)) {
 
                     if (dX >= 0 && dY >= 0) {
-                        angle = (float) Math.toDegrees(Math.atan(dY / dX));
+                        calculatedAngle = (float) Math.toDegrees(Math.atan(dY / dX));
                     }
 
                     if (dX < 0 && dY >= 0) {
-                        angle = (float) (180 + Math.toDegrees(Math.atan(dY / dX)));
+                        calculatedAngle = (float) (180 + Math.toDegrees(Math.atan(dY / dX)));
                     }
 
                     if (dX >= 0 && dY < 0) {
-                        angle = (float) (360 + Math.toDegrees(Math.atan(dY / dX)));
+                        calculatedAngle = (float) (360 + Math.toDegrees(Math.atan(dY / dX)));
                     }
 
                     if (dX < 0 && dY < 0) {
-                        angle = (float) (180 + Math.toDegrees(Math.atan(dY / dX)));
+                        calculatedAngle = (float) (180 + Math.toDegrees(Math.atan(dY / dX)));
                     }
 
-                    System.out.println(angle);
+                    angle = calculatedAngle;
 
-                    //sprite.rotate(angle);
-
-
-
-
+                    mousePos.setX(screenX);
+                    mousePos.setY(screenY);
                 }
-                //angle = Math.atan(dY/dX);
                 return true;
 
                 //return super.mouseMoved(screenX, screenY);
             }
+
+            @Override
+            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+
+                Position tochedPos = new Position(screenX, screenY);
+
+                if (Gdx.input.isTouched()) {
+
+                    player.shoot(tochedPos);
+                    return true;
+                }
+                return super.mouseMoved(screenX, screenY);
+            }
+
         });
     }
 
@@ -179,7 +206,6 @@ public class Player extends Characters {
         int dX = mousePos.getX() - getPosition().getX();
         int dY = mousePos.getY() - getPosition().getY();
 
-        float angle = (float) Math.atan(dX/dY);
 
 
         //System.out.println("dX: " + dX);
@@ -208,29 +234,34 @@ public class Player extends Characters {
         }
 
         if (movingRight) {
-
+            setTexture(textureRight);
             player.getPosition().setX((int) (player.getPosition().getX() + 200 * Gdx.graphics.getDeltaTime()));
         }
 
         if (movingLeft) {
+            setTexture(textureLeft);
             player.getPosition().setX((int) (player.getPosition().getX() - 200 * Gdx.graphics.getDeltaTime()));
         }
 
         if (movingUp) {
+            setTexture(textureUp);
             player.getPosition().setY((int) (player.getPosition().getY() - 200 * Gdx.graphics.getDeltaTime()));
         }
 
         if (movingDown) {
+            setTexture(textureDown);
             player.getPosition().setY((int) (player.getPosition().getY() + 200 * Gdx.graphics.getDeltaTime()));
         }
 
 
+        if (angle >= 0 && angle < 45 || angle >= 315 && angle < 360) {
+            //texture = new Texture(GameSettings.QUEEN_RIGHT_VIEW);
+        }
 
         Vector3 cameraPos = new Vector3(getPosition().getX(), getPosition().getY(), 0);
         cameraPos = camera.unproject(cameraPos);
         hitbox.setPosition(cameraPos.x, cameraPos.y);
 
-        sprite.rotate(angle);
     }
 
     /**
@@ -238,6 +269,15 @@ public class Player extends Characters {
      */
     @Override
     public void dispose() {
+        textureLeft.dispose();
+        textureDown.dispose();
+        textureRight.dispose();
+        textureUp.dispose();
+
+
+
+
+
     }
 
     public Rectangle getHitbox() {
@@ -254,5 +294,9 @@ public class Player extends Characters {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public void setTexture(Texture texture) {
+        this.activeTexture = texture;
     }
 }
