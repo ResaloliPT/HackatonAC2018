@@ -10,6 +10,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import org.academiadecodigo.hashtronauts.KillerQueen;
 import org.academiadecodigo.hashtronauts.MainGame;
+import org.academiadecodigo.hashtronauts.gameobjects.GameObjectContainer;
+import org.academiadecodigo.hashtronauts.gameobjects.characters.Soldier;
+import org.academiadecodigo.hashtronauts.utils.Position;
 
 /**
  *
@@ -27,6 +30,7 @@ public class GameScreen extends ScreenAdapter {
     private Music music;
     private Texture bkgImage;
 
+    private Soldier soldier;
 
     // private Score score;
 
@@ -41,6 +45,9 @@ public class GameScreen extends ScreenAdapter {
 
         this.shapeRenderer = new ShapeRenderer();
         this.game = new MainGame();
+
+        soldier = new Soldier(new Position(50, 50));
+        GameObjectContainer.getInstance().addObject(soldier);
 
         setupEvents();
     }
