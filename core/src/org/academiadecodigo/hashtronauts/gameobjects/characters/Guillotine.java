@@ -21,9 +21,7 @@ public class Guillotine implements Renderable {
     }
 
     public void hit() {
-        if (Player.getInstance().getHitbox().contains(hitbox)) {
-            Player.getInstance().hit(Player.getInstance().getHealth());
-        }
+        Player.getInstance().hit(Player.getInstance().getHealth());
     }
 
     @Override

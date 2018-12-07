@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.academiadecodigo.hashtronauts.Renderable;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Enemy;
+import org.academiadecodigo.hashtronauts.gameobjects.characters.Guillotine;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Player;
 import org.academiadecodigo.hashtronauts.gameobjects.weapons.projectiles.Projectile;
 
@@ -16,6 +17,7 @@ public class GameObjectContainer implements Renderable {
 
     private List<Enemy> enemies;
     private List<Projectile> projectiles;
+    private List<Guillotine> guillotines;
     private Player player;
 
 
@@ -23,6 +25,7 @@ public class GameObjectContainer implements Renderable {
         this.player = Player.getInstance();
         this.enemies = new LinkedList<Enemy>();
         this.projectiles = new LinkedList<Projectile>();
+        this.guillotines = new LinkedList<Guillotine>();
     }
 
     public static GameObjectContainer getInstance() {
@@ -43,6 +46,11 @@ public class GameObjectContainer implements Renderable {
                 projectile.render(batch);
             }
         }
+
+        for(Guillotine guillotine : guillotines) {
+            guillotine.render(batch);
+        }
+
     }
 
     @Override
@@ -57,6 +65,10 @@ public class GameObjectContainer implements Renderable {
                     projectile.update(camera);
             }
         }
+
+        for (Guillotine guillotine : guillotines) {
+            guillotine.update(camera);
+        }
     }
 
     @Override
@@ -68,8 +80,16 @@ public class GameObjectContainer implements Renderable {
         projectiles.add(projectile);
     }
 
+    public synchronized void addObject(Guillotine guillotine) {
+        guillotines.add(guillotine);
+    }
+
     public synchronized void addObject(Enemy enemy) {
         enemies.add(enemy);
+    }
+
+    public synchronized void removeObject(Guillotine guillotine) {
+        projectiles.remove(guillotine);
     }
 
     public synchronized void removeObject(Projectile projectile) {
