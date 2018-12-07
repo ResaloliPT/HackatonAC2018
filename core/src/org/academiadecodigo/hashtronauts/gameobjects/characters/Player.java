@@ -36,7 +36,7 @@ public class Player extends Characters {
         //this.weapon = null;
         //this.playerRender = null;
 
-        this.sprite = new Sprite(new Texture("images/player/queen.png"));
+        this.sprite = new Sprite(new Texture("images/player/queen_back_view.png"));
         this.hitbox = new Rectangle(getPosition().getX(), getPosition().getY(), GameSettings.PLAYER_WIDTH, GameSettings.PLAYER_HEIGHT);
         this.playerEvents = new PlayerEvents();
         this.angle = 0;

@@ -7,6 +7,7 @@ import org.academiadecodigo.hashtronauts.Renderable;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Enemy;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Player;
 import org.academiadecodigo.hashtronauts.gameobjects.weapons.projectiles.Projectile;
+import org.academiadecodigo.hashtronauts.utils.Score;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -18,12 +19,14 @@ public class GameObjectContainer implements Renderable {
     private volatile List<Enemy> enemies;
     private volatile List<Projectile> projectiles;
     private Player player;
+    private Score score;
 
 
     private GameObjectContainer() {
         this.player = Player.getInstance();
         this.enemies = new LinkedList<Enemy>();
         this.projectiles = new LinkedList<Projectile>();
+        this.score = new Score();
     }
 
     public static GameObjectContainer getInstance() {
@@ -43,6 +46,7 @@ public class GameObjectContainer implements Renderable {
             projectile.render(batch);
         }
 
+        score.draw(batch);
 
     }
 
@@ -90,6 +94,7 @@ public class GameObjectContainer implements Renderable {
     }
 
     public synchronized void removeObject(Enemy enemy) {
+        //score.changeScore(enemy.getScore());
         enemies.remove(enemy);
     }
 

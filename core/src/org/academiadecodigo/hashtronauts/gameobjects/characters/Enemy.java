@@ -14,6 +14,7 @@ import javax.swing.*;
 
 
 public abstract class Enemy extends Characters {
+
     private Texture enemyImage;
     private Rectangle hitbox;
     private int health;
@@ -77,6 +78,7 @@ public abstract class Enemy extends Characters {
 
     @Override
     public void dispose() {
+
         enemyImage.dispose();
     }
 
@@ -96,5 +98,9 @@ public abstract class Enemy extends Characters {
             health = 0;
         }
         health -= damage;
+    }
+
+    public Rectangle getHitbox() {
+        return hitbox;
     }
 }
