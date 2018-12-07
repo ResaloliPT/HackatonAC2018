@@ -22,7 +22,6 @@ public abstract class Characters implements Killable, Renderable {
         this.health = health;
     }
 
-
     /**
      * Sees if the character is still alive
      *

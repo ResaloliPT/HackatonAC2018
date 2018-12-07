@@ -18,7 +18,8 @@ public class GameSettings {
 
 
     /* Weapons & Projectiles */
-    public static final int PROJECTILE_GELATIN_SPEED = 600;
+    public static final float PROJECTILE_CAKE_SPEED = 0.05f;
+    public static final String PROJECTILE_CAKE_IMAGE = "images/projectiles/projectiles_cake.png";
 
 
     /* Player images */

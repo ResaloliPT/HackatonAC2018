@@ -74,7 +74,6 @@ public class GameObjectContainer implements Renderable {
             }
 
         }
-
     }
 
     @Override
@@ -95,7 +94,6 @@ public class GameObjectContainer implements Renderable {
     }
 
     public synchronized void removeObject(Enemy enemy) {
-        //score.changeScore(enemy.getScore());
         enemies.remove(enemy);
     }
 

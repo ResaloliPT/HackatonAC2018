@@ -10,7 +10,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.academiadecodigo.hashtronauts.KillerQueen;
 import org.academiadecodigo.hashtronauts.MainGame;
 import org.academiadecodigo.hashtronauts.configs.GameSettings;
+import org.academiadecodigo.hashtronauts.gameobjects.GameObjectContainer;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Player;
+import org.academiadecodigo.hashtronauts.gameobjects.characters.Soldier;
+import org.academiadecodigo.hashtronauts.utils.Position;
 
 /**
  *
@@ -38,6 +41,8 @@ public class GameScreen extends ScreenAdapter {
         this.bkgImage = new Texture(GameSettings.MAP_LEVEL1);
 
         this.game = new MainGame(mainClass);
+
+        GameObjectContainer.getInstance().addObject(new Soldier(new Position(100, -10)));
 
         setupEvents();
     }
