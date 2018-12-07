@@ -1,6 +1,7 @@
 package org.academiadecodigo.hashtronauts.menu;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -32,13 +33,16 @@ public class MainMenu extends ScreenAdapter {
     private Sound startSound;
     private Texture backgroundImage;
 
-
     public MainMenu(KillerQueen game) {
         this.game = game;
         this.batch = game.getBatch();
         this.camera = game.getCamera();
         this.welcomeText = Fonts.PRESS_START.getFont();
         this.pressToStart = Fonts.PRESS_START.getFont();
+
+        /* Adding music */
+
+
 
         //Adding a background image
         this.backgroundImage = new Texture("background/background_test.png");
@@ -70,8 +74,12 @@ public class MainMenu extends ScreenAdapter {
             game.setScreen(new GameScreen(game));
         }
 
-        batch.end();
+        if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
 
+            Gdx.app.exit();
+        }
+
+        batch.end();
     }
 
     @Override

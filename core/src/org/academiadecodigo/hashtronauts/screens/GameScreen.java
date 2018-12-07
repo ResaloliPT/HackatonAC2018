@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.academiadecodigo.hashtronauts.KillerQueen;
 import org.academiadecodigo.hashtronauts.MainGame;
+import org.academiadecodigo.hashtronauts.gameobjects.characters.Player;
 import org.academiadecodigo.hashtronauts.configs.GameSettings;
 
 /**
@@ -73,7 +74,6 @@ public class GameScreen extends ScreenAdapter {
         //Draw sprites
         game.render(batch);
 
-
         //End SpriteBatch
         batch.end();
 
@@ -98,6 +98,7 @@ public class GameScreen extends ScreenAdapter {
 
     public void setupEvents() {
         //input handling
+        Player.getInstance().setEvents();
     }
 
 }
