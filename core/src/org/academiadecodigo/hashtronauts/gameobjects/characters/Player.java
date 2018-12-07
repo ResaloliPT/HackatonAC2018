@@ -42,9 +42,9 @@ public class Player extends Characters {
         //this.playerRender = null;
 
         this.activeTexture = new Texture(GameSettings.QUEEN_FRONT_VIEW);
-        this.textureUp = new Texture(GameSettings.QUEEN_FRONT_VIEW);
+        this.textureDown = new Texture(GameSettings.QUEEN_FRONT_VIEW);
         this.textureRight = new Texture(GameSettings.QUEEN_RIGHT_VIEW);
-        this.textureDown = new Texture(GameSettings.QUEEN_BACK_VIEW);
+        this.textureUp = new Texture(GameSettings.QUEEN_BACK_VIEW);
         this.textureLeft = new Texture(GameSettings.QUEEN_LEFT_VIEW);
 
         this.hitbox = new Rectangle(getPosition().getX(), getPosition().getY(), GameSettings.PLAYER_WIDTH, -GameSettings.PLAYER_HEIGHT);
