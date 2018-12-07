@@ -11,7 +11,9 @@ import org.academiadecodigo.hashtronauts.KillerQueen;
 import org.academiadecodigo.hashtronauts.MainGame;
 import org.academiadecodigo.hashtronauts.configs.GameSettings;
 import org.academiadecodigo.hashtronauts.gameobjects.GameObjectContainer;
+import org.academiadecodigo.hashtronauts.gameobjects.characters.Guillotine;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Player;
+import org.academiadecodigo.hashtronauts.utils.Position;
 
 /**
  *
@@ -24,6 +26,7 @@ public class GameScreen extends ScreenAdapter {
     private OrthographicCamera camera;
 
     private Texture bkgImage;
+    private Guillotine guillotine;
 
 
     // private Score score;
@@ -45,6 +48,9 @@ public class GameScreen extends ScreenAdapter {
         GameObjectContainer.getInstance().resetScore();
         Player.getInstance().reset();
         this.bkgImage = new Texture(GameSettings.MAP_LEVEL1);
+
+        guillotine = new Guillotine(new Position(100,100));
+        GameObjectContainer.getInstance().addObject(guillotine);
 
         setupEvents();
     }

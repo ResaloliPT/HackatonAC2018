@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 import org.academiadecodigo.hashtronauts.Renderable;
 import org.academiadecodigo.hashtronauts.configs.GameSettings;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Enemy;
+import org.academiadecodigo.hashtronauts.gameobjects.characters.Guillotine;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Player;
 import org.academiadecodigo.hashtronauts.gameobjects.weapons.projectiles.Projectile;
 import org.academiadecodigo.hashtronauts.utils.Score;
@@ -19,12 +20,11 @@ import java.util.List;
 
 public class GameObjectContainer implements Renderable {
 
-    private static final java.util.concurrent.locks.Lock lock = new java.util.concurrent.locks.ReentrantLock();
-
     private static GameObjectContainer instance = new GameObjectContainer();
 
     private volatile List<Enemy> enemies;
     private volatile List<Projectile> projectiles;
+    private volatile List<GameObject> gameObjects;
     private Player player;
     private Sound enemyHit;
     private Score score;
@@ -57,13 +57,16 @@ public class GameObjectContainer implements Renderable {
             projectile.render(batch);
         }
 
+        for (GameObject gameObject : gameObjects) {
+            gameObject.render(batch);
+        }
+
         score.draw(batch);
     }
 
     @Override
     public void update(Camera camera) {
         player.update(camera);
-
 
         for (Iterator<Enemy> iterator = enemies.iterator(); iterator.hasNext(); ) {
             Enemy currentEnemy = iterator.next();
@@ -117,6 +120,14 @@ public class GameObjectContainer implements Renderable {
                 }
             }
         }
+
+        for (Iterator<GameObject> gOIterator = gameObjects.iterator(); gOIterator.hasNext(); ) {
+            GameObject gameObject = gOIterator.next();
+
+            if (gameObject instanceof Guillotine) {
+
+            }
+        }
     }
 
     @Override
@@ -164,4 +175,7 @@ public class GameObjectContainer implements Renderable {
         score.changeScore(-score.getScore());
     }
 
+    public void addObject(GameObject gameObject) {
+        gameObjects.add(gameObject);
+    }
 }

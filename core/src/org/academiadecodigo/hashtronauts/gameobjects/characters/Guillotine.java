@@ -6,18 +6,24 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import org.academiadecodigo.hashtronauts.Renderable;
 import org.academiadecodigo.hashtronauts.configs.GameSettings;
+import org.academiadecodigo.hashtronauts.gameobjects.GameObject;
 import org.academiadecodigo.hashtronauts.utils.Position;
 
-public class Guillotine implements Renderable {
+public class Guillotine extends GameObject {
 
     private Rectangle hitbox;
     private Texture texture;
     private Position pos;
+    private Position startingFall;
+    private boolean falling;
+
 
     public Guillotine(Position position) {
         this.texture = new Texture("images/projectiles/projectile1.png");
         this.hitbox = new Rectangle(position.getX(), position.getY(), GameSettings.ENEMY_SIZE, GameSettings.ENEMY_SIZE);
+        startingFall = new Position(position.getX(), position.getY() + 70);
         this.pos = position;
+
     }
 
     public void hit() {
@@ -32,7 +38,9 @@ public class Guillotine implements Renderable {
 
     @Override
     public void update(Camera camera) {
-
+        if(startingFall.getY() > pos.getY()) {
+            startingFall.setY(startingFall.getY() - 5);
+        }
     }
 
     @Override
