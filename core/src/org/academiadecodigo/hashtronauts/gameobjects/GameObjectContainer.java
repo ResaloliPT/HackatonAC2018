@@ -1,8 +1,11 @@
 package org.academiadecodigo.hashtronauts.gameobjects;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.academiadecodigo.hashtronauts.Renderable;
+import org.academiadecodigo.hashtronauts.configs.GameSettings;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Enemy;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Player;
 import org.academiadecodigo.hashtronauts.gameobjects.weapons.projectiles.Projectile;
@@ -17,12 +20,13 @@ public class GameObjectContainer implements Renderable {
     private List<Enemy> enemies;
     private List<Projectile> projectiles;
     private Player player;
-
+    private Sound enemyHit;
 
     private GameObjectContainer() {
         this.player = Player.getInstance();
         this.enemies = new LinkedList<Enemy>();
         this.projectiles = new LinkedList<Projectile>();
+        this.enemyHit = Gdx.audio.newSound(Gdx.files.internal(GameSettings.ENEMY_HIT_SOUND));
     }
 
     public static GameObjectContainer getInstance() {
