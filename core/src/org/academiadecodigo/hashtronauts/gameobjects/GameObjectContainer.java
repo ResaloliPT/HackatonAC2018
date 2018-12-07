@@ -7,6 +7,7 @@ import org.academiadecodigo.hashtronauts.Renderable;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Enemy;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Player;
 import org.academiadecodigo.hashtronauts.gameobjects.weapons.projectiles.Projectile;
+import org.academiadecodigo.hashtronauts.menu.GameOverScreen;
 import org.academiadecodigo.hashtronauts.utils.Score;
 
 import java.util.Iterator;
@@ -23,7 +24,7 @@ public class GameObjectContainer implements Renderable {
     private volatile List<Projectile> projectiles;
     private Player player;
     private Score score;
-
+    private boolean gameOver;
 
     private GameObjectContainer() {
         this.player = Player.getInstance();
@@ -42,15 +43,11 @@ public class GameObjectContainer implements Renderable {
         player.render(batch);
 
         for (Enemy currentEnemy : enemies) {
-            synchronized (lock) {
-                currentEnemy.render(batch);
-            }
+            currentEnemy.render(batch);
         }
 
         for (Projectile projectile : projectiles) {
-            synchronized (this) {
-                projectile.render(batch);
-            }
+            projectile.render(batch);
         }
 
         score.draw(batch);
@@ -66,6 +63,9 @@ public class GameObjectContainer implements Renderable {
 
             if (currentEnemy.isToDispose()) {
                 iterator.remove();
+                if (enemies.size() == 0) {
+                    gameOver = true;
+                }
                 continue;
             }
 
@@ -120,5 +120,9 @@ public class GameObjectContainer implements Renderable {
 
     public List<Enemy> getEnemies() {
         return enemies;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
     }
 }

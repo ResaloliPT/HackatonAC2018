@@ -70,9 +70,10 @@ public class Player extends Characters {
     @Override
     public void hit(int damage) {
         if (health - damage < 0) {
-            health = 0;
+            setHealth(0);
         }
-        health -= damage;
+
+        setHealth(health - damage);
     }
 
 
@@ -90,22 +91,22 @@ public class Player extends Characters {
 
             @Override
             public boolean keyDown(int keycode) {
-                if (keycode == Input.Keys.RIGHT) {
+                if (keycode == Input.Keys.D) {
                     movingRight = true;
                     return true;
                 }
 
-                if (keycode == Input.Keys.LEFT) {
+                if (keycode == Input.Keys.A) {
                     movingLeft = true;
                     return true;
                 }
 
-                if (keycode == Input.Keys.UP) {
+                if (keycode == Input.Keys.W) {
                     movingUp = true;
                     return true;
                 }
 
-                if (keycode == Input.Keys.DOWN) {
+                if (keycode == Input.Keys.S) {
                     movingDown = true;
                     return true;
                 }
@@ -116,22 +117,22 @@ public class Player extends Characters {
 
             @Override
             public boolean keyUp(int keycode) {
-                if (keycode == Input.Keys.RIGHT) {
+                if (keycode == Input.Keys.D) {
                     movingRight = false;
                     return true;
                 }
 
-                if (keycode == Input.Keys.LEFT) {
+                if (keycode == Input.Keys.A) {
                     movingLeft = false;
                     return true;
                 }
 
-                if (keycode == Input.Keys.UP) {
+                if (keycode == Input.Keys.W) {
                     movingUp = false;
                     return true;
                 }
 
-                if (keycode == Input.Keys.DOWN) {
+                if (keycode == Input.Keys.S) {
                     movingDown = false;
                     return true;
                 }
@@ -199,6 +200,10 @@ public class Player extends Characters {
      */
     @Override
     public void update(Camera camera) {
+        if (isDead()){
+            return;
+        }
+
         Position mousePos = playerEvents.getMousePos();
 
 
@@ -272,11 +277,6 @@ public class Player extends Characters {
         textureDown.dispose();
         textureRight.dispose();
         textureUp.dispose();
-
-
-
-
-
     }
 
     public Rectangle getHitbox() {

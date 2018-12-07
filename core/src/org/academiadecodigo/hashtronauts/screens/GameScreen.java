@@ -42,10 +42,10 @@ public class GameScreen extends ScreenAdapter {
 
         this.game = new MainGame(mainClass);
 
-        int numOfEnemies = (int) ((Math.random() * 10) + 5);
+        int numOfEnemies = (int)((Math.random() * 10) + 5);
 
         for (int i = 0; i < numOfEnemies; i++) {
-            GameObjectContainer.getInstance().addObject(new Soldier(new Position((int) ((Math.random() * GameSettings.WIDTH) + 50), -10)));
+            GameObjectContainer.getInstance().addObject(new Soldier(new Position((int)((Math.random() * GameSettings.WIDTH) + 50), -10)));
         }
 
         setupEvents();

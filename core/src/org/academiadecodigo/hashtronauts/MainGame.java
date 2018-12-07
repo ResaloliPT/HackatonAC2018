@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.academiadecodigo.hashtronauts.gameobjects.GameObjectContainer;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Player;
+import org.academiadecodigo.hashtronauts.menu.GameOverScreen;
 
 public class MainGame implements Renderable {
 
@@ -22,26 +23,24 @@ public class MainGame implements Renderable {
     @Override
     public void render(SpriteBatch batch) {
         gameObjects.render(batch);
+    }
 
-        if (gameObjects.getEnemies().size() == 0) {
-            //game.setScreen(new GameOverScreen());
-            return;
-        }
-
-        if (Player.getInstance().isDead()) {
-            //game.setScreen(new GameOverScreen());r
-            return;
-        }
-
+    public void gameOver() {
+        game.setScreen(new GameOverScreen(game));
     }
 
     @Override
     public void update(Camera camera) {
         gameObjects.update(camera);
 
+        if (gameObjects.isGameOver()) {
+            gameOver();
+            return;
+        }
 
         if (Player.getInstance().isDead()) {
-            //gameOver();
+            gameOver();
+            return;
         }
     }
 
