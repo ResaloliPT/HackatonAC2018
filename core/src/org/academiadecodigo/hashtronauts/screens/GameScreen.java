@@ -35,7 +35,7 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(KillerQueen mainClass) {
         this.batch = mainClass.getBatch();
         this.camera = mainClass.getCamera();
-        this.bkgImage = new Texture("images/maps/map_interior_level1.png");
+        this.bkgImage = new Texture(GameSettings.MAP_LEVEL1);
 
         this.game = new MainGame(mainClass);
 
@@ -61,11 +61,7 @@ public class GameScreen extends ScreenAdapter {
 
         //Begin SpriteBatch
         batch.begin();
-
-        //Enable Transparency
-        batch.enableBlending();
-
-        batch.draw(bkgImage, 0f, 0f, GameSettings.WIDTH, GameSettings.HEIGHT);
+        batch.draw(bkgImage, 0,0, GameSettings.WIDTH, GameSettings.HEIGHT);
 
         //Draw sprites
         game.render(batch);
