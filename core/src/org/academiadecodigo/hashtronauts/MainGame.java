@@ -29,6 +29,5 @@ public class MainGame implements Renderable {
 
     @Override
     public void dispose() {
-
     }
 }

@@ -14,8 +14,6 @@ public class Player extends Characters {
 
     private static Player player = new Player();
 
-    private Position position;
-
     private int score;
     //private Weapon weapon;
     private Rectangle hitbox;
@@ -26,7 +24,7 @@ public class Player extends Characters {
     private Sprite sprite;
 
     private Player() {
-        super();
+        super(new Position(100, 100));
         this.score = 0;
         //this.weapon = null;
         //this.playerRender = null;
@@ -85,8 +83,8 @@ public class Player extends Characters {
     public void update(Camera camera) {
         Position mousePos = playerEvents.getMousePos();
 
-        int dX = mousePos.getX() - position.getX();
-        int dY = mousePos.getY() - position.getY();
+        int dX = mousePos.getX() - getPosition().getX();
+        int dY = mousePos.getY() - getPosition().getY();
 
         float angle = (float) Math.atan(dX/dY);
 

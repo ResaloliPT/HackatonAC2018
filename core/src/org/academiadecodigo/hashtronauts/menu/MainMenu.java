@@ -35,6 +35,7 @@ public class MainMenu extends ScreenAdapter {
 
 
     public MainMenu(KillerQueen game) {
+        this.game = game;
         this.batch = game.getBatch();
         this.camera = game.getCamera();
         this.welcomeText = Fonts.PRESS_START.getFont();

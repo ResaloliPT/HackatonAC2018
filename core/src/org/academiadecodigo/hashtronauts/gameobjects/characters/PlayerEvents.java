@@ -73,6 +73,6 @@ public class PlayerEvents extends InputAdapter {
     }
 
     public Position getMousePos() {
-        return mousePos;
+        return mousePos == null ? new Position(0,0) : mousePos;
     }
 }

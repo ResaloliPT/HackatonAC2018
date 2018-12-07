@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.academiadecodigo.hashtronauts.menu.MainMenu;
-import org.academiadecodigo.hashtronauts.screens.GameScreen;
 
 public class KillerQueen extends Game {
 
@@ -24,8 +23,7 @@ public class KillerQueen extends Game {
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         //Sets screen
-        this.setScreen(new GameScreen(this));
-
+        this.setScreen(new MainMenu(this));
     }
 
     @Override
