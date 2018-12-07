@@ -105,6 +105,7 @@ public class GameObjectContainer implements Renderable {
                 Enemy currentEnemy = iterator.next();
 
                 if (Intersector.overlaps(currentProjectile.getHitbox(), currentEnemy.getHitbox())) {
+                    enemyHit.play();
                     currentProjectile.hit(currentEnemy);
                 }
             }

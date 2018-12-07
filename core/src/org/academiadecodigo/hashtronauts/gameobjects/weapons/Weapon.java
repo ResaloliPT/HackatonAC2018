@@ -1,5 +1,7 @@
 package org.academiadecodigo.hashtronauts.gameobjects.weapons;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.TimeUtils;
 import org.academiadecodigo.hashtronauts.configs.GameSettings;
 import org.academiadecodigo.hashtronauts.gameobjects.GameObjectContainer;
@@ -11,8 +13,10 @@ public abstract class Weapon {
     private WeaponType weaponType;
     private long timer = 0;
     private long shootTime = 500;
+    private Sound shootfx;
 
     public Weapon(WeaponType weaponType) {
+        this.shootfx = Gdx.audio.newSound(Gdx.files.internal(GameSettings.SHOOTING_SOUND));
         this.weaponType = weaponType;
     }
 
@@ -39,6 +43,7 @@ public abstract class Weapon {
         direction = new Position(calculatedX, calculatedY);
 
         Projectile projectile = new Projectile(weaponType.getBulletType(), position, direction);
+        shootfx.play();
 
         GameObjectContainer.getInstance().addObject(projectile);
     }
