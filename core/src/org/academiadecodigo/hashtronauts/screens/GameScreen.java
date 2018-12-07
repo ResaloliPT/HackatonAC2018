@@ -10,7 +10,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import org.academiadecodigo.hashtronauts.KillerQueen;
 import org.academiadecodigo.hashtronauts.MainGame;
+import org.academiadecodigo.hashtronauts.gameobjects.GameObjectContainer;
+import org.academiadecodigo.hashtronauts.gameobjects.Guillotine;
 import org.academiadecodigo.hashtronauts.gameobjects.characters.Player;
+import org.academiadecodigo.hashtronauts.utils.Position;
 
 /**
  *
@@ -28,6 +31,8 @@ public class GameScreen extends ScreenAdapter {
     private Music music;
     private Texture bkgImage;
 
+    private Guillotine guillotine1;
+    private Guillotine guillotine2;
 
     // private Score score;
 
@@ -40,6 +45,10 @@ public class GameScreen extends ScreenAdapter {
         this.camera = mainClass.getCamera();
         this.bkgImage = new Texture("background/background_test.png");
 
+        guillotine1 = new Guillotine(new Position(100,100));
+        guillotine2 = new Guillotine(new Position(400,400));
+        GameObjectContainer.getInstance().addObject(guillotine1);
+
         this.shapeRenderer = new ShapeRenderer();
         this.game = new MainGame();
 
@@ -48,10 +57,7 @@ public class GameScreen extends ScreenAdapter {
 
 
     /**
-     * @param delta
-     *
-     * Renders the game screen and updates view
-     *
+     * @param delta Renders the game screen and updates view
      */
     @Override
     public void render(float delta) {

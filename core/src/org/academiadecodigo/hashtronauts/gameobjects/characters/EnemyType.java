@@ -1,15 +1,17 @@
 package org.academiadecodigo.hashtronauts.gameobjects.characters;
 
 public enum EnemyType {
-    SOLDIER(5, "images/enemies/enemies.png"),
-    KING(20, "images/enemies/enemies.png");
+    SOLDIER(5, "images/enemies/enemies.png",1),
+    KING(20, "images/enemies/enemies.png",5);
 
     private int health;
     private String path;
+    private int points;
 
-    EnemyType(int enemyHealth, String imagePath) {
+    EnemyType(int enemyHealth, String imagePath, int points) {
         this.health = enemyHealth;
         this.path = imagePath;
+        this.points = points;
     }
 
     public int getHealth() {
@@ -18,5 +20,9 @@ public enum EnemyType {
 
     public String getPath() {
         return path;
+    }
+
+    public int getPoints() {
+        return points;
     }
 }
